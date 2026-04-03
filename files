@@ -1,0 +1,3 @@
+bash-5.2$ cmake -S-DGLFW_BUILD_WAYLAND=ON -DGLFW_BUILD_X11=ON build
+make
+sudo cmake --install build

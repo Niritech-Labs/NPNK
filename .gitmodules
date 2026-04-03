@@ -1,3 +1,8 @@
+[submodule "backend/glfw-nor"]
+	path = backend/glfw-nor
+	url = https://github.com/anon3989/glfw.git
+	branch = ci
 [submodule "nuklear"]
 	path = nuklear
-	url = https://github.com/Immediate-Mode-UI/Nuklear
+	url = https://github.com/Immediate-Mode-UI/Nuklear.git
+	branch = master
