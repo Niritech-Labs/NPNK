@@ -104,6 +104,6 @@ using namespace nanobind::literals;
 body = '\n'.join(fl)
 res = inner + body + outer
 
-with open('bindings/np_nuklear.cpp','w') as f:
+with open('npcore_nuklear/np_nuklear.cpp','w') as f:
     f.write(res)
 

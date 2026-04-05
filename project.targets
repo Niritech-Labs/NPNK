@@ -1,0 +1,18 @@
+%Build
+$python3 generator.py-o-critical
+
+
+DIR:libnuklear/build-o-install-o-755
+DIR:bindings/build-o-install-o-755
+
+$cmake -S libnuklear -B libnuklear/build
+$cmake -S bindings -B bindings/build
+
+
+%Install
+
+
+%Clean
+DIR:backend/glfw-nor/build-o-remove-o-755
+DIR:libnuklear/build-o-remove-o-755
+DIR:bindings/build-o-remove-o-755

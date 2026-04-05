@@ -4,9 +4,23 @@
 # the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
 cmake_minimum_required(VERSION 3.15)
-project(npnuklear_bindings LANGUAGES CXX)
+project(npnuklear_backend LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 20)
+
+set(GLFW_BUILD_X11 OFF CACHE INTERNAL "")
+set(GLFW_BUILD_EXAMPLES OFF CACHE INTERNAL "")
+set(GLFW_BUILD_TESTS OFF CACHE INTERNAL "")
+set(GLFW_BUILD_DOCS OFF CACHE INTERNAL "")
+set(GLFW_INSTALL OFF CACHE INTERNAL "")
+set(GLFW_BUILD_WAYLAND ON CACHE INTERNAL "")
+
+add_subdirectory(glfw-nor)
+
+
+
+
+
 
 
 find_package(Python REQUIRED COMPONENTS Interpreter Development.Module)
@@ -23,32 +37,23 @@ if(NOT NANOBIND_DIR)
 endif()
 
 set(nanobind_DIR "${NANOBIND_DIR}")
-
 find_package(nanobind CONFIG REQUIRED)
+#find_package(glad REQUIRED)
 
 find_library(NUKLEAR_LIB nuklear)
-if(NOT NUKLEAR_LIB)
-    message(FATAL_ERROR "libnuklear.so не найдена. Убедитесь, что она установлена.")
-endif()
-
 find_path(NUKLEAR_INCLUDE_DIR nuklear.h)
 
-nanobind_add_module(npnuklear 
+nanobind_add_module(npnk_wbackend 
     LTO 
-    np_nuklear.cpp
+    npnk-backend.cpp
 )
 
-target_include_directories(npnuklear PRIVATE ${NUKLEAR_INCLUDE_DIR})
-target_link_libraries(npnuklear PRIVATE ${NUKLEAR_LIB})
+target_include_directories(npnk_wbackend PRIVATE ${NUKLEAR_INCLUDE_DIR})
+target_link_libraries(npnk_wbackend PRIVATE nuklear glfw)
+set_property(TARGET glfw PROPERTY POSITION_INDEPENT_CODE ON)
 
-
-
-nanobind_add_stub(my_module_stub
-    TARGET npnuklear
-    MODULE npnuklear
-    OUTPUT npnuklear.pyi
+nanobind_add_stub(stub
+    TARGET npnk_wbackend
+    MODULE npnk_wbackend
+    OUTPUT npnk_wbackend.pyi
 )
-
-
-
-install(TARGETS npnuklear LIBRARY DESTINATION .)
