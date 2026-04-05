@@ -1,5 +1,5 @@
 
-//Copyright (C) 2024-2026 Niritech Labs
+//Copyright (C) 2026 Niritech Labs
 //This program is free software: you can redistribute it and/or modify
 //it under the terms of the GNU General Public License as published by
 //the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
@@ -908,6 +908,7 @@ NB_MODULE(npnuklear, m) {
 
     nk_command_var.def_rw("type", &nk_command::type);
     nk_command_var.def_rw("next", &nk_command::next);
+    nk_command_var.def_rw("userdata", &nk_command::userdata);
 
     nk_command_scissor_var.def_rw("header", &nk_command_scissor::header);
     nk_command_scissor_var.def_rw("y", &nk_command_scissor::y);
@@ -1041,6 +1042,7 @@ NB_MODULE(npnuklear, m) {
     nk_draw_command_var.def_rw("elem_count", &nk_draw_command::elem_count);
     nk_draw_command_var.def_rw("clip_rect", &nk_draw_command::clip_rect);
     nk_draw_command_var.def_rw("texture", &nk_draw_command::texture);
+    nk_draw_command_var.def_rw("userdata", &nk_draw_command::userdata);
 
     nk_draw_list_var.def_rw("clip_rect", &nk_draw_list::clip_rect);
     nk_draw_list_var.def_rw("config", &nk_draw_list::config);
@@ -1052,6 +1054,7 @@ NB_MODULE(npnuklear, m) {
     nk_draw_list_var.def_rw("path_offset", &nk_draw_list::path_offset);
     nk_draw_list_var.def_rw("line_AA", &nk_draw_list::line_AA);
     nk_draw_list_var.def_rw("shape_AA", &nk_draw_list::shape_AA);
+    nk_draw_list_var.def_rw("userdata", &nk_draw_list::userdata);
 
     nk_style_item_var.def_rw("type", &nk_style_item::type);
     nk_style_item_var.def_rw("data", &nk_style_item::data);
@@ -1513,6 +1516,7 @@ NB_MODULE(npnuklear, m) {
     nk_context_var.def_rw("stacks", &nk_context::stacks);
     nk_context_var.def_rw("delta_time_seconds", &nk_context::delta_time_seconds);
     nk_context_var.def_rw("draw_list", &nk_context::draw_list);
+    nk_context_var.def_rw("userdata", &nk_context::userdata);
     nk_context_var.def_rw("text_edit", &nk_context::text_edit);
     nk_context_var.def_rw("overlay", &nk_context::overlay);
     nk_context_var.def_rw("build", &nk_context::build);
@@ -1530,6 +1534,8 @@ NB_MODULE(npnuklear, m) {
     m.def("nk_clear_mtd", &nk_clear);
 
     m.def("nk_free_mtd", &nk_free);
+
+    m.def("nk_set_user_data_mtd", &nk_set_user_data);
 
     m.def("nk_input_begin_mtd", &nk_input_begin);
 
@@ -1549,17 +1555,7 @@ NB_MODULE(npnuklear, m) {
 
     m.def("nk_input_end_mtd", &nk_input_end);
 
-    m.def("nk__begin_mtd", &nk__begin, nb::rv_policy::reference);
-
-    m.def("nk__next_mtd", &nk__next, nb::rv_policy::reference);
-
     m.def("nk_convert_mtd", &nk_convert);
-
-    m.def("nk__draw_begin_mtd", &nk__draw_begin, nb::rv_policy::reference);
-
-    m.def("nk__draw_end_mtd", &nk__draw_end, nb::rv_policy::reference);
-
-    m.def("nk__draw_next_mtd", &nk__draw_next, nb::rv_policy::reference);
 
     m.def("nk_begin_mtd", &nk_begin);
 
@@ -1760,6 +1756,20 @@ NB_MODULE(npnuklear, m) {
     m.def("nk_image_mtd", &nk_image);
 
     m.def("nk_image_color_mtd", &nk_image_color);
+
+    m.def("nk_value_bool_mtd", &nk_value_bool);
+
+    m.def("nk_value_int_mtd", &nk_value_int);
+
+    m.def("nk_value_uint_mtd", &nk_value_uint);
+
+    m.def("nk_value_float_mtd", &nk_value_float);
+
+    m.def("nk_value_color_byte_mtd", &nk_value_color_byte);
+
+    m.def("nk_value_color_float_mtd", &nk_value_color_float);
+
+    m.def("nk_value_color_hex_mtd", &nk_value_color_hex);
 
     m.def("nk_button_text_mtd", &nk_button_text);
 
@@ -2451,12 +2461,6 @@ NB_MODULE(npnuklear, m) {
 
     m.def("nk_draw_list_setup_mtd", &nk_draw_list_setup);
 
-    m.def("nk__draw_list_begin_mtd", &nk__draw_list_begin, nb::rv_policy::reference);
-
-    m.def("nk__draw_list_next_mtd", &nk__draw_list_next, nb::rv_policy::reference);
-
-    m.def("nk__draw_list_end_mtd", &nk__draw_list_end, nb::rv_policy::reference);
-
     m.def("nk_draw_list_path_clear_mtd", &nk_draw_list_path_clear);
 
     m.def("nk_draw_list_path_line_to_mtd", &nk_draw_list_path_line_to);
@@ -2498,6 +2502,8 @@ NB_MODULE(npnuklear, m) {
     m.def("nk_draw_list_add_image_mtd", &nk_draw_list_add_image);
 
     m.def("nk_draw_list_add_text_mtd", &nk_draw_list_add_text);
+
+    m.def("nk_draw_list_push_userdata_mtd", &nk_draw_list_push_userdata);
 
     m.def("nk_style_item_color_mtd", &nk_style_item_color);
 

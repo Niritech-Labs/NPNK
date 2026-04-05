@@ -1,24 +1,28 @@
+# Copyright (C) 2026 Niritech Labs
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 from NLUtils.TextUtils import GigaRE
 from handleFunctions import *
 gre = GigaRE(True)
 file = ''
-with open('nuklear_pp.h','r') as f:
+with open('nkpp.h','r') as f:
     file = f.read()
 fl = []
 enums = gre.FindAndWrap(file,EnumsRE,Enums,None)
 fl.append('\n'.join(enums))
 
-structBlacklist = ['nk_allocator','nk_command_custom']
+structBlacklist = ['nk_allocator','nk_command_custom','__']
 structsPre = gre.FindAndWrap(file,PredefStructsRE,PredefStructs,wrapSkeleton=None,blacklist=structBlacklist,flags=re.MULTILINE | re.DOTALL)
 fl.append('\n'.join(structsPre))
 structs = gre.FindAndWrap(file,StructsRE,Structs,None,blacklist=structBlacklist,flags=re.MULTILINE | re.DOTALL)
 fl.append('\n'.join(structs))
-methodBlacklist = ['nk_command_custom','nk_allocator','nk_strto','nk_color_hex_rgb','nk_utf','nk_edit_string','nk_combo(','nk_combobox(']
+methodBlacklist = ['nk_command_custom','nk_allocator','nk_strto','nk_color_hex_rgb','nk_utf','nk_edit_string','nk_combo(','nk_combobox(','__']
 methods = gre.FindAndWrap(file,MethodsRE,Methods,None,blacklist=methodBlacklist,flags=0)
 fl.append('\n'.join(methods))
 
 inner = '''
-//Copyright (C) 2024-2026 Niritech Labs
+//Copyright (C) 2026 Niritech Labs
 //This program is free software: you can redistribute it and/or modify
 //it under the terms of the GNU General Public License as published by
 //the Free Software Foundation, either version 3 of the License, or (at your option) any later version.

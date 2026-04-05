@@ -1,18 +1,48 @@
-%Build
+# Copyright (C) 2026 Niritech Labs
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+%Make Backend
+$cmake -S backend -B backend/build-o-critical
+$cmake --build backend/build-o-critical
+
+%Make Nuklear
+$cmake -S libnuklear -B libnuklear/build-o-critical
+$cmake --build libnuklear/build-o-critical
+
+%Make Nuklear Bingings
+$sh preprocess.sh-o-critical
 $python3 generator.py-o-critical
+$cmake -S npcore_nuklear -B npcore_nuklear/build-o-critical
+$cmake --build npcore_nuklear/build-o-critical
 
-
-DIR:libnuklear/build-o-install-o-755
-DIR:bindings/build-o-install-o-755
-
-$cmake -S libnuklear -B libnuklear/build
-$cmake -S bindings -B bindings/build
+%Install Nuklear
+$sudo cmake --install libnuklear/build-o-critical
+TRG:/usr/lib64-o-libnuklear/build/libnuklear.so-o-install-o-755
 
 
 %Install
+DIR:obuild-o-install-o-755
+TRG:obuild-o-libnuklear/build/libnuklear.so-o-install-o-755
 
+TRG:obuild-o-backend/build/npnk_wbackend.pyi-o-install-o-755
+TRG:obuild-o-backend/build/npnk_wbackend.cpython-313-x86_64-linux-gnu.so-o-install-o-755
 
-%Clean
-DIR:backend/glfw-nor/build-o-remove-o-755
+TRG:obuild-o-npcore_nuklear/build/npnuklear.pyi-o-install-o-755
+TRG:obuild-o-npcore_nuklear/build/npnuklear.cpython-313-x86_64-linux-gnu.so-o-install-o-755
+
+%Clean Backend
+DIR:backend/build-o-remove-o-755
+
+%Clean Nuklear
 DIR:libnuklear/build-o-remove-o-755
-DIR:bindings/build-o-remove-o-755
+
+%Clean Nuklear Bingings
+DIR:npcore_nuklear/build-o-remove-o-755
+
+%Clean All
+DIR:backend/build-o-remove-o-755
+DIR:npcore_nuklear/build-o-remove-o-755
+DIR:libnuklear/build-o-remove-o-755
+DIR:obuild-o-remove-o-755

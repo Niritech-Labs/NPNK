@@ -13,8 +13,6 @@
 #define NK_INCLUDE_STANDARD_VARARGS
 #define NK_INCLUDE_COMMAND_USERDATA
 #define NK_UINT_DRAW_INDEX
-#define NK_IMPLEMENTATION
 
-
-#include "../nuklear/nuklear.h"
+#include "nuklear/nuklear.h"
 
