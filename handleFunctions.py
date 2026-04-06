@@ -16,7 +16,7 @@ def Enums(datainput, Logger):
 
     is_flag = ', nb::is_flag()' if '=' in body else ''
 
-    defenum = f'    nb::enum_<{name}>(m, "{name}"{is_flag})\n'
+    defenum = f'    nb::enum_<enum {name}>(m, "{name}"{is_flag})\n'
 
     keys = re.findall(r'(?:^|,)\s*(NK_\w+)(?:\s*=[^,]*)?', body)
 

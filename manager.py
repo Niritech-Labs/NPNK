@@ -8,8 +8,9 @@ import sys
 ti = NLInstaller('project.targets')
 
 ti.RunTarget('Clean All')
-#ti.RunTarget('Make Nuklear')
+ti.RunTarget('Make Nuklear')
+ti.RunTarget('Make Nuklear Bingings')
+ti.RunTarget('Make Backend')
+ti.RunTarget('Install')
+
 #ti.RunTarget('Install Nuklear')
-#ti.RunTarget('Make Nuklear Bingings')
-#ti.RunTarget('Make Backend')
-#ti.RunTarget('Install')

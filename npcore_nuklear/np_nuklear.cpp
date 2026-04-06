@@ -4,17 +4,17 @@
 //it under the terms of the GNU General Public License as published by
 //the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
+#define NK_IMPLEMENTATION
+#define NK_INCLUDE_STANDARD_IO
 #define NK_INCLUDE_FIXED_TYPES
 #define NK_INCLUDE_DEFAULT_ALLOCATOR
 #define NK_INCLUDE_STANDARD_VARARGS
-#define NK_INCLUDE_STANDARD_IO
 #define NK_INCLUDE_STANDARD_BOOL
 #define NK_INCLUDE_VERTEX_BUFFER_OUTPUT
 #define NK_INCLUDE_FONT_BAKING
 #define NK_INCLUDE_DEFAULT_FONT
 #define NK_INCLUDE_STANDARD_VARARGS
-#define NK_INCLUDE_COMMAND_USERDATA
-#define NK_UINT_DRAW_INDEX
+
 
 #include <nanobind/nanobind.h>
 #include <stdint.h>
@@ -37,70 +37,70 @@ auto as_capsule(Ret (*func)(Args...)) {
 
 NB_MODULE(npnuklear, m) {
     m.doc() = "Niritech Labs port Nuklear to python with nanobind"; 
-    nb::enum_<nk_heading>(m, "nk_heading")
+    nb::enum_<enum nk_heading>(m, "nk_heading")
         .value("NK_UP", NK_UP)
         .value("NK_RIGHT", NK_RIGHT)
         .value("NK_DOWN", NK_DOWN)
         .value("NK_LEFT", NK_LEFT)
         .export_values();
 
-    nb::enum_<nk_button_behavior>(m, "nk_button_behavior")
+    nb::enum_<enum nk_button_behavior>(m, "nk_button_behavior")
         .value("NK_BUTTON_DEFAULT", NK_BUTTON_DEFAULT)
         .value("NK_BUTTON_REPEATER", NK_BUTTON_REPEATER)
         .export_values();
 
-    nb::enum_<nk_modify>(m, "nk_modify", nb::is_flag())
+    nb::enum_<enum nk_modify>(m, "nk_modify", nb::is_flag())
         .value("NK_FIXED", NK_FIXED)
         .value("NK_MODIFIABLE", NK_MODIFIABLE)
         .export_values();
 
-    nb::enum_<nk_orientation>(m, "nk_orientation")
+    nb::enum_<enum nk_orientation>(m, "nk_orientation")
         .value("NK_VERTICAL", NK_VERTICAL)
         .value("NK_HORIZONTAL", NK_HORIZONTAL)
         .export_values();
 
-    nb::enum_<nk_collapse_states>(m, "nk_collapse_states", nb::is_flag())
+    nb::enum_<enum nk_collapse_states>(m, "nk_collapse_states", nb::is_flag())
         .value("NK_MINIMIZED", NK_MINIMIZED)
         .value("NK_MAXIMIZED", NK_MAXIMIZED)
         .export_values();
 
-    nb::enum_<nk_show_states>(m, "nk_show_states", nb::is_flag())
+    nb::enum_<enum nk_show_states>(m, "nk_show_states", nb::is_flag())
         .value("NK_HIDDEN", NK_HIDDEN)
         .value("NK_SHOWN", NK_SHOWN)
         .export_values();
 
-    nb::enum_<nk_chart_type>(m, "nk_chart_type")
+    nb::enum_<enum nk_chart_type>(m, "nk_chart_type")
         .value("NK_CHART_LINES", NK_CHART_LINES)
         .value("NK_CHART_COLUMN", NK_CHART_COLUMN)
         .value("NK_CHART_MAX", NK_CHART_MAX)
         .export_values();
 
-    nb::enum_<nk_chart_event>(m, "nk_chart_event", nb::is_flag())
+    nb::enum_<enum nk_chart_event>(m, "nk_chart_event", nb::is_flag())
         .value("NK_CHART_HOVERING", NK_CHART_HOVERING)
         .value("NK_CHART_CLICKED", NK_CHART_CLICKED)
         .export_values();
 
-    nb::enum_<nk_color_format>(m, "nk_color_format")
+    nb::enum_<enum nk_color_format>(m, "nk_color_format")
         .value("NK_RGB", NK_RGB)
         .value("NK_RGBA", NK_RGBA)
         .export_values();
 
-    nb::enum_<nk_popup_type>(m, "nk_popup_type")
+    nb::enum_<enum nk_popup_type>(m, "nk_popup_type")
         .value("NK_POPUP_STATIC", NK_POPUP_STATIC)
         .value("NK_POPUP_DYNAMIC", NK_POPUP_DYNAMIC)
         .export_values();
 
-    nb::enum_<nk_layout_format>(m, "nk_layout_format")
+    nb::enum_<enum nk_layout_format>(m, "nk_layout_format")
         .value("NK_DYNAMIC", NK_DYNAMIC)
         .value("NK_STATIC", NK_STATIC)
         .export_values();
 
-    nb::enum_<nk_tree_type>(m, "nk_tree_type")
+    nb::enum_<enum nk_tree_type>(m, "nk_tree_type")
         .value("NK_TREE_NODE", NK_TREE_NODE)
         .value("NK_TREE_TAB", NK_TREE_TAB)
         .export_values();
 
-    nb::enum_<nk_tooltip_pos>(m, "nk_tooltip_pos")
+    nb::enum_<enum nk_tooltip_pos>(m, "nk_tooltip_pos")
         .value("NK_TOP_LEFT", NK_TOP_LEFT)
         .value("NK_TOP_CENTER", NK_TOP_CENTER)
         .value("NK_TOP_RIGHT", NK_TOP_RIGHT)
@@ -112,7 +112,7 @@ NB_MODULE(npnuklear, m) {
         .value("NK_BOTTOM_RIGHT", NK_BOTTOM_RIGHT)
         .export_values();
 
-    nb::enum_<nk_symbol_type>(m, "nk_symbol_type")
+    nb::enum_<enum nk_symbol_type>(m, "nk_symbol_type")
         .value("NK_SYMBOL_NONE", NK_SYMBOL_NONE)
         .value("NK_SYMBOL_X", NK_SYMBOL_X)
         .value("NK_SYMBOL_UNDERSCORE", NK_SYMBOL_UNDERSCORE)
@@ -133,7 +133,7 @@ NB_MODULE(npnuklear, m) {
         .value("NK_SYMBOL_MAX", NK_SYMBOL_MAX)
         .export_values();
 
-    nb::enum_<nk_keys>(m, "nk_keys")
+    nb::enum_<enum nk_keys>(m, "nk_keys")
         .value("NK_KEY_NONE", NK_KEY_NONE)
         .value("NK_KEY_SHIFT", NK_KEY_SHIFT)
         .value("NK_KEY_CTRL", NK_KEY_CTRL)
@@ -167,7 +167,7 @@ NB_MODULE(npnuklear, m) {
         .value("NK_KEY_MAX", NK_KEY_MAX)
         .export_values();
 
-    nb::enum_<nk_buttons>(m, "nk_buttons")
+    nb::enum_<enum nk_buttons>(m, "nk_buttons")
         .value("NK_BUTTON_LEFT", NK_BUTTON_LEFT)
         .value("NK_BUTTON_MIDDLE", NK_BUTTON_MIDDLE)
         .value("NK_BUTTON_RIGHT", NK_BUTTON_RIGHT)
@@ -175,12 +175,12 @@ NB_MODULE(npnuklear, m) {
         .value("NK_BUTTON_MAX", NK_BUTTON_MAX)
         .export_values();
 
-    nb::enum_<nk_anti_aliasing>(m, "nk_anti_aliasing")
+    nb::enum_<enum nk_anti_aliasing>(m, "nk_anti_aliasing")
         .value("NK_ANTI_ALIASING_OFF", NK_ANTI_ALIASING_OFF)
         .value("NK_ANTI_ALIASING_ON", NK_ANTI_ALIASING_ON)
         .export_values();
 
-    nb::enum_<nk_convert_result>(m, "nk_convert_result", nb::is_flag())
+    nb::enum_<enum nk_convert_result>(m, "nk_convert_result", nb::is_flag())
         .value("NK_CONVERT_SUCCESS", NK_CONVERT_SUCCESS)
         .value("NK_CONVERT_INVALID_PARAM", NK_CONVERT_INVALID_PARAM)
         .value("NK_CONVERT_COMMAND_BUFFER_FULL", NK_CONVERT_COMMAND_BUFFER_FULL)
@@ -188,7 +188,7 @@ NB_MODULE(npnuklear, m) {
         .value("NK_CONVERT_ELEMENT_BUFFER_FULL", NK_CONVERT_ELEMENT_BUFFER_FULL)
         .export_values();
 
-    nb::enum_<nk_panel_flags>(m, "nk_panel_flags", nb::is_flag())
+    nb::enum_<enum nk_panel_flags>(m, "nk_panel_flags", nb::is_flag())
         .value("NK_WINDOW_BORDER", NK_WINDOW_BORDER)
         .value("NK_WINDOW_MOVABLE", NK_WINDOW_MOVABLE)
         .value("NK_WINDOW_SCALABLE", NK_WINDOW_SCALABLE)
@@ -202,7 +202,7 @@ NB_MODULE(npnuklear, m) {
         .value("NK_WINDOW_NO_INPUT", NK_WINDOW_NO_INPUT)
         .export_values();
 
-    nb::enum_<nk_widget_align>(m, "nk_widget_align", nb::is_flag())
+    nb::enum_<enum nk_widget_align>(m, "nk_widget_align", nb::is_flag())
         .value("NK_WIDGET_ALIGN_LEFT", NK_WIDGET_ALIGN_LEFT)
         .value("NK_WIDGET_ALIGN_CENTERED", NK_WIDGET_ALIGN_CENTERED)
         .value("NK_WIDGET_ALIGN_RIGHT", NK_WIDGET_ALIGN_RIGHT)
@@ -211,20 +211,20 @@ NB_MODULE(npnuklear, m) {
         .value("NK_WIDGET_ALIGN_BOTTOM", NK_WIDGET_ALIGN_BOTTOM)
         .export_values();
 
-    nb::enum_<nk_widget_alignment>(m, "nk_widget_alignment", nb::is_flag())
+    nb::enum_<enum nk_widget_alignment>(m, "nk_widget_alignment", nb::is_flag())
         .value("NK_WIDGET_LEFT", NK_WIDGET_LEFT)
         .value("NK_WIDGET_CENTERED", NK_WIDGET_CENTERED)
         .value("NK_WIDGET_RIGHT", NK_WIDGET_RIGHT)
         .export_values();
 
-    nb::enum_<nk_widget_layout_states>(m, "nk_widget_layout_states")
+    nb::enum_<enum nk_widget_layout_states>(m, "nk_widget_layout_states")
         .value("NK_WIDGET_INVALID", NK_WIDGET_INVALID)
         .value("NK_WIDGET_VALID", NK_WIDGET_VALID)
         .value("NK_WIDGET_ROM", NK_WIDGET_ROM)
         .value("NK_WIDGET_DISABLED", NK_WIDGET_DISABLED)
         .export_values();
 
-    nb::enum_<nk_widget_states>(m, "nk_widget_states", nb::is_flag())
+    nb::enum_<enum nk_widget_states>(m, "nk_widget_states", nb::is_flag())
         .value("NK_WIDGET_STATE_MODIFIED", NK_WIDGET_STATE_MODIFIED)
         .value("NK_WIDGET_STATE_INACTIVE", NK_WIDGET_STATE_INACTIVE)
         .value("NK_WIDGET_STATE_ENTERED", NK_WIDGET_STATE_ENTERED)
@@ -235,7 +235,7 @@ NB_MODULE(npnuklear, m) {
         .value("NK_WIDGET_STATE_ACTIVE", NK_WIDGET_STATE_ACTIVE)
         .export_values();
 
-    nb::enum_<nk_text_align>(m, "nk_text_align", nb::is_flag())
+    nb::enum_<enum nk_text_align>(m, "nk_text_align", nb::is_flag())
         .value("NK_TEXT_ALIGN_LEFT", NK_TEXT_ALIGN_LEFT)
         .value("NK_TEXT_ALIGN_CENTERED", NK_TEXT_ALIGN_CENTERED)
         .value("NK_TEXT_ALIGN_RIGHT", NK_TEXT_ALIGN_RIGHT)
@@ -244,13 +244,13 @@ NB_MODULE(npnuklear, m) {
         .value("NK_TEXT_ALIGN_BOTTOM", NK_TEXT_ALIGN_BOTTOM)
         .export_values();
 
-    nb::enum_<nk_text_alignment>(m, "nk_text_alignment", nb::is_flag())
+    nb::enum_<enum nk_text_alignment>(m, "nk_text_alignment", nb::is_flag())
         .value("NK_TEXT_LEFT", NK_TEXT_LEFT)
         .value("NK_TEXT_CENTERED", NK_TEXT_CENTERED)
         .value("NK_TEXT_RIGHT", NK_TEXT_RIGHT)
         .export_values();
 
-    nb::enum_<nk_edit_flags>(m, "nk_edit_flags", nb::is_flag())
+    nb::enum_<enum nk_edit_flags>(m, "nk_edit_flags", nb::is_flag())
         .value("NK_EDIT_DEFAULT", NK_EDIT_DEFAULT)
         .value("NK_EDIT_READ_ONLY", NK_EDIT_READ_ONLY)
         .value("NK_EDIT_AUTO_SELECT", NK_EDIT_AUTO_SELECT)
@@ -266,14 +266,14 @@ NB_MODULE(npnuklear, m) {
         .value("NK_EDIT_GOTO_END_ON_ACTIVATE", NK_EDIT_GOTO_END_ON_ACTIVATE)
         .export_values();
 
-    nb::enum_<nk_edit_types>(m, "nk_edit_types", nb::is_flag())
+    nb::enum_<enum nk_edit_types>(m, "nk_edit_types", nb::is_flag())
         .value("NK_EDIT_SIMPLE", NK_EDIT_SIMPLE)
         .value("NK_EDIT_FIELD", NK_EDIT_FIELD)
         .value("NK_EDIT_BOX", NK_EDIT_BOX)
         .value("NK_EDIT_EDITOR", NK_EDIT_EDITOR)
         .export_values();
 
-    nb::enum_<nk_edit_events>(m, "nk_edit_events", nb::is_flag())
+    nb::enum_<enum nk_edit_events>(m, "nk_edit_events", nb::is_flag())
         .value("NK_EDIT_ACTIVE", NK_EDIT_ACTIVE)
         .value("NK_EDIT_INACTIVE", NK_EDIT_INACTIVE)
         .value("NK_EDIT_ACTIVATED", NK_EDIT_ACTIVATED)
@@ -281,7 +281,7 @@ NB_MODULE(npnuklear, m) {
         .value("NK_EDIT_COMMITED", NK_EDIT_COMMITED)
         .export_values();
 
-    nb::enum_<nk_style_colors>(m, "nk_style_colors")
+    nb::enum_<enum nk_style_colors>(m, "nk_style_colors")
         .value("NK_COLOR_TEXT", NK_COLOR_TEXT)
         .value("NK_COLOR_WINDOW", NK_COLOR_WINDOW)
         .value("NK_COLOR_HEADER", NK_COLOR_HEADER)
@@ -317,7 +317,7 @@ NB_MODULE(npnuklear, m) {
         .value("NK_COLOR_COUNT", NK_COLOR_COUNT)
         .export_values();
 
-    nb::enum_<nk_style_cursor>(m, "nk_style_cursor")
+    nb::enum_<enum nk_style_cursor>(m, "nk_style_cursor")
         .value("NK_CURSOR_ARROW", NK_CURSOR_ARROW)
         .value("NK_CURSOR_TEXT", NK_CURSOR_TEXT)
         .value("NK_CURSOR_MOVE", NK_CURSOR_MOVE)
@@ -328,39 +328,39 @@ NB_MODULE(npnuklear, m) {
         .value("NK_CURSOR_COUNT", NK_CURSOR_COUNT)
         .export_values();
 
-    nb::enum_<nk_font_coord_type>(m, "nk_font_coord_type")
+    nb::enum_<enum nk_font_coord_type>(m, "nk_font_coord_type")
         .value("NK_COORD_UV", NK_COORD_UV)
         .value("NK_COORD_PIXEL", NK_COORD_PIXEL)
         .export_values();
 
-    nb::enum_<nk_font_atlas_format>(m, "nk_font_atlas_format")
+    nb::enum_<enum nk_font_atlas_format>(m, "nk_font_atlas_format")
         .value("NK_FONT_ATLAS_ALPHA8", NK_FONT_ATLAS_ALPHA8)
         .value("NK_FONT_ATLAS_RGBA32", NK_FONT_ATLAS_RGBA32)
         .export_values();
 
-    nb::enum_<nk_allocation_type>(m, "nk_allocation_type")
+    nb::enum_<enum nk_allocation_type>(m, "nk_allocation_type")
         .value("NK_BUFFER_FIXED", NK_BUFFER_FIXED)
         .value("NK_BUFFER_DYNAMIC", NK_BUFFER_DYNAMIC)
         .export_values();
 
-    nb::enum_<nk_buffer_allocation_type>(m, "nk_buffer_allocation_type")
+    nb::enum_<enum nk_buffer_allocation_type>(m, "nk_buffer_allocation_type")
         .value("NK_BUFFER_FRONT", NK_BUFFER_FRONT)
         .value("NK_BUFFER_BACK", NK_BUFFER_BACK)
         .value("NK_BUFFER_MAX", NK_BUFFER_MAX)
         .export_values();
 
-    nb::enum_<nk_text_edit_type>(m, "nk_text_edit_type")
+    nb::enum_<enum nk_text_edit_type>(m, "nk_text_edit_type")
         .value("NK_TEXT_EDIT_SINGLE_LINE", NK_TEXT_EDIT_SINGLE_LINE)
         .value("NK_TEXT_EDIT_MULTI_LINE", NK_TEXT_EDIT_MULTI_LINE)
         .export_values();
 
-    nb::enum_<nk_text_edit_mode>(m, "nk_text_edit_mode")
+    nb::enum_<enum nk_text_edit_mode>(m, "nk_text_edit_mode")
         .value("NK_TEXT_EDIT_MODE_VIEW", NK_TEXT_EDIT_MODE_VIEW)
         .value("NK_TEXT_EDIT_MODE_INSERT", NK_TEXT_EDIT_MODE_INSERT)
         .value("NK_TEXT_EDIT_MODE_REPLACE", NK_TEXT_EDIT_MODE_REPLACE)
         .export_values();
 
-    nb::enum_<nk_command_type>(m, "nk_command_type")
+    nb::enum_<enum nk_command_type>(m, "nk_command_type")
         .value("NK_COMMAND_NOP", NK_COMMAND_NOP)
         .value("NK_COMMAND_SCISSOR", NK_COMMAND_SCISSOR)
         .value("NK_COMMAND_LINE", NK_COMMAND_LINE)
@@ -382,24 +382,24 @@ NB_MODULE(npnuklear, m) {
         .value("NK_COMMAND_CUSTOM", NK_COMMAND_CUSTOM)
         .export_values();
 
-    nb::enum_<nk_command_clipping>(m, "nk_command_clipping", nb::is_flag())
+    nb::enum_<enum nk_command_clipping>(m, "nk_command_clipping", nb::is_flag())
         .value("NK_CLIPPING_OFF", NK_CLIPPING_OFF)
         .value("NK_CLIPPING_ON", NK_CLIPPING_ON)
         .export_values();
 
-    nb::enum_<nk_draw_list_stroke>(m, "nk_draw_list_stroke", nb::is_flag())
+    nb::enum_<enum nk_draw_list_stroke>(m, "nk_draw_list_stroke", nb::is_flag())
         .value("NK_STROKE_OPEN", NK_STROKE_OPEN)
         .value("NK_STROKE_CLOSED", NK_STROKE_CLOSED)
         .export_values();
 
-    nb::enum_<nk_draw_vertex_layout_attribute>(m, "nk_draw_vertex_layout_attribute")
+    nb::enum_<enum nk_draw_vertex_layout_attribute>(m, "nk_draw_vertex_layout_attribute")
         .value("NK_VERTEX_POSITION", NK_VERTEX_POSITION)
         .value("NK_VERTEX_COLOR", NK_VERTEX_COLOR)
         .value("NK_VERTEX_TEXCOORD", NK_VERTEX_TEXCOORD)
         .value("NK_VERTEX_ATTRIBUTE_COUNT", NK_VERTEX_ATTRIBUTE_COUNT)
         .export_values();
 
-    nb::enum_<nk_draw_vertex_layout_format>(m, "nk_draw_vertex_layout_format", nb::is_flag())
+    nb::enum_<enum nk_draw_vertex_layout_format>(m, "nk_draw_vertex_layout_format", nb::is_flag())
         .value("NK_FORMAT_SCHAR", NK_FORMAT_SCHAR)
         .value("NK_FORMAT_SSHORT", NK_FORMAT_SSHORT)
         .value("NK_FORMAT_SINT", NK_FORMAT_SINT)
@@ -424,18 +424,18 @@ NB_MODULE(npnuklear, m) {
         .value("NK_FORMAT_COUNT", NK_FORMAT_COUNT)
         .export_values();
 
-    nb::enum_<nk_style_item_type>(m, "nk_style_item_type")
+    nb::enum_<enum nk_style_item_type>(m, "nk_style_item_type")
         .value("NK_STYLE_ITEM_COLOR", NK_STYLE_ITEM_COLOR)
         .value("NK_STYLE_ITEM_IMAGE", NK_STYLE_ITEM_IMAGE)
         .value("NK_STYLE_ITEM_NINE_SLICE", NK_STYLE_ITEM_NINE_SLICE)
         .export_values();
 
-    nb::enum_<nk_style_header_align>(m, "nk_style_header_align")
+    nb::enum_<enum nk_style_header_align>(m, "nk_style_header_align")
         .value("NK_HEADER_LEFT", NK_HEADER_LEFT)
         .value("NK_HEADER_RIGHT", NK_HEADER_RIGHT)
         .export_values();
 
-    nb::enum_<nk_panel_type>(m, "nk_panel_type", nb::is_flag())
+    nb::enum_<enum nk_panel_type>(m, "nk_panel_type", nb::is_flag())
         .value("NK_PANEL_NONE", NK_PANEL_NONE)
         .value("NK_PANEL_WINDOW", NK_PANEL_WINDOW)
         .value("NK_PANEL_GROUP", NK_PANEL_GROUP)
@@ -446,13 +446,13 @@ NB_MODULE(npnuklear, m) {
         .value("NK_PANEL_TOOLTIP", NK_PANEL_TOOLTIP)
         .export_values();
 
-    nb::enum_<nk_panel_set>(m, "nk_panel_set", nb::is_flag())
+    nb::enum_<enum nk_panel_set>(m, "nk_panel_set", nb::is_flag())
         .value("NK_PANEL_SET_NONBLOCK", NK_PANEL_SET_NONBLOCK)
         .value("NK_PANEL_SET_POPUP", NK_PANEL_SET_POPUP)
         .value("NK_PANEL_SET_SUB", NK_PANEL_SET_SUB)
         .export_values();
 
-    nb::enum_<nk_panel_row_layout_type>(m, "nk_panel_row_layout_type", nb::is_flag())
+    nb::enum_<enum nk_panel_row_layout_type>(m, "nk_panel_row_layout_type", nb::is_flag())
         .value("NK_LAYOUT_DYNAMIC_FIXED", NK_LAYOUT_DYNAMIC_FIXED)
         .value("NK_LAYOUT_DYNAMIC_ROW", NK_LAYOUT_DYNAMIC_ROW)
         .value("NK_LAYOUT_DYNAMIC_FREE", NK_LAYOUT_DYNAMIC_FREE)
@@ -465,7 +465,7 @@ NB_MODULE(npnuklear, m) {
         .value("NK_LAYOUT_COUNT", NK_LAYOUT_COUNT)
         .export_values();
 
-    nb::enum_<nk_window_flags>(m, "nk_window_flags", nb::is_flag())
+    nb::enum_<enum nk_window_flags>(m, "nk_window_flags", nb::is_flag())
         .value("NK_WINDOW_PRIVATE", NK_WINDOW_PRIVATE)
         .value("NK_WINDOW_DYNAMIC", NK_WINDOW_DYNAMIC)
         .value("NK_WINDOW_ROM", NK_WINDOW_ROM)
@@ -908,7 +908,6 @@ NB_MODULE(npnuklear, m) {
 
     nk_command_var.def_rw("type", &nk_command::type);
     nk_command_var.def_rw("next", &nk_command::next);
-    nk_command_var.def_rw("userdata", &nk_command::userdata);
 
     nk_command_scissor_var.def_rw("header", &nk_command_scissor::header);
     nk_command_scissor_var.def_rw("y", &nk_command_scissor::y);
@@ -1042,7 +1041,6 @@ NB_MODULE(npnuklear, m) {
     nk_draw_command_var.def_rw("elem_count", &nk_draw_command::elem_count);
     nk_draw_command_var.def_rw("clip_rect", &nk_draw_command::clip_rect);
     nk_draw_command_var.def_rw("texture", &nk_draw_command::texture);
-    nk_draw_command_var.def_rw("userdata", &nk_draw_command::userdata);
 
     nk_draw_list_var.def_rw("clip_rect", &nk_draw_list::clip_rect);
     nk_draw_list_var.def_rw("config", &nk_draw_list::config);
@@ -1054,7 +1052,6 @@ NB_MODULE(npnuklear, m) {
     nk_draw_list_var.def_rw("path_offset", &nk_draw_list::path_offset);
     nk_draw_list_var.def_rw("line_AA", &nk_draw_list::line_AA);
     nk_draw_list_var.def_rw("shape_AA", &nk_draw_list::shape_AA);
-    nk_draw_list_var.def_rw("userdata", &nk_draw_list::userdata);
 
     nk_style_item_var.def_rw("type", &nk_style_item::type);
     nk_style_item_var.def_rw("data", &nk_style_item::data);
@@ -1516,7 +1513,6 @@ NB_MODULE(npnuklear, m) {
     nk_context_var.def_rw("stacks", &nk_context::stacks);
     nk_context_var.def_rw("delta_time_seconds", &nk_context::delta_time_seconds);
     nk_context_var.def_rw("draw_list", &nk_context::draw_list);
-    nk_context_var.def_rw("userdata", &nk_context::userdata);
     nk_context_var.def_rw("text_edit", &nk_context::text_edit);
     nk_context_var.def_rw("overlay", &nk_context::overlay);
     nk_context_var.def_rw("build", &nk_context::build);
@@ -1534,8 +1530,6 @@ NB_MODULE(npnuklear, m) {
     m.def("nk_clear_mtd", &nk_clear);
 
     m.def("nk_free_mtd", &nk_free);
-
-    m.def("nk_set_user_data_mtd", &nk_set_user_data);
 
     m.def("nk_input_begin_mtd", &nk_input_begin);
 
@@ -2502,8 +2496,6 @@ NB_MODULE(npnuklear, m) {
     m.def("nk_draw_list_add_image_mtd", &nk_draw_list_add_image);
 
     m.def("nk_draw_list_add_text_mtd", &nk_draw_list_add_text);
-
-    m.def("nk_draw_list_push_userdata_mtd", &nk_draw_list_push_userdata);
 
     m.def("nk_style_item_color_mtd", &nk_style_item_color);
 

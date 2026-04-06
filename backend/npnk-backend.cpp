@@ -3,21 +3,30 @@
 //it under the terms of the GNU General Public License as published by
 //the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdint.h>
+#include <stdarg.h>
+#include <string.h>
+#include <math.h>
+#include <assert.h>
+#include <limits.h>
+#include <time.h>
+
 #define GLAD_GL_IMPLEMENTATION
-#define NK_GLFW_GL2_IMPLEMENTATION
+#define NK_GLFW_GL3_IMPLEMENTATION
 #define GLFW_EXPOSE_NATIVE_WAYLAND
 #define NK_IMPLEMENTATION
+#define NK_INCLUDE_STANDARD_IO
 #define NK_INCLUDE_FIXED_TYPES
 #define NK_INCLUDE_DEFAULT_ALLOCATOR
 #define NK_INCLUDE_STANDARD_VARARGS
-#define NK_INCLUDE_STANDARD_IO
 #define NK_INCLUDE_STANDARD_BOOL
 #define NK_INCLUDE_VERTEX_BUFFER_OUTPUT
 #define NK_INCLUDE_FONT_BAKING
 #define NK_INCLUDE_DEFAULT_FONT
 #define NK_INCLUDE_STANDARD_VARARGS
-#define NK_INCLUDE_COMMAND_USERDATA
-#define NK_UINT_DRAW_INDEX
+
 
 #include <nanobind/nanobind.h>
 #include "glfw-nor/deps/glad/gl.h"
@@ -25,205 +34,209 @@
 #include <GLFW/glfw3native.h>   
 #include <nuklear.h>
 
-#include <nuklear_glfw_gl2.h>
+#include <nuklear_glfw_gl3.h>
+
+#define MAX_VERTEX_BUFFER 512 * 1024
+#define MAX_ELEMENT_BUFFER 128 * 1024
 
 namespace nb = nanobind;
 
-static GLFWwindow*   g_window = nullptr;
-static nk_context*   g_nk     = nullptr;
-static bool          g_glfw_initialized = false;
 
-// ---------------------------------------------------------------------------
-static void glfw_error_callback(int err, const char* desc) {
-    fprintf(stderr, "GLFW error %d: %s\n", err, desc);
-}
+class Backend {
+private:
+    GLFWwindow   *window;
+    struct nk_context *nk_ctx;
+    struct nk_glfw glfw;
+    bool glfw_initialized;
+    int width, height;
+    struct nk_colorf bg;
 
-// ---------------------------------------------------------------------------
-
-void GLFWInit() {
-    if (g_glfw_initialized) return;
-    glfwSetErrorCallback(glfw_error_callback);
-    if (!glfwInit())
-        throw std::runtime_error("Failed to initialize GLFW");
-    g_glfw_initialized = true;
-}
-
-// ---------------------------------------------------------------------------
-// Создание окна, контекста OpenGL и Nuklear
-void CreateWindow(int width, int height, const char* title,bool decorated,bool layerShell) {
-    if (g_window)
-        throw std::runtime_error("Window already exists");
-
-    
-    glfwWindowHint(GLFW_DECORATED, decorated);
-
-    if (layerShell) {
-        glfwWindowHint(GLFW_WAYLAND_ZWLR_KEYBOARD_ON_FOCUS, GLFW_TRUE);
-        glfwWindowHint(GLFW_WAYLAND_USE_ZWLR, GLFW_WAYLAND_ZWLR_LAYER_TOP);
+    static void glfw_error_callback(int err, const char *desc) {
+        fprintf(stderr, "GLFW error %d: %s\n", err, desc);
     }
 
-    g_window = glfwCreateWindow(width, height, title, nullptr, nullptr);
-    if (!g_window)
-        throw std::runtime_error("Failed to create window");
-
-    glfwMakeContextCurrent(g_window);
-
-    // Загрузка OpenGL (предполагается, что glad уже инициализирован)
-    if (!gladLoadGL(glfwGetProcAddress))
-        throw std::runtime_error("Failed to load OpenGL");
-
-    // Инициализация Nuklear с бэкендом GLFW
-    g_nk = nk_glfw3_init(g_window, NK_GLFW3_INSTALL_CALLBACKS);
-    if (!g_nk)
-        throw std::runtime_error("Failed to init Nuklear");
-
-    // Стандартный шрифт
-    struct nk_font_atlas* atlas;
-    nk_glfw3_font_stash_begin(&atlas);
-    nk_glfw3_font_stash_end();
-}
-
-// ---------------------------------------------------------------------------
-// Возвращает указатель на nk_context – nanobind автоматически обернёт в ваш класс
-nk_context* GetNKContext() {
-    if (!g_nk) throw std::runtime_error("Nuklear not initialized");
-    return g_nk;
-}
-
-// ---------------------------------------------------------------------------
-// Начать новый кадр (обработка событий, сброс состояния)
-void NewFrame() {
-    if (!g_nk) throw std::runtime_error("Nuklear not initialized");
-    nk_glfw3_new_frame();
-}
-
-// ---------------------------------------------------------------------------
-// Очистка экрана, рендер Nuklear, смена буферов
-void Render() {
-    if (!g_window) throw std::runtime_error("No window");
-    nk_glfw3_render(NK_ANTI_ALIASING_ON);
-    glfwSwapBuffers(g_window);
-}
-
-// ---------------------------------------------------------------------------
-// Ожидание событий (блокирующий вызов)
-void WaitEvents() {
-    if (!g_window) throw std::runtime_error("No window");
-    glfwWaitEvents();
-}
-
-// ---------------------------------------------------------------------------
-// Проверка, нужно ли закрыть окно
-bool ShouldClose() {
-    if (!g_window) return true;
-    return glfwWindowShouldClose(g_window) != 0;
-}
-
-// ---------------------------------------------------------------------------
-// Установить флаг закрытия окна
-void SetShouldClose(bool value) {
-    if (!g_window) return;
-    glfwSetWindowShouldClose(g_window, value ? GLFW_TRUE : GLFW_FALSE);
-}
-
-// ---------------------------------------------------------------------------
-// Получить текущие размеры окна
-std::tuple<int, int> GetWindowSize() {
-    if (!g_window) return {0, 0};
-    int w, h;
-    glfwGetWindowSize(g_window, &w, &h);
-    return {w, h};
-}
-
-// ---------------------------------------------------------------------------
-// Wayland: exclusive zone
-void LS_SetExclusiveZone(int zone) {
-    if (!g_window) throw std::runtime_error("No window");
-    glfwWaylandZwlrSetExclusiveZone(g_window, zone);
-}
-
-// ---------------------------------------------------------------------------
-// Wayland: margin (одинаковый со всех сторон)
-void LS_SetMargin(int top, int right, int bottom, int left) {
-    if (!g_window) throw std::runtime_error("No window");
-    glfwWaylandZwlrSetMargin(g_window, top, right, bottom, left);
-}
-
-// ---------------------------------------------------------------------------
-// Wayland: слой (0 = TOP, 1 = OVERLAY, 2 = BOTTOM, 3 = BACKGROUND)
-void LS_SetLayer(int layer) {
-    if (!g_window) throw std::runtime_error("No window");
-    static const int layers[] = {
-        GLFW_WAYLAND_ZWLR_LAYER_TOP,
-        GLFW_WAYLAND_ZWLR_LAYER_OVERLAY,
-        GLFW_WAYLAND_ZWLR_LAYER_BOTTOM,
-        GLFW_WAYLAND_ZWLR_LAYER_BACKGROUND
-    };
-    if (layer < 0 || layer >= 4)
-        throw std::runtime_error("Invalid layer index (0..3)");
-    glfwWaylandZwlrSetLayer(g_window, layers[layer]);
-}
-
-// ---------------------------------------------------------------------------
-// Wayland: якорь (0 = TOP, 1 = BOTTOM, 2 = LEFT, 3 = RIGHT)
-void LS_SetAnchor(int anchor) {
-    if (!g_window) throw std::runtime_error("No window");
-    static const int anchors[] = {
-        GLFW_WAYLAND_ZWLR_ANCHOR_TOP,
-        GLFW_WAYLAND_ZWLR_ANCHOR_BOTTOM,
-        GLFW_WAYLAND_ZWLR_ANCHOR_LEFT,
-        GLFW_WAYLAND_ZWLR_ANCHOR_RIGHT
-    };
-    if (anchor < 0 || anchor >= 4)
-        throw std::runtime_error("Invalid anchor index (0..3)");
-    glfwWaylandZwlrSetAnchor(g_window, anchors[anchor]);
-}
-
-// ---------------------------------------------------------------------------
-// Wayland: запросить/освободить фокус клавиатуры
-void SetKeyboardFocus(bool focus) {
-    if (!g_window) throw std::runtime_error("No window");
-    glfwWaylandZwlrSetKeyboardFocus(g_window, focus ? GLFW_TRUE : GLFW_FALSE);
-}
-
-// ---------------------------------------------------------------------------
-// Очистка ресурсов (должна вызываться перед выходом)
-void Shutdown() {
-    if (g_nk) {
-        nk_glfw3_shutdown();
-        g_nk = nullptr;
+public:
+    Backend() {
+        window = NULL;
+        nk_ctx = NULL;
+        memset(&glfw, 0, sizeof(glfw));
+        glfw_initialized = false;
+        width = 0;
+        height = 0;
+        bg.r = 0.10f;
+        bg.g = 0.18f;
+        bg.b = 0.24f;
+        bg.a = 1.0f;
     }
-    if (g_window) {
-        glfwDestroyWindow(g_window);
-        g_window = nullptr;
-    }
-    if (g_glfw_initialized) {
-        glfwTerminate();
-        g_glfw_initialized = false;
-    }
-}
-// ---------------------------------------------------------------------------
-void PollEvents() {
-    if (!g_window) throw std::runtime_error("No window");
-    glfwPollEvents();
-}
 
-// ---------------------------------------------------------------------------
+    ~Backend() {
+        if (window) Shutdown();
+    }
+
+    void GLFWInit() {
+        if (glfw_initialized) return;
+        glfwSetErrorCallback(glfw_error_callback);
+        if (!glfwInit())
+            throw std::runtime_error("Failed to initialize GLFW");
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+        glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+        glfw_initialized = true;
+    }
+
+    void CreateWindow(int widthps, int heightps, const char* title, bool decorated, bool layerShell) {
+        if (window)
+            throw std::runtime_error("Window already exists");
+
+        glfwWindowHint(GLFW_DECORATED, decorated);
+        if (layerShell) {
+            glfwWindowHint(GLFW_WAYLAND_ZWLR_KEYBOARD_ON_FOCUS, GLFW_TRUE);
+            glfwWindowHint(GLFW_WAYLAND_USE_ZWLR, GLFW_WAYLAND_ZWLR_LAYER_TOP);
+        }
+
+        window = glfwCreateWindow(widthps, heightps, title, nullptr, nullptr);
+        if (!window)
+            throw std::runtime_error("Failed to create window");
+
+        glfwMakeContextCurrent(window);
+        if (!gladLoadGL(glfwGetProcAddress))
+            throw std::runtime_error("Failed to load OpenGL");
+        glViewport(0, 0, widthps, heightps);
+
+        nk_ctx = nk_glfw3_init(&glfw, window, NK_GLFW3_INSTALL_CALLBACKS);
+        if (!nk_ctx)
+            throw std::runtime_error("Failed to init Nuklear");
+
+        
+        {struct nk_font_atlas* atlas;
+            nk_glfw3_font_stash_begin(&glfw, &atlas);
+            nk_glfw3_font_stash_end(&glfw);
+        }
+    }
+
+    nk_context* GetNKContext() {
+        if (!nk_ctx) throw std::runtime_error("Nuklear not initialized");
+        return nk_ctx;
+    }
+
+    void NewFrame() {
+        if (!nk_ctx) throw std::runtime_error("Nuklear not initialized");
+        nk_glfw3_new_frame(&glfw);
+    }
+
+    void Render() {
+        if (!window) throw std::runtime_error("No window");
+        glfwGetWindowSize(window, &width, &height);
+        glViewport(0, 0, width, height);
+        glClearColor(bg.r, bg.g, bg.b, bg.a);
+        glClear(GL_COLOR_BUFFER_BIT);
+        nk_glfw3_render(&glfw, NK_ANTI_ALIASING_ON, MAX_VERTEX_BUFFER, MAX_ELEMENT_BUFFER);
+        glfwSwapBuffers(window);
+    }
+
+    void PollEvents() {
+        if (!window) throw std::runtime_error("No window");
+        glfwPollEvents();
+    }
+
+    void WaitEvents() {
+        if (!window) throw std::runtime_error("No window");
+        glfwWaitEvents();
+    }
+
+    bool ShouldClose() {
+        if (!window) return true;
+        return glfwWindowShouldClose(window) != 0;
+    }
+
+    void SetShouldClose(bool value) {
+        if (!window) return;
+        glfwSetWindowShouldClose(window, value ? GLFW_TRUE : GLFW_FALSE);
+    }
+
+    std::tuple<int, int> GetWindowSize() {
+        if (!window) return {0, 0};
+        int w, h;
+        glfwGetWindowSize(window, &w, &h);
+        return {w, h};
+    }
+
+    void LS_SetExclusiveZone(int zone) {
+        if (!window) throw std::runtime_error("No window");
+        glfwWaylandZwlrSetExclusiveZone(window, zone);
+    }
+
+    void LS_SetMargin(int top, int right, int bottom, int left) {
+        if (!window) throw std::runtime_error("No window");
+        glfwWaylandZwlrSetMargin(window, top, right, bottom, left);
+    }
+
+    void LS_SetLayer(int layer) {
+        if (!window) throw std::runtime_error("No window");
+        static const int layers[] = {
+            GLFW_WAYLAND_ZWLR_LAYER_TOP,
+            GLFW_WAYLAND_ZWLR_LAYER_OVERLAY,
+            GLFW_WAYLAND_ZWLR_LAYER_BOTTOM,
+            GLFW_WAYLAND_ZWLR_LAYER_BACKGROUND
+        };
+        if (layer < 0 || layer >= 4)
+            throw std::runtime_error("Invalid layer index (0..3)");
+        glfwWaylandZwlrSetLayer(window, layers[layer]);
+    }
+
+    void LS_SetAnchor(int anchor) {
+        if (!window) throw std::runtime_error("No window");
+        static const int anchors[] = {
+            GLFW_WAYLAND_ZWLR_ANCHOR_TOP,
+            GLFW_WAYLAND_ZWLR_ANCHOR_BOTTOM,
+            GLFW_WAYLAND_ZWLR_ANCHOR_LEFT,
+            GLFW_WAYLAND_ZWLR_ANCHOR_RIGHT
+        };
+        if (anchor < 0 || anchor >= 4)
+            throw std::runtime_error("Invalid anchor index (0..3)");
+        glfwWaylandZwlrSetAnchor(window, anchors[anchor]);
+    }
+
+    void SetKeyboardFocus(bool focus) {
+        if (!window) throw std::runtime_error("No window");
+        glfwWaylandZwlrSetKeyboardFocus(window, focus ? GLFW_TRUE : GLFW_FALSE);
+    }
+
+    void Shutdown() {
+        if (nk_ctx) {
+            nk_glfw3_shutdown(&glfw);
+            nk_ctx = nullptr;
+        }
+        if (window) {
+            glfwDestroyWindow(window);
+            window = nullptr;
+        }
+        if (glfw_initialized) {
+            glfwTerminate();
+            glfw_initialized = false;
+        }
+    }
+};
+
 NB_MODULE(npnk_wbackend, m) {
-    m.def("GLFWInit",         &GLFWInit);
-    m.def("CreateWindow",     &CreateWindow);
-    m.def("GetNKContext",    &GetNKContext);       
-    m.def("NewFrame",         &NewFrame);
-    m.def("Render",            &Render);
-    m.def("WaitEvents",       &WaitEvents);
-    m.def("ShouldClose",      &ShouldClose);
-    m.def("SetShouldClose",  &SetShouldClose);
-    m.def("GetWindowSize",   &GetWindowSize);
-    m.def("LS_SetExclusiveZone",&LS_SetExclusiveZone);
-    m.def("LS_SetMargin",        &LS_SetMargin);
-    m.def("LS_SetLayer",         &LS_SetLayer);
-    m.def("LS_SetAnchor",        &LS_SetAnchor);
-    m.def("SetKeyboardFocus",&SetKeyboardFocus);
-    m.def("Shutdown",          &Shutdown);
-    m.def("PollEvents", &PollEvents);
+    nb::class_<Backend>(m, "Bk")
+        .def(nb::init<>())
+        .def("GLFWInit", &Backend::GLFWInit)
+        .def("CreateWindow", &Backend::CreateWindow)
+        .def("GetNKContext", &Backend::GetNKContext)
+        .def("NewFrame", &Backend::NewFrame)
+        .def("Render", &Backend::Render)
+        .def("PollEvents", &Backend::PollEvents)
+        .def("WaitEvents", &Backend::WaitEvents)
+        .def("ShouldClose", &Backend::ShouldClose)
+        .def("SetShouldClose", &Backend::SetShouldClose)
+        .def("GetWindowSize", &Backend::GetWindowSize)
+        .def("LS_SetExclusiveZone", &Backend::LS_SetExclusiveZone)
+        .def("LS_SetMargin", &Backend::LS_SetMargin)
+        .def("LS_SetLayer", &Backend::LS_SetLayer)
+        .def("LS_SetAnchor", &Backend::LS_SetAnchor)
+        .def("SetKeyboardFocus", &Backend::SetKeyboardFocus)
+        .def("Shutdown", &Backend::Shutdown);
 }
+
+

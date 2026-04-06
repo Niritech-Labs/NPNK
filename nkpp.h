@@ -318,7 +318,6 @@ extern nk_bool nk_init(struct nk_context*, const struct nk_allocator*, const str
 extern nk_bool nk_init_custom(struct nk_context*, struct nk_buffer *cmds, struct nk_buffer *pool, const struct nk_user_font*);
 extern void nk_clear(struct nk_context*);
 extern void nk_free(struct nk_context*);
-extern void nk_set_user_data(struct nk_context*, nk_handle handle);
 enum nk_keys {
     NK_KEY_NONE,
     NK_KEY_SHIFT,
@@ -1405,7 +1404,7 @@ struct nk_command {
     enum nk_command_type type;
     nk_size next;
 
-    nk_handle userdata;
+
 
 };
 
@@ -1655,9 +1654,7 @@ extern nk_bool nk_input_is_mouse_released(const struct nk_input*, enum nk_button
 extern nk_bool nk_input_is_key_pressed(const struct nk_input*, enum nk_keys);
 extern nk_bool nk_input_is_key_released(const struct nk_input*, enum nk_keys);
 extern nk_bool nk_input_is_key_down(const struct nk_input*, enum nk_keys);
-typedef nk_uint nk_draw_index;
-
-
+typedef nk_ushort nk_draw_index;
 
 enum nk_draw_list_stroke {
     NK_STROKE_OPEN = nk_false,
@@ -1711,7 +1708,7 @@ struct nk_draw_command {
     struct nk_rect clip_rect;
     nk_handle texture;
 
-    nk_handle userdata;
+
 
 };
 
@@ -1736,7 +1733,7 @@ struct nk_draw_list {
     enum nk_anti_aliasing shape_AA;
 
 
-    nk_handle userdata;
+
 
 };
 
@@ -1778,8 +1775,6 @@ extern void nk_draw_list_fill_poly_convex(struct nk_draw_list*, const struct nk_
 
 extern void nk_draw_list_add_image(struct nk_draw_list*, struct nk_image texture, struct nk_rect rect, struct nk_color);
 extern void nk_draw_list_add_text(struct nk_draw_list*, const struct nk_user_font*, struct nk_rect, const char *text, int len, float font_height, struct nk_color);
-
-extern void nk_draw_list_push_userdata(struct nk_draw_list*, nk_handle userdata);
 enum nk_style_item_type {
     NK_STYLE_ITEM_COLOR,
     NK_STYLE_ITEM_IMAGE,
@@ -2540,14 +2535,6 @@ struct nk_context {
 
 
     struct nk_draw_list draw_list;
-
-
-    nk_handle userdata;
-
-
-
-
-
     struct nk_text_edit text_edit;
 
     struct nk_command_buffer overlay;

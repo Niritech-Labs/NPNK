@@ -40,8 +40,12 @@ set(nanobind_DIR "${NANOBIND_DIR}")
 find_package(nanobind CONFIG REQUIRED)
 #find_package(glad REQUIRED)
 
+
 find_library(NUKLEAR_LIB nuklear)
 find_path(NUKLEAR_INCLUDE_DIR nuklear.h)
+
+find_package(OpenGL REQUIRED)
+find_package(Threads REQUIRED) 
 
 nanobind_add_module(npnk_wbackend 
     LTO 
@@ -49,7 +53,13 @@ nanobind_add_module(npnk_wbackend
 )
 
 target_include_directories(npnk_wbackend PRIVATE ${NUKLEAR_INCLUDE_DIR})
-target_link_libraries(npnk_wbackend PRIVATE nuklear glfw)
+target_link_libraries(npnk_wbackend PRIVATE
+    nuklear 
+    glfw 
+    OpenGL::GL   
+    OpenGL::GLU 
+    m
+)
 set_property(TARGET glfw PROPERTY POSITION_INDEPENT_CODE ON)
 
 nanobind_add_stub(stub
