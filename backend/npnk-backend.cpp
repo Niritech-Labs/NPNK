@@ -29,6 +29,9 @@
 
 
 #include <nanobind/nanobind.h>
+#include <nanobind/stl/tuple.h>
+#include <lunasvg/lunasvg.h> 
+#include <vector>
 #include "glfw-nor/deps/glad/gl.h"
 #include <GLFW/glfw3.h>
 #include <GLFW/glfw3native.h>   
@@ -199,7 +202,7 @@ public:
 
     void SetKeyboardFocus(bool focus) {
         if (!window) throw std::runtime_error("No window");
-        glfwWaylandZwlrSetKeyboardFocus(window, focus ? GLFW_TRUE : GLFW_FALSE);
+        glfwWaylandZwlrSetKeyboardFocus(window, focus);
     }
 
     void Shutdown() {
@@ -215,6 +218,26 @@ public:
             glfwTerminate();
             glfw_initialized = false;
         }
+    }
+
+    struct nk_image LoadSvgImage(const char* filename, int width, int height) {
+        auto document = lunasvg::Document::loadFromFile(filename);
+        if (!document) throw std::runtime_error("Invalid filepath");
+
+        auto bitmap = document->renderToBitmap(width, height);
+        bitmap.convertToRGBA(); 
+
+        GLuint tex;
+        glGenTextures(1, &tex);
+        glBindTexture(GL_TEXTURE_2D, tex);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, width, height, 0, 
+                 GL_RGBA, GL_UNSIGNED_BYTE, bitmap.data());
+
+
+        return nk_image_id((int)tex);
     }
 };
 
@@ -236,7 +259,9 @@ NB_MODULE(npnk_wbackend, m) {
         .def("LS_SetLayer", &Backend::LS_SetLayer)
         .def("LS_SetAnchor", &Backend::LS_SetAnchor)
         .def("SetKeyboardFocus", &Backend::SetKeyboardFocus)
-        .def("Shutdown", &Backend::Shutdown);
+        .def("Shutdown", &Backend::Shutdown)
+        .def("LoadSvgImage", &Backend::LoadSvgImage);
+
 }
 
 

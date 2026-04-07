@@ -6,7 +6,7 @@ from NLUtils.TextUtils import GigaRE
 from handleFunctions import *
 gre = GigaRE(True)
 file = ''
-with open('nkpp.h','r') as f:
+with open('tools/nkpp.h','r') as f:
     file = f.read()
 fl = []
 enums = gre.FindAndWrap(file,EnumsRE,Enums,None)
@@ -65,7 +65,7 @@ outer = """
 // NOT AUTOMATIC REALIZATION
 
 using namespace nanobind::literals;
-    m.def("nk_combobox", [](nk_context* ctx, std::vector<std::string> items, int selected, int item_height, struct nk_vec2 size) {
+    m.def("mnk_combobox", [](nk_context* ctx, std::vector<std::string> items, int selected, int item_height, struct nk_vec2 size) {
         std::vector<const char*> ptrs;
         for (const auto& s : items) ptrs.push_back(s.c_str());
         nk_combobox(ctx, ptrs.data(), (int)ptrs.size(), &selected, item_height, size);
@@ -73,13 +73,13 @@ using namespace nanobind::literals;
     });
 
 
-    m.def("nk_combo", [](nk_context* ctx, std::vector<std::string> items, int selected, int item_height, struct nk_vec2 size) {
+    m.def("mnk_combo", [](nk_context* ctx, std::vector<std::string> items, int selected, int item_height, struct nk_vec2 size) {
         std::vector<const char*> ptrs;
         for (const auto& s : items) ptrs.push_back(s.c_str());
         return nk_combo(ctx, ptrs.data(), (int)ptrs.size(), selected, item_height, size);
     });
 
-    m.def("nk_edit_string_zero_terminated", [](nk_context* ctx, nk_flags flags, std::string buffer, int max, nk_plugin_filter filter) {
+    m.def("mnk_edit_string_zero_terminated", [](nk_context* ctx, nk_flags flags, std::string buffer, int max, nk_plugin_filter filter) {
         buffer.resize(max); 
         nk_flags res = nk_edit_string_zero_terminated(ctx, flags, buffer.data(), max, filter);
     
@@ -88,7 +88,7 @@ using namespace nanobind::literals;
         return std::make_tuple(res, buffer);
     }, "ctx"_a, "flags"_a, "buffer"_a, "max"_a, "filter"_a = nullptr);
 
-    m.def("nk_edit_string", [](nk_context* ctx, nk_flags flags, std::string buffer, int max, nk_plugin_filter filter) {
+    m.def("mnk_edit_string", [](nk_context* ctx, nk_flags flags, std::string buffer, int max, nk_plugin_filter filter) {
         buffer.resize(max);
         int current_len = (int)strlen(buffer.c_str()); // Или передавать len из Python
     

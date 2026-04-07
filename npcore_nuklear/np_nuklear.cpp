@@ -1521,994 +1521,994 @@ NB_MODULE(npnuklear, m) {
     nk_context_var.def_rw("count", &nk_context::count);
     nk_context_var.def_rw("seq", &nk_context::seq);
 
-    m.def("nk_init_default_mtd", &nk_init_default);
+    m.def("mnk_init_default", &nk_init_default);
 
-    m.def("nk_init_fixed_mtd", &nk_init_fixed);
+    m.def("mnk_init_fixed", &nk_init_fixed);
 
-    m.def("nk_init_custom_mtd", &nk_init_custom);
+    m.def("mnk_init_custom", &nk_init_custom);
 
-    m.def("nk_clear_mtd", &nk_clear);
+    m.def("mnk_clear", &nk_clear);
 
-    m.def("nk_free_mtd", &nk_free);
+    m.def("mnk_free", &nk_free);
 
-    m.def("nk_input_begin_mtd", &nk_input_begin);
+    m.def("mnk_input_begin", &nk_input_begin);
 
-    m.def("nk_input_motion_mtd", &nk_input_motion);
+    m.def("mnk_input_motion", &nk_input_motion);
 
-    m.def("nk_input_key_mtd", &nk_input_key);
+    m.def("mnk_input_key", &nk_input_key);
 
-    m.def("nk_input_button_mtd", &nk_input_button);
+    m.def("mnk_input_button", &nk_input_button);
 
-    m.def("nk_input_scroll_mtd", &nk_input_scroll);
+    m.def("mnk_input_scroll", &nk_input_scroll);
 
-    m.def("nk_input_char_mtd", &nk_input_char);
+    m.def("mnk_input_char", &nk_input_char);
 
-    m.def("nk_input_glyph_mtd", &nk_input_glyph);
+    m.def("mnk_input_glyph", &nk_input_glyph);
 
-    m.def("nk_input_unicode_mtd", &nk_input_unicode);
+    m.def("mnk_input_unicode", &nk_input_unicode);
 
-    m.def("nk_input_end_mtd", &nk_input_end);
+    m.def("mnk_input_end", &nk_input_end);
 
-    m.def("nk_convert_mtd", &nk_convert);
+    m.def("mnk_convert", &nk_convert);
 
-    m.def("nk_begin_mtd", &nk_begin);
+    m.def("mnk_begin", &nk_begin);
 
-    m.def("nk_begin_titled_mtd", &nk_begin_titled);
+    m.def("mnk_begin_titled", &nk_begin_titled);
 
-    m.def("nk_end_mtd", &nk_end);
+    m.def("mnk_end", &nk_end);
 
-    m.def("nk_window_get_bounds_mtd", &nk_window_get_bounds);
+    m.def("mnk_window_get_bounds", &nk_window_get_bounds);
 
-    m.def("nk_window_get_position_mtd", &nk_window_get_position);
+    m.def("mnk_window_get_position", &nk_window_get_position);
 
-    m.def("nk_window_get_size_mtd", &nk_window_get_size);
+    m.def("mnk_window_get_size", &nk_window_get_size);
 
-    m.def("nk_window_get_width_mtd", &nk_window_get_width);
+    m.def("mnk_window_get_width", &nk_window_get_width);
 
-    m.def("nk_window_get_height_mtd", &nk_window_get_height);
+    m.def("mnk_window_get_height", &nk_window_get_height);
 
-    m.def("nk_window_get_panel_mtd", &nk_window_get_panel, nb::rv_policy::reference);
+    m.def("mnk_window_get_panel", &nk_window_get_panel, nb::rv_policy::reference);
 
-    m.def("nk_window_get_content_region_mtd", &nk_window_get_content_region);
+    m.def("mnk_window_get_content_region", &nk_window_get_content_region);
 
-    m.def("nk_window_get_content_region_min_mtd", &nk_window_get_content_region_min);
+    m.def("mnk_window_get_content_region_min", &nk_window_get_content_region_min);
 
-    m.def("nk_window_get_content_region_max_mtd", &nk_window_get_content_region_max);
+    m.def("mnk_window_get_content_region_max", &nk_window_get_content_region_max);
 
-    m.def("nk_window_get_content_region_size_mtd", &nk_window_get_content_region_size);
+    m.def("mnk_window_get_content_region_size", &nk_window_get_content_region_size);
 
-    m.def("nk_window_get_canvas_mtd", &nk_window_get_canvas, nb::rv_policy::reference);
+    m.def("mnk_window_get_canvas", &nk_window_get_canvas, nb::rv_policy::reference);
 
-    m.def("nk_window_get_scroll_mtd", &nk_window_get_scroll);
+    m.def("mnk_window_get_scroll", &nk_window_get_scroll);
 
-    m.def("nk_window_has_focus_mtd", &nk_window_has_focus);
+    m.def("mnk_window_has_focus", &nk_window_has_focus);
 
-    m.def("nk_window_is_hovered_mtd", &nk_window_is_hovered);
+    m.def("mnk_window_is_hovered", &nk_window_is_hovered);
 
-    m.def("nk_window_is_collapsed_mtd", &nk_window_is_collapsed);
+    m.def("mnk_window_is_collapsed", &nk_window_is_collapsed);
 
-    m.def("nk_window_is_closed_mtd", &nk_window_is_closed);
+    m.def("mnk_window_is_closed", &nk_window_is_closed);
 
-    m.def("nk_window_is_hidden_mtd", &nk_window_is_hidden);
+    m.def("mnk_window_is_hidden", &nk_window_is_hidden);
 
-    m.def("nk_window_is_active_mtd", &nk_window_is_active);
+    m.def("mnk_window_is_active", &nk_window_is_active);
 
-    m.def("nk_window_is_any_hovered_mtd", &nk_window_is_any_hovered);
+    m.def("mnk_window_is_any_hovered", &nk_window_is_any_hovered);
 
-    m.def("nk_item_is_any_active_mtd", &nk_item_is_any_active);
+    m.def("mnk_item_is_any_active", &nk_item_is_any_active);
 
-    m.def("nk_window_set_bounds_mtd", &nk_window_set_bounds);
+    m.def("mnk_window_set_bounds", &nk_window_set_bounds);
 
-    m.def("nk_window_set_position_mtd", &nk_window_set_position);
+    m.def("mnk_window_set_position", &nk_window_set_position);
 
-    m.def("nk_window_set_size_mtd", &nk_window_set_size);
+    m.def("mnk_window_set_size", &nk_window_set_size);
 
-    m.def("nk_window_set_focus_mtd", &nk_window_set_focus);
+    m.def("mnk_window_set_focus", &nk_window_set_focus);
 
-    m.def("nk_window_set_scroll_mtd", &nk_window_set_scroll);
+    m.def("mnk_window_set_scroll", &nk_window_set_scroll);
 
-    m.def("nk_window_close_mtd", &nk_window_close);
+    m.def("mnk_window_close", &nk_window_close);
 
-    m.def("nk_window_collapse_mtd", &nk_window_collapse);
+    m.def("mnk_window_collapse", &nk_window_collapse);
 
-    m.def("nk_window_collapse_if_mtd", &nk_window_collapse_if);
+    m.def("mnk_window_collapse_if", &nk_window_collapse_if);
 
-    m.def("nk_window_show_mtd", &nk_window_show);
+    m.def("mnk_window_show", &nk_window_show);
 
-    m.def("nk_window_show_if_mtd", &nk_window_show_if);
+    m.def("mnk_window_show_if", &nk_window_show_if);
 
-    m.def("nk_rule_horizontal_mtd", &nk_rule_horizontal);
+    m.def("mnk_rule_horizontal", &nk_rule_horizontal);
 
-    m.def("nk_layout_set_min_row_height_mtd", &nk_layout_set_min_row_height);
+    m.def("mnk_layout_set_min_row_height", &nk_layout_set_min_row_height);
 
-    m.def("nk_layout_reset_min_row_height_mtd", &nk_layout_reset_min_row_height);
+    m.def("mnk_layout_reset_min_row_height", &nk_layout_reset_min_row_height);
 
-    m.def("nk_layout_widget_bounds_mtd", &nk_layout_widget_bounds);
+    m.def("mnk_layout_widget_bounds", &nk_layout_widget_bounds);
 
-    m.def("nk_layout_ratio_from_pixel_mtd", &nk_layout_ratio_from_pixel);
+    m.def("mnk_layout_ratio_from_pixel", &nk_layout_ratio_from_pixel);
 
-    m.def("nk_layout_row_dynamic_mtd", &nk_layout_row_dynamic);
+    m.def("mnk_layout_row_dynamic", &nk_layout_row_dynamic);
 
-    m.def("nk_layout_row_static_mtd", &nk_layout_row_static);
+    m.def("mnk_layout_row_static", &nk_layout_row_static);
 
-    m.def("nk_layout_row_begin_mtd", &nk_layout_row_begin);
+    m.def("mnk_layout_row_begin", &nk_layout_row_begin);
 
-    m.def("nk_layout_row_push_mtd", &nk_layout_row_push);
+    m.def("mnk_layout_row_push", &nk_layout_row_push);
 
-    m.def("nk_layout_row_end_mtd", &nk_layout_row_end);
+    m.def("mnk_layout_row_end", &nk_layout_row_end);
 
-    m.def("nk_layout_row_mtd", &nk_layout_row);
+    m.def("mnk_layout_row", &nk_layout_row);
 
-    m.def("nk_layout_row_template_begin_mtd", &nk_layout_row_template_begin);
+    m.def("mnk_layout_row_template_begin", &nk_layout_row_template_begin);
 
-    m.def("nk_layout_row_template_push_dynamic_mtd", &nk_layout_row_template_push_dynamic);
+    m.def("mnk_layout_row_template_push_dynamic", &nk_layout_row_template_push_dynamic);
 
-    m.def("nk_layout_row_template_push_variable_mtd", &nk_layout_row_template_push_variable);
+    m.def("mnk_layout_row_template_push_variable", &nk_layout_row_template_push_variable);
 
-    m.def("nk_layout_row_template_push_static_mtd", &nk_layout_row_template_push_static);
+    m.def("mnk_layout_row_template_push_static", &nk_layout_row_template_push_static);
 
-    m.def("nk_layout_row_template_end_mtd", &nk_layout_row_template_end);
+    m.def("mnk_layout_row_template_end", &nk_layout_row_template_end);
 
-    m.def("nk_layout_space_begin_mtd", &nk_layout_space_begin);
+    m.def("mnk_layout_space_begin", &nk_layout_space_begin);
 
-    m.def("nk_layout_space_push_mtd", &nk_layout_space_push);
+    m.def("mnk_layout_space_push", &nk_layout_space_push);
 
-    m.def("nk_layout_space_end_mtd", &nk_layout_space_end);
+    m.def("mnk_layout_space_end", &nk_layout_space_end);
 
-    m.def("nk_layout_space_bounds_mtd", &nk_layout_space_bounds);
+    m.def("mnk_layout_space_bounds", &nk_layout_space_bounds);
 
-    m.def("nk_layout_space_to_screen_mtd", &nk_layout_space_to_screen);
+    m.def("mnk_layout_space_to_screen", &nk_layout_space_to_screen);
 
-    m.def("nk_layout_space_to_local_mtd", &nk_layout_space_to_local);
+    m.def("mnk_layout_space_to_local", &nk_layout_space_to_local);
 
-    m.def("nk_layout_space_rect_to_screen_mtd", &nk_layout_space_rect_to_screen);
+    m.def("mnk_layout_space_rect_to_screen", &nk_layout_space_rect_to_screen);
 
-    m.def("nk_layout_space_rect_to_local_mtd", &nk_layout_space_rect_to_local);
+    m.def("mnk_layout_space_rect_to_local", &nk_layout_space_rect_to_local);
 
-    m.def("nk_spacer_mtd", &nk_spacer);
+    m.def("mnk_spacer", &nk_spacer);
 
-    m.def("nk_group_begin_mtd", &nk_group_begin);
+    m.def("mnk_group_begin", &nk_group_begin);
 
-    m.def("nk_group_begin_titled_mtd", &nk_group_begin_titled);
+    m.def("mnk_group_begin_titled", &nk_group_begin_titled);
 
-    m.def("nk_group_end_mtd", &nk_group_end);
+    m.def("mnk_group_end", &nk_group_end);
 
-    m.def("nk_group_scrolled_offset_begin_mtd", &nk_group_scrolled_offset_begin);
+    m.def("mnk_group_scrolled_offset_begin", &nk_group_scrolled_offset_begin);
 
-    m.def("nk_group_scrolled_begin_mtd", &nk_group_scrolled_begin);
+    m.def("mnk_group_scrolled_begin", &nk_group_scrolled_begin);
 
-    m.def("nk_group_scrolled_end_mtd", &nk_group_scrolled_end);
+    m.def("mnk_group_scrolled_end", &nk_group_scrolled_end);
 
-    m.def("nk_group_get_scroll_mtd", &nk_group_get_scroll);
+    m.def("mnk_group_get_scroll", &nk_group_get_scroll);
 
-    m.def("nk_group_set_scroll_mtd", &nk_group_set_scroll);
+    m.def("mnk_group_set_scroll", &nk_group_set_scroll);
 
-    m.def("nk_tree_push_hashed_mtd", &nk_tree_push_hashed);
+    m.def("mnk_tree_push_hashed", &nk_tree_push_hashed);
 
-    m.def("nk_tree_image_push_hashed_mtd", &nk_tree_image_push_hashed);
+    m.def("mnk_tree_image_push_hashed", &nk_tree_image_push_hashed);
 
-    m.def("nk_tree_pop_mtd", &nk_tree_pop);
+    m.def("mnk_tree_pop", &nk_tree_pop);
 
-    m.def("nk_tree_state_push_mtd", &nk_tree_state_push);
+    m.def("mnk_tree_state_push", &nk_tree_state_push);
 
-    m.def("nk_tree_state_image_push_mtd", &nk_tree_state_image_push);
+    m.def("mnk_tree_state_image_push", &nk_tree_state_image_push);
 
-    m.def("nk_tree_state_pop_mtd", &nk_tree_state_pop);
+    m.def("mnk_tree_state_pop", &nk_tree_state_pop);
 
-    m.def("nk_tree_element_push_hashed_mtd", &nk_tree_element_push_hashed);
+    m.def("mnk_tree_element_push_hashed", &nk_tree_element_push_hashed);
 
-    m.def("nk_tree_element_image_push_hashed_mtd", &nk_tree_element_image_push_hashed);
+    m.def("mnk_tree_element_image_push_hashed", &nk_tree_element_image_push_hashed);
 
-    m.def("nk_tree_element_pop_mtd", &nk_tree_element_pop);
+    m.def("mnk_tree_element_pop", &nk_tree_element_pop);
 
-    m.def("nk_list_view_begin_mtd", &nk_list_view_begin);
+    m.def("mnk_list_view_begin", &nk_list_view_begin);
 
-    m.def("nk_list_view_end_mtd", &nk_list_view_end);
+    m.def("mnk_list_view_end", &nk_list_view_end);
 
-    m.def("nk_widget_mtd", &nk_widget);
+    m.def("mnk_widget", &nk_widget);
 
-    m.def("nk_widget_fitting_mtd", &nk_widget_fitting);
+    m.def("mnk_widget_fitting", &nk_widget_fitting);
 
-    m.def("nk_widget_bounds_mtd", &nk_widget_bounds);
+    m.def("mnk_widget_bounds", &nk_widget_bounds);
 
-    m.def("nk_widget_position_mtd", &nk_widget_position);
+    m.def("mnk_widget_position", &nk_widget_position);
 
-    m.def("nk_widget_size_mtd", &nk_widget_size);
+    m.def("mnk_widget_size", &nk_widget_size);
 
-    m.def("nk_widget_width_mtd", &nk_widget_width);
+    m.def("mnk_widget_width", &nk_widget_width);
 
-    m.def("nk_widget_height_mtd", &nk_widget_height);
+    m.def("mnk_widget_height", &nk_widget_height);
 
-    m.def("nk_widget_is_hovered_mtd", &nk_widget_is_hovered);
+    m.def("mnk_widget_is_hovered", &nk_widget_is_hovered);
 
-    m.def("nk_widget_is_mouse_clicked_mtd", &nk_widget_is_mouse_clicked);
+    m.def("mnk_widget_is_mouse_clicked", &nk_widget_is_mouse_clicked);
 
-    m.def("nk_widget_has_mouse_click_down_mtd", &nk_widget_has_mouse_click_down);
+    m.def("mnk_widget_has_mouse_click_down", &nk_widget_has_mouse_click_down);
 
-    m.def("nk_spacing_mtd", &nk_spacing);
+    m.def("mnk_spacing", &nk_spacing);
 
-    m.def("nk_widget_disable_begin_mtd", &nk_widget_disable_begin);
+    m.def("mnk_widget_disable_begin", &nk_widget_disable_begin);
 
-    m.def("nk_widget_disable_end_mtd", &nk_widget_disable_end);
+    m.def("mnk_widget_disable_end", &nk_widget_disable_end);
 
-    m.def("nk_text_mtd", &nk_text);
+    m.def("mnk_text", &nk_text);
 
-    m.def("nk_text_colored_mtd", &nk_text_colored);
+    m.def("mnk_text_colored", &nk_text_colored);
 
-    m.def("nk_text_wrap_mtd", &nk_text_wrap);
+    m.def("mnk_text_wrap", &nk_text_wrap);
 
-    m.def("nk_text_wrap_colored_mtd", &nk_text_wrap_colored);
+    m.def("mnk_text_wrap_colored", &nk_text_wrap_colored);
 
-    m.def("nk_label_mtd", &nk_label);
+    m.def("mnk_label", &nk_label);
 
-    m.def("nk_label_colored_mtd", &nk_label_colored);
+    m.def("mnk_label_colored", &nk_label_colored);
 
-    m.def("nk_label_wrap_mtd", &nk_label_wrap);
+    m.def("mnk_label_wrap", &nk_label_wrap);
 
-    m.def("nk_label_colored_wrap_mtd", &nk_label_colored_wrap);
+    m.def("mnk_label_colored_wrap", &nk_label_colored_wrap);
 
-    m.def("nk_image_mtd", &nk_image);
+    m.def("mnk_image", &nk_image);
 
-    m.def("nk_image_color_mtd", &nk_image_color);
+    m.def("mnk_image_color", &nk_image_color);
 
-    m.def("nk_value_bool_mtd", &nk_value_bool);
+    m.def("mnk_value_bool", &nk_value_bool);
 
-    m.def("nk_value_int_mtd", &nk_value_int);
+    m.def("mnk_value_int", &nk_value_int);
 
-    m.def("nk_value_uint_mtd", &nk_value_uint);
+    m.def("mnk_value_uint", &nk_value_uint);
 
-    m.def("nk_value_float_mtd", &nk_value_float);
+    m.def("mnk_value_float", &nk_value_float);
 
-    m.def("nk_value_color_byte_mtd", &nk_value_color_byte);
+    m.def("mnk_value_color_byte", &nk_value_color_byte);
 
-    m.def("nk_value_color_float_mtd", &nk_value_color_float);
+    m.def("mnk_value_color_float", &nk_value_color_float);
 
-    m.def("nk_value_color_hex_mtd", &nk_value_color_hex);
+    m.def("mnk_value_color_hex", &nk_value_color_hex);
 
-    m.def("nk_button_text_mtd", &nk_button_text);
+    m.def("mnk_button_text", &nk_button_text);
 
-    m.def("nk_button_label_mtd", &nk_button_label);
+    m.def("mnk_button_label", &nk_button_label);
 
-    m.def("nk_button_color_mtd", &nk_button_color);
+    m.def("mnk_button_color", &nk_button_color);
 
-    m.def("nk_button_symbol_mtd", &nk_button_symbol);
+    m.def("mnk_button_symbol", &nk_button_symbol);
 
-    m.def("nk_button_image_mtd", &nk_button_image);
+    m.def("mnk_button_image", &nk_button_image);
 
-    m.def("nk_button_symbol_label_mtd", &nk_button_symbol_label);
+    m.def("mnk_button_symbol_label", &nk_button_symbol_label);
 
-    m.def("nk_button_symbol_text_mtd", &nk_button_symbol_text);
+    m.def("mnk_button_symbol_text", &nk_button_symbol_text);
 
-    m.def("nk_button_image_label_mtd", &nk_button_image_label);
+    m.def("mnk_button_image_label", &nk_button_image_label);
 
-    m.def("nk_button_image_text_mtd", &nk_button_image_text);
+    m.def("mnk_button_image_text", &nk_button_image_text);
 
-    m.def("nk_button_text_styled_mtd", &nk_button_text_styled);
+    m.def("mnk_button_text_styled", &nk_button_text_styled);
 
-    m.def("nk_button_label_styled_mtd", &nk_button_label_styled);
+    m.def("mnk_button_label_styled", &nk_button_label_styled);
 
-    m.def("nk_button_symbol_styled_mtd", &nk_button_symbol_styled);
+    m.def("mnk_button_symbol_styled", &nk_button_symbol_styled);
 
-    m.def("nk_button_image_styled_mtd", &nk_button_image_styled);
+    m.def("mnk_button_image_styled", &nk_button_image_styled);
 
-    m.def("nk_button_symbol_text_styled_mtd", &nk_button_symbol_text_styled);
+    m.def("mnk_button_symbol_text_styled", &nk_button_symbol_text_styled);
 
-    m.def("nk_button_symbol_label_styled_mtd", &nk_button_symbol_label_styled);
+    m.def("mnk_button_symbol_label_styled", &nk_button_symbol_label_styled);
 
-    m.def("nk_button_image_label_styled_mtd", &nk_button_image_label_styled);
+    m.def("mnk_button_image_label_styled", &nk_button_image_label_styled);
 
-    m.def("nk_button_image_text_styled_mtd", &nk_button_image_text_styled);
+    m.def("mnk_button_image_text_styled", &nk_button_image_text_styled);
 
-    m.def("nk_button_set_behavior_mtd", &nk_button_set_behavior);
+    m.def("mnk_button_set_behavior", &nk_button_set_behavior);
 
-    m.def("nk_button_push_behavior_mtd", &nk_button_push_behavior);
+    m.def("mnk_button_push_behavior", &nk_button_push_behavior);
 
-    m.def("nk_button_pop_behavior_mtd", &nk_button_pop_behavior);
+    m.def("mnk_button_pop_behavior", &nk_button_pop_behavior);
 
-    m.def("nk_check_label_mtd", &nk_check_label);
+    m.def("mnk_check_label", &nk_check_label);
 
-    m.def("nk_check_text_mtd", &nk_check_text);
+    m.def("mnk_check_text", &nk_check_text);
 
-    m.def("nk_check_text_align_mtd", &nk_check_text_align);
+    m.def("mnk_check_text_align", &nk_check_text_align);
 
-    m.def("nk_check_flags_label_mtd", &nk_check_flags_label);
+    m.def("mnk_check_flags_label", &nk_check_flags_label);
 
-    m.def("nk_check_flags_text_mtd", &nk_check_flags_text);
+    m.def("mnk_check_flags_text", &nk_check_flags_text);
 
-    m.def("nk_checkbox_label_mtd", &nk_checkbox_label);
+    m.def("mnk_checkbox_label", &nk_checkbox_label);
 
-    m.def("nk_checkbox_label_align_mtd", &nk_checkbox_label_align);
+    m.def("mnk_checkbox_label_align", &nk_checkbox_label_align);
 
-    m.def("nk_checkbox_text_mtd", &nk_checkbox_text);
+    m.def("mnk_checkbox_text", &nk_checkbox_text);
 
-    m.def("nk_checkbox_text_align_mtd", &nk_checkbox_text_align);
+    m.def("mnk_checkbox_text_align", &nk_checkbox_text_align);
 
-    m.def("nk_checkbox_flags_label_mtd", &nk_checkbox_flags_label);
+    m.def("mnk_checkbox_flags_label", &nk_checkbox_flags_label);
 
-    m.def("nk_checkbox_flags_text_mtd", &nk_checkbox_flags_text);
+    m.def("mnk_checkbox_flags_text", &nk_checkbox_flags_text);
 
-    m.def("nk_radio_label_mtd", &nk_radio_label);
+    m.def("mnk_radio_label", &nk_radio_label);
 
-    m.def("nk_radio_label_align_mtd", &nk_radio_label_align);
+    m.def("mnk_radio_label_align", &nk_radio_label_align);
 
-    m.def("nk_radio_text_mtd", &nk_radio_text);
+    m.def("mnk_radio_text", &nk_radio_text);
 
-    m.def("nk_radio_text_align_mtd", &nk_radio_text_align);
+    m.def("mnk_radio_text_align", &nk_radio_text_align);
 
-    m.def("nk_option_label_mtd", &nk_option_label);
+    m.def("mnk_option_label", &nk_option_label);
 
-    m.def("nk_option_label_align_mtd", &nk_option_label_align);
+    m.def("mnk_option_label_align", &nk_option_label_align);
 
-    m.def("nk_option_text_mtd", &nk_option_text);
+    m.def("mnk_option_text", &nk_option_text);
 
-    m.def("nk_option_text_align_mtd", &nk_option_text_align);
+    m.def("mnk_option_text_align", &nk_option_text_align);
 
-    m.def("nk_selectable_label_mtd", &nk_selectable_label);
+    m.def("mnk_selectable_label", &nk_selectable_label);
 
-    m.def("nk_selectable_text_mtd", &nk_selectable_text);
+    m.def("mnk_selectable_text", &nk_selectable_text);
 
-    m.def("nk_selectable_image_label_mtd", &nk_selectable_image_label);
+    m.def("mnk_selectable_image_label", &nk_selectable_image_label);
 
-    m.def("nk_selectable_image_text_mtd", &nk_selectable_image_text);
+    m.def("mnk_selectable_image_text", &nk_selectable_image_text);
 
-    m.def("nk_selectable_symbol_label_mtd", &nk_selectable_symbol_label);
+    m.def("mnk_selectable_symbol_label", &nk_selectable_symbol_label);
 
-    m.def("nk_selectable_symbol_text_mtd", &nk_selectable_symbol_text);
+    m.def("mnk_selectable_symbol_text", &nk_selectable_symbol_text);
 
-    m.def("nk_select_label_mtd", &nk_select_label);
+    m.def("mnk_select_label", &nk_select_label);
 
-    m.def("nk_select_text_mtd", &nk_select_text);
+    m.def("mnk_select_text", &nk_select_text);
 
-    m.def("nk_select_image_label_mtd", &nk_select_image_label);
+    m.def("mnk_select_image_label", &nk_select_image_label);
 
-    m.def("nk_select_image_text_mtd", &nk_select_image_text);
+    m.def("mnk_select_image_text", &nk_select_image_text);
 
-    m.def("nk_select_symbol_label_mtd", &nk_select_symbol_label);
+    m.def("mnk_select_symbol_label", &nk_select_symbol_label);
 
-    m.def("nk_select_symbol_text_mtd", &nk_select_symbol_text);
+    m.def("mnk_select_symbol_text", &nk_select_symbol_text);
 
-    m.def("nk_slide_float_mtd", &nk_slide_float);
+    m.def("mnk_slide_float", &nk_slide_float);
 
-    m.def("nk_slide_int_mtd", &nk_slide_int);
+    m.def("mnk_slide_int", &nk_slide_int);
 
-    m.def("nk_slider_float_mtd", &nk_slider_float);
+    m.def("mnk_slider_float", &nk_slider_float);
 
-    m.def("nk_slider_int_mtd", &nk_slider_int);
+    m.def("mnk_slider_int", &nk_slider_int);
 
-    m.def("nk_knob_float_mtd", &nk_knob_float);
+    m.def("mnk_knob_float", &nk_knob_float);
 
-    m.def("nk_knob_int_mtd", &nk_knob_int);
+    m.def("mnk_knob_int", &nk_knob_int);
 
-    m.def("nk_progress_mtd", &nk_progress);
+    m.def("mnk_progress", &nk_progress);
 
-    m.def("nk_prog_mtd", &nk_prog);
+    m.def("mnk_prog", &nk_prog);
 
-    m.def("nk_color_picker_mtd", &nk_color_picker);
+    m.def("mnk_color_picker", &nk_color_picker);
 
-    m.def("nk_color_pick_mtd", &nk_color_pick);
+    m.def("mnk_color_pick", &nk_color_pick);
 
-    m.def("nk_property_int_mtd", &nk_property_int);
+    m.def("mnk_property_int", &nk_property_int);
 
-    m.def("nk_property_float_mtd", &nk_property_float);
+    m.def("mnk_property_float", &nk_property_float);
 
-    m.def("nk_property_double_mtd", &nk_property_double);
+    m.def("mnk_property_double", &nk_property_double);
 
-    m.def("nk_propertyi_mtd", &nk_propertyi);
+    m.def("mnk_propertyi", &nk_propertyi);
 
-    m.def("nk_propertyf_mtd", &nk_propertyf);
+    m.def("mnk_propertyf", &nk_propertyf);
 
-    m.def("nk_propertyd_mtd", &nk_propertyd);
+    m.def("mnk_propertyd", &nk_propertyd);
 
-    m.def("nk_edit_buffer_mtd", &nk_edit_buffer);
+    m.def("mnk_edit_buffer", &nk_edit_buffer);
 
-    m.def("nk_edit_focus_mtd", &nk_edit_focus);
+    m.def("mnk_edit_focus", &nk_edit_focus);
 
-    m.def("nk_edit_unfocus_mtd", &nk_edit_unfocus);
+    m.def("mnk_edit_unfocus", &nk_edit_unfocus);
 
-    m.def("nk_chart_begin_mtd", &nk_chart_begin);
+    m.def("mnk_chart_begin", &nk_chart_begin);
 
-    m.def("nk_chart_begin_colored_mtd", &nk_chart_begin_colored);
+    m.def("mnk_chart_begin_colored", &nk_chart_begin_colored);
 
-    m.def("nk_chart_add_slot_mtd", &nk_chart_add_slot);
+    m.def("mnk_chart_add_slot", &nk_chart_add_slot);
 
-    m.def("nk_chart_add_slot_colored_mtd", &nk_chart_add_slot_colored);
+    m.def("mnk_chart_add_slot_colored", &nk_chart_add_slot_colored);
 
-    m.def("nk_chart_push_mtd", &nk_chart_push);
+    m.def("mnk_chart_push", &nk_chart_push);
 
-    m.def("nk_chart_push_slot_mtd", &nk_chart_push_slot);
+    m.def("mnk_chart_push_slot", &nk_chart_push_slot);
 
-    m.def("nk_chart_end_mtd", &nk_chart_end);
+    m.def("mnk_chart_end", &nk_chart_end);
 
-    m.def("nk_plot_mtd", &nk_plot);
+    m.def("mnk_plot", &nk_plot);
 
-    m.def("nk_plot_function_mtd", &nk_plot_function);
+    m.def("mnk_plot_function", &nk_plot_function);
 
-    m.def("nk_popup_begin_mtd", &nk_popup_begin);
+    m.def("mnk_popup_begin", &nk_popup_begin);
 
-    m.def("nk_popup_close_mtd", &nk_popup_close);
+    m.def("mnk_popup_close", &nk_popup_close);
 
-    m.def("nk_popup_end_mtd", &nk_popup_end);
+    m.def("mnk_popup_end", &nk_popup_end);
 
-    m.def("nk_popup_get_scroll_mtd", &nk_popup_get_scroll);
+    m.def("mnk_popup_get_scroll", &nk_popup_get_scroll);
 
-    m.def("nk_popup_set_scroll_mtd", &nk_popup_set_scroll);
+    m.def("mnk_popup_set_scroll", &nk_popup_set_scroll);
 
-    m.def("nk_combo_separator_mtd", &nk_combo_separator);
+    m.def("mnk_combo_separator", &nk_combo_separator);
 
-    m.def("nk_combo_string_mtd", &nk_combo_string);
+    m.def("mnk_combo_string", &nk_combo_string);
 
-    m.def("nk_combo_callback_mtd", &nk_combo_callback);
+    m.def("mnk_combo_callback", &nk_combo_callback);
 
-    m.def("nk_combobox_string_mtd", &nk_combobox_string);
+    m.def("mnk_combobox_string", &nk_combobox_string);
 
-    m.def("nk_combobox_separator_mtd", &nk_combobox_separator);
+    m.def("mnk_combobox_separator", &nk_combobox_separator);
 
-    m.def("nk_combobox_callback_mtd", &nk_combobox_callback);
+    m.def("mnk_combobox_callback", &nk_combobox_callback);
 
-    m.def("nk_combo_begin_text_mtd", &nk_combo_begin_text);
+    m.def("mnk_combo_begin_text", &nk_combo_begin_text);
 
-    m.def("nk_combo_begin_label_mtd", &nk_combo_begin_label);
+    m.def("mnk_combo_begin_label", &nk_combo_begin_label);
 
-    m.def("nk_combo_begin_color_mtd", &nk_combo_begin_color);
+    m.def("mnk_combo_begin_color", &nk_combo_begin_color);
 
-    m.def("nk_combo_begin_symbol_mtd", &nk_combo_begin_symbol);
+    m.def("mnk_combo_begin_symbol", &nk_combo_begin_symbol);
 
-    m.def("nk_combo_begin_symbol_label_mtd", &nk_combo_begin_symbol_label);
+    m.def("mnk_combo_begin_symbol_label", &nk_combo_begin_symbol_label);
 
-    m.def("nk_combo_begin_symbol_text_mtd", &nk_combo_begin_symbol_text);
+    m.def("mnk_combo_begin_symbol_text", &nk_combo_begin_symbol_text);
 
-    m.def("nk_combo_begin_image_mtd", &nk_combo_begin_image);
+    m.def("mnk_combo_begin_image", &nk_combo_begin_image);
 
-    m.def("nk_combo_begin_image_label_mtd", &nk_combo_begin_image_label);
+    m.def("mnk_combo_begin_image_label", &nk_combo_begin_image_label);
 
-    m.def("nk_combo_begin_image_text_mtd", &nk_combo_begin_image_text);
+    m.def("mnk_combo_begin_image_text", &nk_combo_begin_image_text);
 
-    m.def("nk_combo_item_label_mtd", &nk_combo_item_label);
+    m.def("mnk_combo_item_label", &nk_combo_item_label);
 
-    m.def("nk_combo_item_text_mtd", &nk_combo_item_text);
+    m.def("mnk_combo_item_text", &nk_combo_item_text);
 
-    m.def("nk_combo_item_image_label_mtd", &nk_combo_item_image_label);
+    m.def("mnk_combo_item_image_label", &nk_combo_item_image_label);
 
-    m.def("nk_combo_item_image_text_mtd", &nk_combo_item_image_text);
+    m.def("mnk_combo_item_image_text", &nk_combo_item_image_text);
 
-    m.def("nk_combo_item_symbol_label_mtd", &nk_combo_item_symbol_label);
+    m.def("mnk_combo_item_symbol_label", &nk_combo_item_symbol_label);
 
-    m.def("nk_combo_item_symbol_text_mtd", &nk_combo_item_symbol_text);
+    m.def("mnk_combo_item_symbol_text", &nk_combo_item_symbol_text);
 
-    m.def("nk_combo_close_mtd", &nk_combo_close);
+    m.def("mnk_combo_close", &nk_combo_close);
 
-    m.def("nk_combo_end_mtd", &nk_combo_end);
+    m.def("mnk_combo_end", &nk_combo_end);
 
-    m.def("nk_contextual_begin_mtd", &nk_contextual_begin);
+    m.def("mnk_contextual_begin", &nk_contextual_begin);
 
-    m.def("nk_contextual_item_text_mtd", &nk_contextual_item_text);
+    m.def("mnk_contextual_item_text", &nk_contextual_item_text);
 
-    m.def("nk_contextual_item_label_mtd", &nk_contextual_item_label);
+    m.def("mnk_contextual_item_label", &nk_contextual_item_label);
 
-    m.def("nk_contextual_item_image_label_mtd", &nk_contextual_item_image_label);
+    m.def("mnk_contextual_item_image_label", &nk_contextual_item_image_label);
 
-    m.def("nk_contextual_item_image_text_mtd", &nk_contextual_item_image_text);
+    m.def("mnk_contextual_item_image_text", &nk_contextual_item_image_text);
 
-    m.def("nk_contextual_item_symbol_label_mtd", &nk_contextual_item_symbol_label);
+    m.def("mnk_contextual_item_symbol_label", &nk_contextual_item_symbol_label);
 
-    m.def("nk_contextual_item_symbol_text_mtd", &nk_contextual_item_symbol_text);
+    m.def("mnk_contextual_item_symbol_text", &nk_contextual_item_symbol_text);
 
-    m.def("nk_contextual_close_mtd", &nk_contextual_close);
+    m.def("mnk_contextual_close", &nk_contextual_close);
 
-    m.def("nk_contextual_end_mtd", &nk_contextual_end);
+    m.def("mnk_contextual_end", &nk_contextual_end);
 
-    m.def("nk_tooltip_mtd", &nk_tooltip);
+    m.def("mnk_tooltip", &nk_tooltip);
 
-    m.def("nk_tooltip_offset_mtd", &nk_tooltip_offset);
+    m.def("mnk_tooltip_offset", &nk_tooltip_offset);
 
-    m.def("nk_tooltip_begin_mtd", &nk_tooltip_begin);
+    m.def("mnk_tooltip_begin", &nk_tooltip_begin);
 
-    m.def("nk_tooltip_begin_offset_mtd", &nk_tooltip_begin_offset);
+    m.def("mnk_tooltip_begin_offset", &nk_tooltip_begin_offset);
 
-    m.def("nk_tooltip_end_mtd", &nk_tooltip_end);
+    m.def("mnk_tooltip_end", &nk_tooltip_end);
 
-    m.def("nk_menubar_begin_mtd", &nk_menubar_begin);
+    m.def("mnk_menubar_begin", &nk_menubar_begin);
 
-    m.def("nk_menubar_end_mtd", &nk_menubar_end);
+    m.def("mnk_menubar_end", &nk_menubar_end);
 
-    m.def("nk_menu_begin_text_mtd", &nk_menu_begin_text);
+    m.def("mnk_menu_begin_text", &nk_menu_begin_text);
 
-    m.def("nk_menu_begin_label_mtd", &nk_menu_begin_label);
+    m.def("mnk_menu_begin_label", &nk_menu_begin_label);
 
-    m.def("nk_menu_begin_image_mtd", &nk_menu_begin_image);
+    m.def("mnk_menu_begin_image", &nk_menu_begin_image);
 
-    m.def("nk_menu_begin_image_text_mtd", &nk_menu_begin_image_text);
+    m.def("mnk_menu_begin_image_text", &nk_menu_begin_image_text);
 
-    m.def("nk_menu_begin_image_label_mtd", &nk_menu_begin_image_label);
+    m.def("mnk_menu_begin_image_label", &nk_menu_begin_image_label);
 
-    m.def("nk_menu_begin_symbol_mtd", &nk_menu_begin_symbol);
+    m.def("mnk_menu_begin_symbol", &nk_menu_begin_symbol);
 
-    m.def("nk_menu_begin_symbol_text_mtd", &nk_menu_begin_symbol_text);
+    m.def("mnk_menu_begin_symbol_text", &nk_menu_begin_symbol_text);
 
-    m.def("nk_menu_begin_symbol_label_mtd", &nk_menu_begin_symbol_label);
+    m.def("mnk_menu_begin_symbol_label", &nk_menu_begin_symbol_label);
 
-    m.def("nk_menu_item_text_mtd", &nk_menu_item_text);
+    m.def("mnk_menu_item_text", &nk_menu_item_text);
 
-    m.def("nk_menu_item_label_mtd", &nk_menu_item_label);
+    m.def("mnk_menu_item_label", &nk_menu_item_label);
 
-    m.def("nk_menu_item_image_label_mtd", &nk_menu_item_image_label);
+    m.def("mnk_menu_item_image_label", &nk_menu_item_image_label);
 
-    m.def("nk_menu_item_image_text_mtd", &nk_menu_item_image_text);
+    m.def("mnk_menu_item_image_text", &nk_menu_item_image_text);
 
-    m.def("nk_menu_item_symbol_text_mtd", &nk_menu_item_symbol_text);
+    m.def("mnk_menu_item_symbol_text", &nk_menu_item_symbol_text);
 
-    m.def("nk_menu_item_symbol_label_mtd", &nk_menu_item_symbol_label);
+    m.def("mnk_menu_item_symbol_label", &nk_menu_item_symbol_label);
 
-    m.def("nk_menu_close_mtd", &nk_menu_close);
+    m.def("mnk_menu_close", &nk_menu_close);
 
-    m.def("nk_menu_end_mtd", &nk_menu_end);
+    m.def("mnk_menu_end", &nk_menu_end);
 
-    m.def("nk_style_default_mtd", &nk_style_default);
+    m.def("mnk_style_default", &nk_style_default);
 
-    m.def("nk_style_from_table_mtd", &nk_style_from_table);
+    m.def("mnk_style_from_table", &nk_style_from_table);
 
-    m.def("nk_style_load_cursor_mtd", &nk_style_load_cursor);
+    m.def("mnk_style_load_cursor", &nk_style_load_cursor);
 
-    m.def("nk_style_load_all_cursors_mtd", &nk_style_load_all_cursors);
+    m.def("mnk_style_load_all_cursors", &nk_style_load_all_cursors);
 
-    m.def("nk_style_get_color_by_name_mtd", &nk_style_get_color_by_name, nb::rv_policy::reference);
+    m.def("mnk_style_get_color_by_name", &nk_style_get_color_by_name, nb::rv_policy::reference);
 
-    m.def("nk_style_set_font_mtd", &nk_style_set_font);
+    m.def("mnk_style_set_font", &nk_style_set_font);
 
-    m.def("nk_style_set_cursor_mtd", &nk_style_set_cursor);
+    m.def("mnk_style_set_cursor", &nk_style_set_cursor);
 
-    m.def("nk_style_show_cursor_mtd", &nk_style_show_cursor);
+    m.def("mnk_style_show_cursor", &nk_style_show_cursor);
 
-    m.def("nk_style_hide_cursor_mtd", &nk_style_hide_cursor);
+    m.def("mnk_style_hide_cursor", &nk_style_hide_cursor);
 
-    m.def("nk_style_push_font_mtd", &nk_style_push_font);
+    m.def("mnk_style_push_font", &nk_style_push_font);
 
-    m.def("nk_style_push_float_mtd", &nk_style_push_float);
+    m.def("mnk_style_push_float", &nk_style_push_float);
 
-    m.def("nk_style_push_vec2_mtd", &nk_style_push_vec2);
+    m.def("mnk_style_push_vec2", &nk_style_push_vec2);
 
-    m.def("nk_style_push_style_item_mtd", &nk_style_push_style_item);
+    m.def("mnk_style_push_style_item", &nk_style_push_style_item);
 
-    m.def("nk_style_push_flags_mtd", &nk_style_push_flags);
+    m.def("mnk_style_push_flags", &nk_style_push_flags);
 
-    m.def("nk_style_push_color_mtd", &nk_style_push_color);
+    m.def("mnk_style_push_color", &nk_style_push_color);
 
-    m.def("nk_style_pop_font_mtd", &nk_style_pop_font);
+    m.def("mnk_style_pop_font", &nk_style_pop_font);
 
-    m.def("nk_style_pop_float_mtd", &nk_style_pop_float);
+    m.def("mnk_style_pop_float", &nk_style_pop_float);
 
-    m.def("nk_style_pop_vec2_mtd", &nk_style_pop_vec2);
+    m.def("mnk_style_pop_vec2", &nk_style_pop_vec2);
 
-    m.def("nk_style_pop_style_item_mtd", &nk_style_pop_style_item);
+    m.def("mnk_style_pop_style_item", &nk_style_pop_style_item);
 
-    m.def("nk_style_pop_flags_mtd", &nk_style_pop_flags);
+    m.def("mnk_style_pop_flags", &nk_style_pop_flags);
 
-    m.def("nk_style_pop_color_mtd", &nk_style_pop_color);
+    m.def("mnk_style_pop_color", &nk_style_pop_color);
 
-    m.def("nk_rgb_mtd", &nk_rgb);
+    m.def("mnk_rgb", &nk_rgb);
 
-    m.def("nk_rgb_iv_mtd", &nk_rgb_iv);
+    m.def("mnk_rgb_iv", &nk_rgb_iv);
 
-    m.def("nk_rgb_bv_mtd", &nk_rgb_bv);
+    m.def("mnk_rgb_bv", &nk_rgb_bv);
 
-    m.def("nk_rgb_f_mtd", &nk_rgb_f);
+    m.def("mnk_rgb_f", &nk_rgb_f);
 
-    m.def("nk_rgb_fv_mtd", &nk_rgb_fv);
+    m.def("mnk_rgb_fv", &nk_rgb_fv);
 
-    m.def("nk_rgb_cf_mtd", &nk_rgb_cf);
+    m.def("mnk_rgb_cf", &nk_rgb_cf);
 
-    m.def("nk_rgb_hex_mtd", &nk_rgb_hex);
+    m.def("mnk_rgb_hex", &nk_rgb_hex);
 
-    m.def("nk_rgb_factor_mtd", &nk_rgb_factor);
+    m.def("mnk_rgb_factor", &nk_rgb_factor);
 
-    m.def("nk_rgba_mtd", &nk_rgba);
+    m.def("mnk_rgba", &nk_rgba);
 
-    m.def("nk_rgba_u32_mtd", &nk_rgba_u32);
+    m.def("mnk_rgba_u32", &nk_rgba_u32);
 
-    m.def("nk_rgba_iv_mtd", &nk_rgba_iv);
+    m.def("mnk_rgba_iv", &nk_rgba_iv);
 
-    m.def("nk_rgba_bv_mtd", &nk_rgba_bv);
+    m.def("mnk_rgba_bv", &nk_rgba_bv);
 
-    m.def("nk_rgba_f_mtd", &nk_rgba_f);
+    m.def("mnk_rgba_f", &nk_rgba_f);
 
-    m.def("nk_rgba_fv_mtd", &nk_rgba_fv);
+    m.def("mnk_rgba_fv", &nk_rgba_fv);
 
-    m.def("nk_rgba_cf_mtd", &nk_rgba_cf);
+    m.def("mnk_rgba_cf", &nk_rgba_cf);
 
-    m.def("nk_rgba_hex_mtd", &nk_rgba_hex);
+    m.def("mnk_rgba_hex", &nk_rgba_hex);
 
-    m.def("nk_hsva_colorf_mtd", &nk_hsva_colorf);
+    m.def("mnk_hsva_colorf", &nk_hsva_colorf);
 
-    m.def("nk_hsva_colorfv_mtd", &nk_hsva_colorfv);
+    m.def("mnk_hsva_colorfv", &nk_hsva_colorfv);
 
-    m.def("nk_colorf_hsva_f_mtd", &nk_colorf_hsva_f);
+    m.def("mnk_colorf_hsva_f", &nk_colorf_hsva_f);
 
-    m.def("nk_colorf_hsva_fv_mtd", &nk_colorf_hsva_fv);
+    m.def("mnk_colorf_hsva_fv", &nk_colorf_hsva_fv);
 
-    m.def("nk_hsv_mtd", &nk_hsv);
+    m.def("mnk_hsv", &nk_hsv);
 
-    m.def("nk_hsv_iv_mtd", &nk_hsv_iv);
+    m.def("mnk_hsv_iv", &nk_hsv_iv);
 
-    m.def("nk_hsv_bv_mtd", &nk_hsv_bv);
+    m.def("mnk_hsv_bv", &nk_hsv_bv);
 
-    m.def("nk_hsv_f_mtd", &nk_hsv_f);
+    m.def("mnk_hsv_f", &nk_hsv_f);
 
-    m.def("nk_hsv_fv_mtd", &nk_hsv_fv);
+    m.def("mnk_hsv_fv", &nk_hsv_fv);
 
-    m.def("nk_hsva_mtd", &nk_hsva);
+    m.def("mnk_hsva", &nk_hsva);
 
-    m.def("nk_hsva_iv_mtd", &nk_hsva_iv);
+    m.def("mnk_hsva_iv", &nk_hsva_iv);
 
-    m.def("nk_hsva_bv_mtd", &nk_hsva_bv);
+    m.def("mnk_hsva_bv", &nk_hsva_bv);
 
-    m.def("nk_hsva_f_mtd", &nk_hsva_f);
+    m.def("mnk_hsva_f", &nk_hsva_f);
 
-    m.def("nk_hsva_fv_mtd", &nk_hsva_fv);
+    m.def("mnk_hsva_fv", &nk_hsva_fv);
 
-    m.def("nk_color_f_mtd", &nk_color_f);
+    m.def("mnk_color_f", &nk_color_f);
 
-    m.def("nk_color_fv_mtd", &nk_color_fv);
+    m.def("mnk_color_fv", &nk_color_fv);
 
-    m.def("nk_color_cf_mtd", &nk_color_cf);
+    m.def("mnk_color_cf", &nk_color_cf);
 
-    m.def("nk_color_d_mtd", &nk_color_d);
+    m.def("mnk_color_d", &nk_color_d);
 
-    m.def("nk_color_dv_mtd", &nk_color_dv);
+    m.def("mnk_color_dv", &nk_color_dv);
 
-    m.def("nk_color_u32_mtd", &nk_color_u32);
+    m.def("mnk_color_u32", &nk_color_u32);
 
-    m.def("nk_color_hsv_i_mtd", &nk_color_hsv_i);
+    m.def("mnk_color_hsv_i", &nk_color_hsv_i);
 
-    m.def("nk_color_hsv_b_mtd", &nk_color_hsv_b);
+    m.def("mnk_color_hsv_b", &nk_color_hsv_b);
 
-    m.def("nk_color_hsv_iv_mtd", &nk_color_hsv_iv);
+    m.def("mnk_color_hsv_iv", &nk_color_hsv_iv);
 
-    m.def("nk_color_hsv_bv_mtd", &nk_color_hsv_bv);
+    m.def("mnk_color_hsv_bv", &nk_color_hsv_bv);
 
-    m.def("nk_color_hsv_f_mtd", &nk_color_hsv_f);
+    m.def("mnk_color_hsv_f", &nk_color_hsv_f);
 
-    m.def("nk_color_hsv_fv_mtd", &nk_color_hsv_fv);
+    m.def("mnk_color_hsv_fv", &nk_color_hsv_fv);
 
-    m.def("nk_color_hsva_i_mtd", &nk_color_hsva_i);
+    m.def("mnk_color_hsva_i", &nk_color_hsva_i);
 
-    m.def("nk_color_hsva_b_mtd", &nk_color_hsva_b);
+    m.def("mnk_color_hsva_b", &nk_color_hsva_b);
 
-    m.def("nk_color_hsva_iv_mtd", &nk_color_hsva_iv);
+    m.def("mnk_color_hsva_iv", &nk_color_hsva_iv);
 
-    m.def("nk_color_hsva_bv_mtd", &nk_color_hsva_bv);
+    m.def("mnk_color_hsva_bv", &nk_color_hsva_bv);
 
-    m.def("nk_color_hsva_f_mtd", &nk_color_hsva_f);
+    m.def("mnk_color_hsva_f", &nk_color_hsva_f);
 
-    m.def("nk_color_hsva_fv_mtd", &nk_color_hsva_fv);
+    m.def("mnk_color_hsva_fv", &nk_color_hsva_fv);
 
-    m.def("nk_handle_ptr_mtd", &nk_handle_ptr);
+    m.def("mnk_handle_ptr", &nk_handle_ptr);
 
-    m.def("nk_handle_id_mtd", &nk_handle_id);
+    m.def("mnk_handle_id", &nk_handle_id);
 
-    m.def("nk_image_handle_mtd", &nk_image_handle);
+    m.def("mnk_image_handle", &nk_image_handle);
 
-    m.def("nk_image_ptr_mtd", &nk_image_ptr);
+    m.def("mnk_image_ptr", &nk_image_ptr);
 
-    m.def("nk_image_id_mtd", &nk_image_id);
+    m.def("mnk_image_id", &nk_image_id);
 
-    m.def("nk_image_is_subimage_mtd", &nk_image_is_subimage);
+    m.def("mnk_image_is_subimage", &nk_image_is_subimage);
 
-    m.def("nk_subimage_ptr_mtd", &nk_subimage_ptr);
+    m.def("mnk_subimage_ptr", &nk_subimage_ptr);
 
-    m.def("nk_subimage_id_mtd", &nk_subimage_id);
+    m.def("mnk_subimage_id", &nk_subimage_id);
 
-    m.def("nk_subimage_handle_mtd", &nk_subimage_handle);
+    m.def("mnk_subimage_handle", &nk_subimage_handle);
 
-    m.def("nk_nine_slice_handle_mtd", &nk_nine_slice_handle);
+    m.def("mnk_nine_slice_handle", &nk_nine_slice_handle);
 
-    m.def("nk_nine_slice_ptr_mtd", &nk_nine_slice_ptr);
+    m.def("mnk_nine_slice_ptr", &nk_nine_slice_ptr);
 
-    m.def("nk_nine_slice_id_mtd", &nk_nine_slice_id);
+    m.def("mnk_nine_slice_id", &nk_nine_slice_id);
 
-    m.def("nk_nine_slice_is_sub9slice_mtd", &nk_nine_slice_is_sub9slice);
+    m.def("mnk_nine_slice_is_sub9slice", &nk_nine_slice_is_sub9slice);
 
-    m.def("nk_sub9slice_ptr_mtd", &nk_sub9slice_ptr);
+    m.def("mnk_sub9slice_ptr", &nk_sub9slice_ptr);
 
-    m.def("nk_sub9slice_id_mtd", &nk_sub9slice_id);
+    m.def("mnk_sub9slice_id", &nk_sub9slice_id);
 
-    m.def("nk_sub9slice_handle_mtd", &nk_sub9slice_handle);
+    m.def("mnk_sub9slice_handle", &nk_sub9slice_handle);
 
-    m.def("nk_murmur_hash_mtd", &nk_murmur_hash);
+    m.def("mnk_murmur_hash", &nk_murmur_hash);
 
-    m.def("nk_triangle_from_direction_mtd", &nk_triangle_from_direction);
+    m.def("mnk_triangle_from_direction", &nk_triangle_from_direction);
 
-    m.def("nk_vec2_mtd", &nk_vec2);
+    m.def("mnk_vec2", &nk_vec2);
 
-    m.def("nk_vec2i_mtd", &nk_vec2i);
+    m.def("mnk_vec2i", &nk_vec2i);
 
-    m.def("nk_vec2v_mtd", &nk_vec2v);
+    m.def("mnk_vec2v", &nk_vec2v);
 
-    m.def("nk_vec2iv_mtd", &nk_vec2iv);
+    m.def("mnk_vec2iv", &nk_vec2iv);
 
-    m.def("nk_get_null_rect_mtd", &nk_get_null_rect);
+    m.def("mnk_get_null_rect", &nk_get_null_rect);
 
-    m.def("nk_rect_mtd", &nk_rect);
+    m.def("mnk_rect", &nk_rect);
 
-    m.def("nk_recti_mtd", &nk_recti);
+    m.def("mnk_recti", &nk_recti);
 
-    m.def("nk_recta_mtd", &nk_recta);
+    m.def("mnk_recta", &nk_recta);
 
-    m.def("nk_rectv_mtd", &nk_rectv);
+    m.def("mnk_rectv", &nk_rectv);
 
-    m.def("nk_rectiv_mtd", &nk_rectiv);
+    m.def("mnk_rectiv", &nk_rectiv);
 
-    m.def("nk_rect_pos_mtd", &nk_rect_pos);
+    m.def("mnk_rect_pos", &nk_rect_pos);
 
-    m.def("nk_rect_size_mtd", &nk_rect_size);
+    m.def("mnk_rect_size", &nk_rect_size);
 
-    m.def("nk_strlen_mtd", &nk_strlen);
+    m.def("mnk_strlen", &nk_strlen);
 
-    m.def("nk_stricmp_mtd", &nk_stricmp);
+    m.def("mnk_stricmp", &nk_stricmp);
 
-    m.def("nk_stricmpn_mtd", &nk_stricmpn);
+    m.def("mnk_stricmpn", &nk_stricmpn);
 
-    m.def("nk_strfilter_mtd", &nk_strfilter);
+    m.def("mnk_strfilter", &nk_strfilter);
 
-    m.def("nk_strmatch_fuzzy_string_mtd", &nk_strmatch_fuzzy_string);
+    m.def("mnk_strmatch_fuzzy_string", &nk_strmatch_fuzzy_string);
 
-    m.def("nk_strmatch_fuzzy_text_mtd", &nk_strmatch_fuzzy_text);
+    m.def("mnk_strmatch_fuzzy_text", &nk_strmatch_fuzzy_text);
 
-    m.def("nk_font_atlas_init_default_mtd", &nk_font_atlas_init_default);
+    m.def("mnk_font_atlas_init_default", &nk_font_atlas_init_default);
 
-    m.def("nk_font_atlas_begin_mtd", &nk_font_atlas_begin);
+    m.def("mnk_font_atlas_begin", &nk_font_atlas_begin);
 
-    m.def("nk_font_config_mtd", &nk_font_config);
+    m.def("mnk_font_config", &nk_font_config);
 
-    m.def("nk_font_atlas_add_default_mtd", &nk_font_atlas_add_default, nb::rv_policy::reference);
+    m.def("mnk_font_atlas_add_default", &nk_font_atlas_add_default, nb::rv_policy::reference);
 
-    m.def("nk_font_atlas_add_from_memory_mtd", &nk_font_atlas_add_from_memory, nb::rv_policy::reference);
+    m.def("mnk_font_atlas_add_from_memory", &nk_font_atlas_add_from_memory, nb::rv_policy::reference);
 
-    m.def("nk_font_atlas_add_from_file_mtd", &nk_font_atlas_add_from_file, nb::rv_policy::reference);
+    m.def("mnk_font_atlas_add_from_file", &nk_font_atlas_add_from_file, nb::rv_policy::reference);
 
-    m.def("nk_font_atlas_add_compressed_base85_mtd", &nk_font_atlas_add_compressed_base85, nb::rv_policy::reference);
+    m.def("mnk_font_atlas_add_compressed_base85", &nk_font_atlas_add_compressed_base85, nb::rv_policy::reference);
 
-    m.def("nk_font_atlas_bake_mtd", as_capsule(&nk_font_atlas_bake));
+    m.def("mnk_font_atlas_bake", as_capsule(&nk_font_atlas_bake));
 
-    m.def("nk_font_atlas_end_mtd", &nk_font_atlas_end);
+    m.def("mnk_font_atlas_end", &nk_font_atlas_end);
 
-    m.def("nk_font_find_glyph_mtd", &nk_font_find_glyph, nb::rv_policy::reference);
+    m.def("mnk_font_find_glyph", &nk_font_find_glyph, nb::rv_policy::reference);
 
-    m.def("nk_font_atlas_cleanup_mtd", &nk_font_atlas_cleanup);
+    m.def("mnk_font_atlas_cleanup", &nk_font_atlas_cleanup);
 
-    m.def("nk_font_atlas_clear_mtd", &nk_font_atlas_clear);
+    m.def("mnk_font_atlas_clear", &nk_font_atlas_clear);
 
-    m.def("nk_buffer_init_default_mtd", &nk_buffer_init_default);
+    m.def("mnk_buffer_init_default", &nk_buffer_init_default);
 
-    m.def("nk_buffer_init_fixed_mtd", &nk_buffer_init_fixed);
+    m.def("mnk_buffer_init_fixed", &nk_buffer_init_fixed);
 
-    m.def("nk_buffer_info_mtd", &nk_buffer_info);
+    m.def("mnk_buffer_info", &nk_buffer_info);
 
-    m.def("nk_buffer_push_mtd", &nk_buffer_push);
+    m.def("mnk_buffer_push", &nk_buffer_push);
 
-    m.def("nk_buffer_mark_mtd", &nk_buffer_mark);
+    m.def("mnk_buffer_mark", &nk_buffer_mark);
 
-    m.def("nk_buffer_reset_mtd", &nk_buffer_reset);
+    m.def("mnk_buffer_reset", &nk_buffer_reset);
 
-    m.def("nk_buffer_clear_mtd", &nk_buffer_clear);
+    m.def("mnk_buffer_clear", &nk_buffer_clear);
 
-    m.def("nk_buffer_free_mtd", &nk_buffer_free);
+    m.def("mnk_buffer_free", &nk_buffer_free);
 
-    m.def("nk_buffer_total_mtd", &nk_buffer_total);
+    m.def("mnk_buffer_total", &nk_buffer_total);
 
-    m.def("nk_str_init_default_mtd", &nk_str_init_default);
+    m.def("mnk_str_init_default", &nk_str_init_default);
 
-    m.def("nk_str_init_fixed_mtd", &nk_str_init_fixed);
+    m.def("mnk_str_init_fixed", &nk_str_init_fixed);
 
-    m.def("nk_str_clear_mtd", &nk_str_clear);
+    m.def("mnk_str_clear", &nk_str_clear);
 
-    m.def("nk_str_free_mtd", &nk_str_free);
+    m.def("mnk_str_free", &nk_str_free);
 
-    m.def("nk_str_append_text_char_mtd", &nk_str_append_text_char);
+    m.def("mnk_str_append_text_char", &nk_str_append_text_char);
 
-    m.def("nk_str_append_str_char_mtd", &nk_str_append_str_char);
+    m.def("mnk_str_append_str_char", &nk_str_append_str_char);
 
-    m.def("nk_str_append_text_utf8_mtd", &nk_str_append_text_utf8);
+    m.def("mnk_str_append_text_utf8", &nk_str_append_text_utf8);
 
-    m.def("nk_str_append_str_utf8_mtd", &nk_str_append_str_utf8);
+    m.def("mnk_str_append_str_utf8", &nk_str_append_str_utf8);
 
-    m.def("nk_str_append_text_runes_mtd", &nk_str_append_text_runes);
+    m.def("mnk_str_append_text_runes", &nk_str_append_text_runes);
 
-    m.def("nk_str_append_str_runes_mtd", &nk_str_append_str_runes);
+    m.def("mnk_str_append_str_runes", &nk_str_append_str_runes);
 
-    m.def("nk_str_insert_at_char_mtd", &nk_str_insert_at_char);
+    m.def("mnk_str_insert_at_char", &nk_str_insert_at_char);
 
-    m.def("nk_str_insert_at_rune_mtd", &nk_str_insert_at_rune);
+    m.def("mnk_str_insert_at_rune", &nk_str_insert_at_rune);
 
-    m.def("nk_str_insert_text_char_mtd", &nk_str_insert_text_char);
+    m.def("mnk_str_insert_text_char", &nk_str_insert_text_char);
 
-    m.def("nk_str_insert_str_char_mtd", &nk_str_insert_str_char);
+    m.def("mnk_str_insert_str_char", &nk_str_insert_str_char);
 
-    m.def("nk_str_insert_text_utf8_mtd", &nk_str_insert_text_utf8);
+    m.def("mnk_str_insert_text_utf8", &nk_str_insert_text_utf8);
 
-    m.def("nk_str_insert_str_utf8_mtd", &nk_str_insert_str_utf8);
+    m.def("mnk_str_insert_str_utf8", &nk_str_insert_str_utf8);
 
-    m.def("nk_str_insert_text_runes_mtd", &nk_str_insert_text_runes);
+    m.def("mnk_str_insert_text_runes", &nk_str_insert_text_runes);
 
-    m.def("nk_str_insert_str_runes_mtd", &nk_str_insert_str_runes);
+    m.def("mnk_str_insert_str_runes", &nk_str_insert_str_runes);
 
-    m.def("nk_str_remove_chars_mtd", &nk_str_remove_chars);
+    m.def("mnk_str_remove_chars", &nk_str_remove_chars);
 
-    m.def("nk_str_remove_runes_mtd", &nk_str_remove_runes);
+    m.def("mnk_str_remove_runes", &nk_str_remove_runes);
 
-    m.def("nk_str_delete_chars_mtd", &nk_str_delete_chars);
+    m.def("mnk_str_delete_chars", &nk_str_delete_chars);
 
-    m.def("nk_str_delete_runes_mtd", &nk_str_delete_runes);
+    m.def("mnk_str_delete_runes", &nk_str_delete_runes);
 
-    m.def("nk_str_rune_at_mtd", &nk_str_rune_at);
+    m.def("mnk_str_rune_at", &nk_str_rune_at);
 
-    m.def("nk_str_len_mtd", &nk_str_len);
+    m.def("mnk_str_len", &nk_str_len);
 
-    m.def("nk_str_len_char_mtd", &nk_str_len_char);
+    m.def("mnk_str_len_char", &nk_str_len_char);
 
-    m.def("nk_filter_default_mtd", &nk_filter_default);
+    m.def("mnk_filter_default", &nk_filter_default);
 
-    m.def("nk_filter_ascii_mtd", &nk_filter_ascii);
+    m.def("mnk_filter_ascii", &nk_filter_ascii);
 
-    m.def("nk_filter_float_mtd", &nk_filter_float);
+    m.def("mnk_filter_float", &nk_filter_float);
 
-    m.def("nk_filter_decimal_mtd", &nk_filter_decimal);
+    m.def("mnk_filter_decimal", &nk_filter_decimal);
 
-    m.def("nk_filter_hex_mtd", &nk_filter_hex);
+    m.def("mnk_filter_hex", &nk_filter_hex);
 
-    m.def("nk_filter_oct_mtd", &nk_filter_oct);
+    m.def("mnk_filter_oct", &nk_filter_oct);
 
-    m.def("nk_filter_binary_mtd", &nk_filter_binary);
+    m.def("mnk_filter_binary", &nk_filter_binary);
 
-    m.def("nk_textedit_init_default_mtd", &nk_textedit_init_default);
+    m.def("mnk_textedit_init_default", &nk_textedit_init_default);
 
-    m.def("nk_textedit_init_fixed_mtd", &nk_textedit_init_fixed);
+    m.def("mnk_textedit_init_fixed", &nk_textedit_init_fixed);
 
-    m.def("nk_textedit_free_mtd", &nk_textedit_free);
+    m.def("mnk_textedit_free", &nk_textedit_free);
 
-    m.def("nk_textedit_text_mtd", &nk_textedit_text);
+    m.def("mnk_textedit_text", &nk_textedit_text);
 
-    m.def("nk_textedit_delete_mtd", &nk_textedit_delete);
+    m.def("mnk_textedit_delete", &nk_textedit_delete);
 
-    m.def("nk_textedit_delete_selection_mtd", &nk_textedit_delete_selection);
+    m.def("mnk_textedit_delete_selection", &nk_textedit_delete_selection);
 
-    m.def("nk_textedit_select_all_mtd", &nk_textedit_select_all);
+    m.def("mnk_textedit_select_all", &nk_textedit_select_all);
 
-    m.def("nk_textedit_cut_mtd", &nk_textedit_cut);
+    m.def("mnk_textedit_cut", &nk_textedit_cut);
 
-    m.def("nk_textedit_paste_mtd", &nk_textedit_paste);
+    m.def("mnk_textedit_paste", &nk_textedit_paste);
 
-    m.def("nk_textedit_undo_mtd", &nk_textedit_undo);
+    m.def("mnk_textedit_undo", &nk_textedit_undo);
 
-    m.def("nk_textedit_redo_mtd", &nk_textedit_redo);
+    m.def("mnk_textedit_redo", &nk_textedit_redo);
 
-    m.def("nk_stroke_line_mtd", &nk_stroke_line);
+    m.def("mnk_stroke_line", &nk_stroke_line);
 
-    m.def("nk_stroke_curve_mtd", &nk_stroke_curve);
+    m.def("mnk_stroke_curve", &nk_stroke_curve);
 
-    m.def("nk_stroke_rect_mtd", &nk_stroke_rect);
+    m.def("mnk_stroke_rect", &nk_stroke_rect);
 
-    m.def("nk_stroke_circle_mtd", &nk_stroke_circle);
+    m.def("mnk_stroke_circle", &nk_stroke_circle);
 
-    m.def("nk_stroke_arc_mtd", &nk_stroke_arc);
+    m.def("mnk_stroke_arc", &nk_stroke_arc);
 
-    m.def("nk_stroke_triangle_mtd", &nk_stroke_triangle);
+    m.def("mnk_stroke_triangle", &nk_stroke_triangle);
 
-    m.def("nk_stroke_polyline_mtd", &nk_stroke_polyline);
+    m.def("mnk_stroke_polyline", &nk_stroke_polyline);
 
-    m.def("nk_stroke_polygon_mtd", &nk_stroke_polygon);
+    m.def("mnk_stroke_polygon", &nk_stroke_polygon);
 
-    m.def("nk_fill_rect_mtd", &nk_fill_rect);
+    m.def("mnk_fill_rect", &nk_fill_rect);
 
-    m.def("nk_fill_rect_multi_color_mtd", &nk_fill_rect_multi_color);
+    m.def("mnk_fill_rect_multi_color", &nk_fill_rect_multi_color);
 
-    m.def("nk_fill_circle_mtd", &nk_fill_circle);
+    m.def("mnk_fill_circle", &nk_fill_circle);
 
-    m.def("nk_fill_arc_mtd", &nk_fill_arc);
+    m.def("mnk_fill_arc", &nk_fill_arc);
 
-    m.def("nk_fill_triangle_mtd", &nk_fill_triangle);
+    m.def("mnk_fill_triangle", &nk_fill_triangle);
 
-    m.def("nk_fill_polygon_mtd", &nk_fill_polygon);
+    m.def("mnk_fill_polygon", &nk_fill_polygon);
 
-    m.def("nk_draw_image_mtd", &nk_draw_image);
+    m.def("mnk_draw_image", &nk_draw_image);
 
-    m.def("nk_draw_nine_slice_mtd", &nk_draw_nine_slice);
+    m.def("mnk_draw_nine_slice", &nk_draw_nine_slice);
 
-    m.def("nk_draw_text_mtd", &nk_draw_text);
+    m.def("mnk_draw_text", &nk_draw_text);
 
-    m.def("nk_push_scissor_mtd", &nk_push_scissor);
+    m.def("mnk_push_scissor", &nk_push_scissor);
 
-    m.def("nk_input_has_mouse_click_mtd", &nk_input_has_mouse_click);
+    m.def("mnk_input_has_mouse_click", &nk_input_has_mouse_click);
 
-    m.def("nk_input_has_mouse_click_in_rect_mtd", &nk_input_has_mouse_click_in_rect);
+    m.def("mnk_input_has_mouse_click_in_rect", &nk_input_has_mouse_click_in_rect);
 
-    m.def("nk_input_has_mouse_click_in_button_rect_mtd", &nk_input_has_mouse_click_in_button_rect);
+    m.def("mnk_input_has_mouse_click_in_button_rect", &nk_input_has_mouse_click_in_button_rect);
 
-    m.def("nk_input_has_mouse_click_down_in_rect_mtd", &nk_input_has_mouse_click_down_in_rect);
+    m.def("mnk_input_has_mouse_click_down_in_rect", &nk_input_has_mouse_click_down_in_rect);
 
-    m.def("nk_input_is_mouse_click_in_rect_mtd", &nk_input_is_mouse_click_in_rect);
+    m.def("mnk_input_is_mouse_click_in_rect", &nk_input_is_mouse_click_in_rect);
 
-    m.def("nk_input_is_mouse_click_down_in_rect_mtd", &nk_input_is_mouse_click_down_in_rect);
+    m.def("mnk_input_is_mouse_click_down_in_rect", &nk_input_is_mouse_click_down_in_rect);
 
-    m.def("nk_input_any_mouse_click_in_rect_mtd", &nk_input_any_mouse_click_in_rect);
+    m.def("mnk_input_any_mouse_click_in_rect", &nk_input_any_mouse_click_in_rect);
 
-    m.def("nk_input_is_mouse_prev_hovering_rect_mtd", &nk_input_is_mouse_prev_hovering_rect);
+    m.def("mnk_input_is_mouse_prev_hovering_rect", &nk_input_is_mouse_prev_hovering_rect);
 
-    m.def("nk_input_is_mouse_hovering_rect_mtd", &nk_input_is_mouse_hovering_rect);
+    m.def("mnk_input_is_mouse_hovering_rect", &nk_input_is_mouse_hovering_rect);
 
-    m.def("nk_input_is_mouse_moved_mtd", &nk_input_is_mouse_moved);
+    m.def("mnk_input_is_mouse_moved", &nk_input_is_mouse_moved);
 
-    m.def("nk_input_mouse_clicked_mtd", &nk_input_mouse_clicked);
+    m.def("mnk_input_mouse_clicked", &nk_input_mouse_clicked);
 
-    m.def("nk_input_is_mouse_down_mtd", &nk_input_is_mouse_down);
+    m.def("mnk_input_is_mouse_down", &nk_input_is_mouse_down);
 
-    m.def("nk_input_is_mouse_pressed_mtd", &nk_input_is_mouse_pressed);
+    m.def("mnk_input_is_mouse_pressed", &nk_input_is_mouse_pressed);
 
-    m.def("nk_input_is_mouse_released_mtd", &nk_input_is_mouse_released);
+    m.def("mnk_input_is_mouse_released", &nk_input_is_mouse_released);
 
-    m.def("nk_input_is_key_pressed_mtd", &nk_input_is_key_pressed);
+    m.def("mnk_input_is_key_pressed", &nk_input_is_key_pressed);
 
-    m.def("nk_input_is_key_released_mtd", &nk_input_is_key_released);
+    m.def("mnk_input_is_key_released", &nk_input_is_key_released);
 
-    m.def("nk_input_is_key_down_mtd", &nk_input_is_key_down);
+    m.def("mnk_input_is_key_down", &nk_input_is_key_down);
 
-    m.def("nk_draw_list_init_mtd", &nk_draw_list_init);
+    m.def("mnk_draw_list_init", &nk_draw_list_init);
 
-    m.def("nk_draw_list_setup_mtd", &nk_draw_list_setup);
+    m.def("mnk_draw_list_setup", &nk_draw_list_setup);
 
-    m.def("nk_draw_list_path_clear_mtd", &nk_draw_list_path_clear);
+    m.def("mnk_draw_list_path_clear", &nk_draw_list_path_clear);
 
-    m.def("nk_draw_list_path_line_to_mtd", &nk_draw_list_path_line_to);
+    m.def("mnk_draw_list_path_line_to", &nk_draw_list_path_line_to);
 
-    m.def("nk_draw_list_path_arc_to_fast_mtd", &nk_draw_list_path_arc_to_fast);
+    m.def("mnk_draw_list_path_arc_to_fast", &nk_draw_list_path_arc_to_fast);
 
-    m.def("nk_draw_list_path_arc_to_mtd", &nk_draw_list_path_arc_to);
+    m.def("mnk_draw_list_path_arc_to", &nk_draw_list_path_arc_to);
 
-    m.def("nk_draw_list_path_rect_to_mtd", &nk_draw_list_path_rect_to);
+    m.def("mnk_draw_list_path_rect_to", &nk_draw_list_path_rect_to);
 
-    m.def("nk_draw_list_path_curve_to_mtd", &nk_draw_list_path_curve_to);
+    m.def("mnk_draw_list_path_curve_to", &nk_draw_list_path_curve_to);
 
-    m.def("nk_draw_list_path_fill_mtd", &nk_draw_list_path_fill);
+    m.def("mnk_draw_list_path_fill", &nk_draw_list_path_fill);
 
-    m.def("nk_draw_list_path_stroke_mtd", &nk_draw_list_path_stroke);
+    m.def("mnk_draw_list_path_stroke", &nk_draw_list_path_stroke);
 
-    m.def("nk_draw_list_stroke_line_mtd", &nk_draw_list_stroke_line);
+    m.def("mnk_draw_list_stroke_line", &nk_draw_list_stroke_line);
 
-    m.def("nk_draw_list_stroke_rect_mtd", &nk_draw_list_stroke_rect);
+    m.def("mnk_draw_list_stroke_rect", &nk_draw_list_stroke_rect);
 
-    m.def("nk_draw_list_stroke_triangle_mtd", &nk_draw_list_stroke_triangle);
+    m.def("mnk_draw_list_stroke_triangle", &nk_draw_list_stroke_triangle);
 
-    m.def("nk_draw_list_stroke_circle_mtd", &nk_draw_list_stroke_circle);
+    m.def("mnk_draw_list_stroke_circle", &nk_draw_list_stroke_circle);
 
-    m.def("nk_draw_list_stroke_curve_mtd", &nk_draw_list_stroke_curve);
+    m.def("mnk_draw_list_stroke_curve", &nk_draw_list_stroke_curve);
 
-    m.def("nk_draw_list_stroke_poly_line_mtd", &nk_draw_list_stroke_poly_line);
+    m.def("mnk_draw_list_stroke_poly_line", &nk_draw_list_stroke_poly_line);
 
-    m.def("nk_draw_list_fill_rect_mtd", &nk_draw_list_fill_rect);
+    m.def("mnk_draw_list_fill_rect", &nk_draw_list_fill_rect);
 
-    m.def("nk_draw_list_fill_rect_multi_color_mtd", &nk_draw_list_fill_rect_multi_color);
+    m.def("mnk_draw_list_fill_rect_multi_color", &nk_draw_list_fill_rect_multi_color);
 
-    m.def("nk_draw_list_fill_triangle_mtd", &nk_draw_list_fill_triangle);
+    m.def("mnk_draw_list_fill_triangle", &nk_draw_list_fill_triangle);
 
-    m.def("nk_draw_list_fill_circle_mtd", &nk_draw_list_fill_circle);
+    m.def("mnk_draw_list_fill_circle", &nk_draw_list_fill_circle);
 
-    m.def("nk_draw_list_fill_poly_convex_mtd", &nk_draw_list_fill_poly_convex);
+    m.def("mnk_draw_list_fill_poly_convex", &nk_draw_list_fill_poly_convex);
 
-    m.def("nk_draw_list_add_image_mtd", &nk_draw_list_add_image);
+    m.def("mnk_draw_list_add_image", &nk_draw_list_add_image);
 
-    m.def("nk_draw_list_add_text_mtd", &nk_draw_list_add_text);
+    m.def("mnk_draw_list_add_text", &nk_draw_list_add_text);
 
-    m.def("nk_style_item_color_mtd", &nk_style_item_color);
+    m.def("mnk_style_item_color", &nk_style_item_color);
 
-    m.def("nk_style_item_image_mtd", &nk_style_item_image);
+    m.def("mnk_style_item_image", &nk_style_item_image);
 
-    m.def("nk_style_item_nine_slice_mtd", &nk_style_item_nine_slice);
+    m.def("mnk_style_item_nine_slice", &nk_style_item_nine_slice);
 
-    m.def("nk_style_item_hide_mtd", &nk_style_item_hide);
+    m.def("mnk_style_item_hide", &nk_style_item_hide);
 
 // NOT AUTOMATIC REALIZATION
 
 using namespace nanobind::literals;
-    m.def("nk_combobox", [](nk_context* ctx, std::vector<std::string> items, int selected, int item_height, struct nk_vec2 size) {
+    m.def("mnk_combobox", [](nk_context* ctx, std::vector<std::string> items, int selected, int item_height, struct nk_vec2 size) {
         std::vector<const char*> ptrs;
         for (const auto& s : items) ptrs.push_back(s.c_str());
         nk_combobox(ctx, ptrs.data(), (int)ptrs.size(), &selected, item_height, size);
@@ -2516,13 +2516,13 @@ using namespace nanobind::literals;
     });
 
 
-    m.def("nk_combo", [](nk_context* ctx, std::vector<std::string> items, int selected, int item_height, struct nk_vec2 size) {
+    m.def("mnk_combo", [](nk_context* ctx, std::vector<std::string> items, int selected, int item_height, struct nk_vec2 size) {
         std::vector<const char*> ptrs;
         for (const auto& s : items) ptrs.push_back(s.c_str());
         return nk_combo(ctx, ptrs.data(), (int)ptrs.size(), selected, item_height, size);
     });
 
-    m.def("nk_edit_string_zero_terminated", [](nk_context* ctx, nk_flags flags, std::string buffer, int max, nk_plugin_filter filter) {
+    m.def("mnk_edit_string_zero_terminated", [](nk_context* ctx, nk_flags flags, std::string buffer, int max, nk_plugin_filter filter) {
         buffer.resize(max); 
         nk_flags res = nk_edit_string_zero_terminated(ctx, flags, buffer.data(), max, filter);
     
@@ -2531,7 +2531,7 @@ using namespace nanobind::literals;
         return std::make_tuple(res, buffer);
     }, "ctx"_a, "flags"_a, "buffer"_a, "max"_a, "filter"_a = nullptr);
 
-    m.def("nk_edit_string", [](nk_context* ctx, nk_flags flags, std::string buffer, int max, nk_plugin_filter filter) {
+    m.def("mnk_edit_string", [](nk_context* ctx, nk_flags flags, std::string buffer, int max, nk_plugin_filter filter) {
         buffer.resize(max);
         int current_len = (int)strlen(buffer.c_str()); // Или передавать len из Python
     

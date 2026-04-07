@@ -46,6 +46,7 @@ find_path(NUKLEAR_INCLUDE_DIR nuklear.h)
 
 find_package(OpenGL REQUIRED)
 find_package(Threads REQUIRED) 
+find_package(lunasvg REQUIRED) 
 
 nanobind_add_module(npnk_wbackend 
     LTO 
@@ -57,7 +58,7 @@ target_link_libraries(npnk_wbackend PRIVATE
     nuklear 
     glfw 
     OpenGL::GL   
-    OpenGL::GLU 
+    lunasvg
     m
 )
 set_property(TARGET glfw PROPERTY POSITION_INDEPENT_CODE ON)

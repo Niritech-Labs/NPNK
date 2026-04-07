@@ -13,5 +13,5 @@
 #define NK_INCLUDE_STANDARD_VARARGS
 
 
-#include "nuklear/nuklear.h"
+#include "../nuklear/nuklear.h"
 

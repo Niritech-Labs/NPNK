@@ -1,4 +1,7 @@
 
+typedef __builtin_va_list __gnuc_va_list;
+typedef __gnuc_va_list va_list;
+
 
 typedef unsigned char __u_char;
 typedef unsigned short int __u_short;
@@ -164,6 +167,13 @@ typedef long int intptr_t;
 typedef unsigned long int uintptr_t;
 typedef __intmax_t intmax_t;
 typedef __uintmax_t uintmax_t;
+
+
+
+
+
+
+
 typedef int8_t nk_char;
 typedef uint8_t nk_uchar;
 typedef uint8_t nk_byte;
@@ -173,7 +183,9 @@ typedef int32_t nk_int;
 typedef uint32_t nk_uint;
 typedef uintptr_t nk_size;
 typedef uintptr_t nk_ptr;
-typedef int nk_bool;
+typedef 
+       _Bool 
+               nk_bool;
 
 typedef nk_uint nk_hash;
 typedef nk_uint nk_flags;
@@ -571,6 +583,28 @@ extern void nk_label_wrap(struct nk_context*, const char*);
 extern void nk_label_colored_wrap(struct nk_context*, const char*, struct nk_color);
 extern void nk_image(struct nk_context*, struct nk_image);
 extern void nk_image_color(struct nk_context*, struct nk_image, struct nk_color);
+
+extern void nk_labelf(struct nk_context*, nk_flags, const char*, ...) __attribute__((format(__printf__, 3, 3 +1)));
+extern void nk_labelf_colored(struct nk_context*, nk_flags, struct nk_color, const char*,...) __attribute__((format(__printf__, 4, 4 +1)));
+extern void nk_labelf_wrap(struct nk_context*, const char*,...) __attribute__((format(__printf__, 2, 2 +1)));
+extern void nk_labelf_colored_wrap(struct nk_context*, struct nk_color, const char*,...) __attribute__((format(__printf__, 3, 3 +1)));
+extern void nk_labelfv(struct nk_context*, nk_flags, const char*, va_list) __attribute__((format(__printf__, 3, 0)));
+extern void nk_labelfv_colored(struct nk_context*, nk_flags, struct nk_color, const char*, va_list) __attribute__((format(__printf__, 4, 0)));
+extern void nk_labelfv_wrap(struct nk_context*, const char*, va_list) __attribute__((format(__printf__, 2, 0)));
+extern void nk_labelfv_colored_wrap(struct nk_context*, struct nk_color, const char*, va_list) __attribute__((format(__printf__, 3, 0)));
+extern void nk_value_bool(struct nk_context*, const char *prefix, int);
+extern void nk_value_int(struct nk_context*, const char *prefix, int);
+extern void nk_value_uint(struct nk_context*, const char *prefix, unsigned int);
+extern void nk_value_float(struct nk_context*, const char *prefix, float);
+extern void nk_value_color_byte(struct nk_context*, const char *prefix, struct nk_color);
+extern void nk_value_color_float(struct nk_context*, const char *prefix, struct nk_color);
+extern void nk_value_color_hex(struct nk_context*, const char *prefix, struct nk_color);
+
+
+
+
+
+
 extern nk_bool nk_button_text(struct nk_context*, const char *title, int len);
 extern nk_bool nk_button_label(struct nk_context*, const char *title);
 extern nk_bool nk_button_color(struct nk_context*, struct nk_color);
@@ -798,10 +832,10 @@ extern void nk_contextual_end(struct nk_context*);
 extern void nk_tooltip(struct nk_context*, const char*);
 extern void nk_tooltip_offset(struct nk_context *ctx, const char *text, enum nk_tooltip_pos position, struct nk_vec2 offset);
 
-
-
-
-
+extern void nk_tooltipf(struct nk_context*, const char*, ...) __attribute__((format(__printf__, 2, 2 +1)));
+extern void nk_tooltipfv(struct nk_context*, const char*, va_list) __attribute__((format(__printf__, 2, 0)));
+extern void nk_tooltipf_offset(struct nk_context*, enum nk_tooltip_pos, struct nk_vec2, const char*, ...) __attribute__((format(__printf__, 4, 4 +1)));
+extern void nk_tooltipfv_offset(struct nk_context*, enum nk_tooltip_pos, struct nk_vec2, const char*, va_list) __attribute__((format(__printf__, 4, 0)));
 
 extern nk_bool nk_tooltip_begin(struct nk_context*, float width);
 extern nk_bool nk_tooltip_begin_offset(struct nk_context*, float, enum nk_tooltip_pos, struct nk_vec2);
@@ -1644,7 +1678,7 @@ enum nk_draw_vertex_layout_format {
     NK_FORMAT_FLOAT,
     NK_FORMAT_DOUBLE,
 
-    NK_FORMAT_COLOR_BEGIN,
+NK_FORMAT_COLOR_BEGIN,
     NK_FORMAT_R8G8B8 = NK_FORMAT_COLOR_BEGIN,
     NK_FORMAT_R16G15B16,
     NK_FORMAT_R32G32B32,
@@ -1658,7 +1692,7 @@ enum nk_draw_vertex_layout_format {
 
     NK_FORMAT_RGB32,
     NK_FORMAT_RGBA32,
-    NK_FORMAT_COLOR_END = NK_FORMAT_RGBA32,
+NK_FORMAT_COLOR_END = NK_FORMAT_RGBA32,
     NK_FORMAT_COUNT
 };
 
@@ -2517,7 +2551,3 @@ struct nk_context {
     unsigned int count;
     unsigned int seq;
 };
-
-
-
-

@@ -12,8 +12,8 @@ $cmake -S libnuklear -B libnuklear/build-o-critical
 $cmake --build libnuklear/build-o-critical
 
 %Make Nuklear Bingings
-$sh preprocess.sh-o-critical
-$python3 generator.py-o-critical
+$sh tools/preprocess.sh-o-critical
+$python3 tools/generator.py-o-critical
 $cmake -S npcore_nuklear -B npcore_nuklear/build-o-critical
 $cmake --build npcore_nuklear/build-o-critical
 
