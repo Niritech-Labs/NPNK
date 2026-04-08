@@ -99,6 +99,14 @@ using namespace nanobind::literals;
     }, "ctx"_a, "flags"_a, "buffer"_a, "max"_a, "filter"_a = nullptr);
 
 
+    nk_mouse_var.def("__getitem__", [](nk_mouse &m, size_t i) -> nk_mouse_button& {
+            if (i >= NK_BUTTON_MAX) throw nb::index_error();
+            return m.buttons[i];
+        }, nb::rv_policy::reference_internal);
+        
+    nk_mouse_var.def("__len__", [](nk_mouse &) { return NK_BUTTON_MAX; });
+
+
 
  
 }

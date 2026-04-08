@@ -53,6 +53,7 @@ private:
     bool glfw_initialized;
     int width, height;
     struct nk_colorf bg;
+    struct nk_font *font;
 
     static void glfw_error_callback(int err, const char *desc) {
         fprintf(stderr, "GLFW error %d: %s\n", err, desc);
@@ -111,9 +112,19 @@ public:
             throw std::runtime_error("Failed to init Nuklear");
 
         
+    }
+
+
+    void InitFont(bool nonstdfont,const char* filepath,int bold) {
         {struct nk_font_atlas* atlas;
             nk_glfw3_font_stash_begin(&glfw, &atlas);
+            if (nonstdfont) {
+                font = nk_font_atlas_add_from_file(atlas, filepath, bold, 0);
+            }
             nk_glfw3_font_stash_end(&glfw);
+            if (nonstdfont) {
+                nk_style_set_font(nk_ctx, &font->handle);
+            }
         }
     }
 
@@ -260,6 +271,7 @@ NB_MODULE(npnk_wbackend, m) {
         .def("LS_SetAnchor", &Backend::LS_SetAnchor)
         .def("SetKeyboardFocus", &Backend::SetKeyboardFocus)
         .def("Shutdown", &Backend::Shutdown)
+        .def("InitFont", &Backend::InitFont)
         .def("LoadSvgImage", &Backend::LoadSvgImage);
 
 }
