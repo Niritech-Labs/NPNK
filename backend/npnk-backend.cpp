@@ -35,9 +35,9 @@
 #include "glfw-nor/deps/glad/gl.h"
 #include <GLFW/glfw3.h>
 #include <GLFW/glfw3native.h>   
-#include <nuklear.h>
+#include "../nuklear/nuklear.h"
 
-#include <nuklear_glfw_gl3.h>
+#include "../nuklear/demo/glfw_opengl3/nuklear_glfw_gl3.h"
 
 #define MAX_VERTEX_BUFFER 512 * 1024
 #define MAX_ELEMENT_BUFFER 128 * 1024
@@ -54,6 +54,7 @@ private:
     int width, height;
     struct nk_colorf bg;
     struct nk_font *font;
+    struct nk_mouse_button buf;
 
     static void glfw_error_callback(int err, const char *desc) {
         fprintf(stderr, "GLFW error %d: %s\n", err, desc);
@@ -231,7 +232,7 @@ public:
         }
     }
 
-    struct nk_image LoadSvgImage(const char* filename, int width, int height) {
+    static struct nk_image LoadSvgImage(const char* filename, int width, int height) {
         auto document = lunasvg::Document::loadFromFile(filename);
         if (!document) throw std::runtime_error("Invalid filepath");
 
@@ -250,6 +251,32 @@ public:
 
         return nk_image_id((int)tex);
     }
+
+    void SetupButtons(struct nk_context* ctx) {
+        buf = ctx->input.mouse.buttons[NK_BUTTON_LEFT];
+
+
+        if (ctx->input.mouse.buttons[NK_BUTTON_RIGHT].down) {
+            ctx->input.mouse.buttons[NK_BUTTON_LEFT] = ctx->input.mouse.buttons[NK_BUTTON_RIGHT];
+        }
+        
+    }
+
+    int GetClick(struct nk_context* ctx) {
+
+        int clk = 0;
+        if (ctx->input.mouse.buttons[NK_BUTTON_RIGHT].down) {
+            clk = 2;
+        } 
+        else {
+            clk = 1;
+        }
+
+        ctx->input.mouse.buttons[NK_BUTTON_LEFT] = buf;
+        return clk;
+
+    }
+
 };
 
 NB_MODULE(npnk_wbackend, m) {
@@ -272,7 +299,10 @@ NB_MODULE(npnk_wbackend, m) {
         .def("SetKeyboardFocus", &Backend::SetKeyboardFocus)
         .def("Shutdown", &Backend::Shutdown)
         .def("InitFont", &Backend::InitFont)
-        .def("LoadSvgImage", &Backend::LoadSvgImage);
+        .def_static("LoadSvgImage", &Backend::LoadSvgImage)
+        .def("SetupButtons",&Backend::SetupButtons)
+        .def("GetClick", &Backend::GetClick);
+
 
 }
 

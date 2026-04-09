@@ -26,12 +26,16 @@ set(nanobind_DIR "${NANOBIND_DIR}")
 
 find_package(nanobind CONFIG REQUIRED)
 
-find_library(NUKLEAR_LIB nuklear)
+find_library(NUKLEAR_LIB 
+    NAMES nuklear
+    PATHS ${CMAKE_CURRENT_SOURCE_DIR}/../libnuklear/build
+    NO_DEFAULT_PATH
+)
 if(NOT NUKLEAR_LIB)
     message(FATAL_ERROR "libnuklear.so не найдена. Убедитесь, что она установлена.")
 endif()
 
-find_path(NUKLEAR_INCLUDE_DIR nuklear.h)
+
 
 nanobind_add_module(npnuklear 
     LTO 

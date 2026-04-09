@@ -20,7 +20,7 @@
 #include <stdint.h>
 #include <algorithm>           
 #include <type_traits>   
-#include <nuklear.h>
+#include "../nuklear/nuklear.h"
 #include <nanobind/stl/string.h>
 #include <nanobind/stl/vector.h>
 #include <nanobind/stl/tuple.h>
