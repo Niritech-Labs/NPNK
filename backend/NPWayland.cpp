@@ -27,7 +27,7 @@
 #define NK_INCLUDE_DEFAULT_FONT
 #define NK_INCLUDE_STANDARD_VARARGS
 
-
+#include <spng.h>
 #include <nanobind/nanobind.h>
 #include <nanobind/stl/tuple.h>
 #include <lunasvg/lunasvg.h> 
@@ -55,6 +55,7 @@ private:
     struct nk_colorf bg;
     struct nk_font *font;
     struct nk_mouse_button buf;
+    bool lbd;
 
     static void glfw_error_callback(int err, const char *desc) {
         fprintf(stderr, "GLFW error %d: %s\n", err, desc);
@@ -72,6 +73,7 @@ public:
         bg.g = 0.18f;
         bg.b = 0.24f;
         bg.a = 1.0f;
+        lbd = 0;
     }
 
     ~Backend() {
@@ -232,9 +234,9 @@ public:
         }
     }
 
-    static struct nk_image LoadSvgImage(const char* filename, int width, int height) {
+    static struct nk_image LoadSVGImage(const char* filename, int width, int height) {
         auto document = lunasvg::Document::loadFromFile(filename);
-        if (!document) throw std::runtime_error("Invalid filepath");
+        if (!document) throw std::runtime_error("Failed to open file");
 
         auto bitmap = document->renderToBitmap(width, height);
         bitmap.convertToRGBA(); 
@@ -252,35 +254,65 @@ public:
         return nk_image_id((int)tex);
     }
 
-    void SetupButtons(struct nk_context* ctx) {
-        buf = ctx->input.mouse.buttons[NK_BUTTON_LEFT];
+    static struct nk_image LoadPNGImage(const char* filename) {
+        FILE *fp = fopen(filename, "rb");
+        if (!fp) throw std::runtime_error("Failed to open file");
 
-
-        if (ctx->input.mouse.buttons[NK_BUTTON_RIGHT].down) {
-            ctx->input.mouse.buttons[NK_BUTTON_LEFT] = ctx->input.mouse.buttons[NK_BUTTON_RIGHT];
+        spng_ctx *sctx = spng_ctx_new(0);
+        if (!sctx) { 
+            fclose(fp); 
+            throw std::runtime_error("Failed to create spng context"); 
         }
+
+        spng_set_png_file(sctx, fp);
+
+        struct spng_ihdr ihdr;
+        spng_get_ihdr(sctx, &ihdr);
+
+
+        size_t out_size;
+        spng_decoded_image_size(sctx, SPNG_FMT_RGBA8, &out_size);
+
+        std::vector<unsigned char> out_data(out_size);
+
+        int ret = spng_decode_image(sctx, out_data.data(), out_size, SPNG_FMT_RGBA8, SPNG_DECODE_TRNS);
         
-    }
-
-    int GetClick(struct nk_context* ctx) {
-
-        int clk = 0;
-        if (ctx->input.mouse.buttons[NK_BUTTON_RIGHT].down) {
-            clk = 2;
-        } 
-        else {
-            clk = 1;
+        if (ret) {
+            spng_ctx_free(sctx);
+            fclose(fp);
+            throw std::runtime_error("Failed to decode PNG");
         }
 
-        ctx->input.mouse.buttons[NK_BUTTON_LEFT] = buf;
-        return clk;
+        GLuint tex;
+        glGenTextures(1, &tex);
+        glBindTexture(GL_TEXTURE_2D, tex);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, ihdr.width, ihdr.height, 0, 
+                     GL_RGBA, GL_UNSIGNED_BYTE, out_data.data());
+
+
+        spng_ctx_free(sctx);
+        fclose(fp);
+
+        return nk_image_id((int)tex);
     }
+
+
+    static bool mnk_button_right(struct nk_context* ctx) {
+
+        struct nk_rect bounds = nk_widget_bounds(ctx);
+
+        return nk_input_mouse_clicked(&ctx->input, NK_BUTTON_RIGHT, bounds);
+          
+    }
+
 
 };
 
-NB_MODULE(npnk_wbackend, m) {
-    nb::class_<Backend>(m, "Bk")
+NB_MODULE(NPWayland, m) {
+    nb::class_<Backend>(m, "Window")
         .def(nb::init<>())
         .def("GLFWInit", &Backend::GLFWInit)
         .def("CreateWindow", &Backend::CreateWindow)
@@ -299,11 +331,9 @@ NB_MODULE(npnk_wbackend, m) {
         .def("SetKeyboardFocus", &Backend::SetKeyboardFocus)
         .def("Shutdown", &Backend::Shutdown)
         .def("InitFont", &Backend::InitFont)
-        .def_static("LoadSvgImage", &Backend::LoadSvgImage)
-        .def("SetupButtons",&Backend::SetupButtons)
-        .def("GetClick", &Backend::GetClick);
-
-
+        .def_static("LoadSVGImage", &Backend::LoadSVGImage)
+        .def_static("LoadPNGImage", &Backend::LoadPNGImage)
+        .def_static("mnk_button_right",&Backend::mnk_button_right);
 }
 
 

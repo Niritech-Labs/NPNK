@@ -47,24 +47,28 @@ find_path(NUKLEAR_INCLUDE_DIR nuklear.h)
 find_package(OpenGL REQUIRED)
 find_package(Threads REQUIRED) 
 find_package(lunasvg REQUIRED) 
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(SPNG REQUIRED spng)
 
-nanobind_add_module(npnk_wbackend 
+nanobind_add_module(NPWayland 
     LTO 
-    npnk-backend.cpp
+    NPWayland.cpp
 )
 
-target_include_directories(npnk_wbackend PRIVATE ${NUKLEAR_INCLUDE_DIR})
-target_link_libraries(npnk_wbackend PRIVATE
+target_include_directories(NPWayland PRIVATE ${NUKLEAR_INCLUDE_DIR})
+target_link_libraries(NPWayland PRIVATE
     nuklear 
     glfw 
     OpenGL::GL   
     lunasvg
     m
+    spng
 )
 set_property(TARGET glfw PROPERTY POSITION_INDEPENT_CODE ON)
 
 nanobind_add_stub(stub
-    TARGET npnk_wbackend
-    MODULE npnk_wbackend
-    OUTPUT npnk_wbackend.pyi
+    TARGET NPWayland
+    MODULE NPWayland
+    OUTPUT NPWayland.pyi
 )
+add_dependencies(stub NPWayland)

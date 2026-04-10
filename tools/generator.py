@@ -58,7 +58,7 @@ auto as_capsule(Ret (*func)(Args...)) {
 }
 
 
-NB_MODULE(npnuklear, m) {
+NB_MODULE(NPNK, m) {
     m.doc() = "Niritech Labs port Nuklear to python with nanobind"; 
 '''
 outer = """
@@ -116,6 +116,6 @@ using namespace nanobind::literals;
 body = '\n'.join(fl)
 res = inner + body + outer
 
-with open('npcore_nuklear/np_nuklear.cpp','w') as f:
+with open('npcore_nuklear/NPNK.cpp','w') as f:
     f.write(res)
 

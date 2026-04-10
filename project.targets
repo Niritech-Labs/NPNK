@@ -5,7 +5,7 @@
 
 %Make Backend
 $cmake -S backend -B backend/build-o-critical
-$cmake --build backend/build-o-critical
+$cmake --build backend/build -j-o-critical
 
 %Make Nuklear
 $cmake -S libnuklear -B libnuklear/build-o-critical
@@ -15,7 +15,7 @@ $cmake --build libnuklear/build-o-critical
 $sh tools/preprocess.sh-o-critical
 $python3 tools/generator.py-o-critical
 $cmake -S npcore_nuklear -B npcore_nuklear/build-o-critical
-$cmake --build npcore_nuklear/build-o-critical
+$cmake --build npcore_nuklear/build -j-o-critical
 
 %Install Nuklear
 $sudo cmake --install libnuklear/build-o-critical
