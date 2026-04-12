@@ -37,22 +37,22 @@ endif()
 
 
 
-nanobind_add_module(NPNK
+nanobind_add_module(Nuklear
     LTO 
     NPNK.cpp
 )
 
-target_include_directories(NPNK PRIVATE ${NUKLEAR_INCLUDE_DIR})
-target_link_libraries(NPNK PRIVATE ${NUKLEAR_LIB})
+target_include_directories(Nuklear PRIVATE ${NUKLEAR_INCLUDE_DIR})
+target_link_libraries(Nuklear PRIVATE ${NUKLEAR_LIB})
 
 
 
 nanobind_add_stub(stub
-    TARGET NPNK
-    MODULE NPNK
-    OUTPUT NPNK.pyi
+    TARGET Nuklear
+    MODULE Nuklear
+    OUTPUT Nuklear.pyi
 )
 
-add_dependencies(stub NPNK)
+add_dependencies(stub Nuklear)
 
-install(TARGETS NPNK LIBRARY DESTINATION .)
+install(TARGETS Nuklear LIBRARY DESTINATION .)

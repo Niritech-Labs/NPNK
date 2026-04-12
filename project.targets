@@ -17,17 +17,16 @@ $python3 tools/generator.py-o-critical
 $cmake -S npcore_nuklear -B npcore_nuklear/build-o-critical
 $cmake --build npcore_nuklear/build -j-o-critical
 
-%Install Nuklear
-$sudo cmake --install libnuklear/build-o-critical
-TRG:/usr/lib64-o-libnuklear/build/libnuklear.so-o-install-o-755
+#%Install Nuklear
+#$sudo cmake --install libnuklear/build-o-critical
+#TRG:/usr/lib64-o-libnuklear/build/libnuklear.so-o-install-o-755
 
 
 %Install on project
-DIR:build-o-remove-o-755
-DIR:build-o-install-o-755
+DIR:src/NPNK-o-install-o-755
 
 
-TRG:build-o-libnuklear/build/libnuklear.so-o-install-o-755
+TRG:src/NPNK-o-libnuklear/build/libnuklear.so-o-install-o-755
 
 $sh tools/install.sh-o-critical
 
@@ -46,4 +45,4 @@ DIR:npcore_nuklear/build-o-remove-o-755
 DIR:backend/build-o-remove-o-755
 DIR:npcore_nuklear/build-o-remove-o-755
 DIR:libnuklear/build-o-remove-o-755
-DIR:build-o-remove-o-755
+DIR:src/NPNK-o-remove-o-755

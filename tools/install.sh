@@ -1,3 +1,3 @@
 
-cp npcore_nuklear/build/NPNK* build
-cp backend/build/NPWayland* build
+cp npcore_nuklear/build/Nuklear* src/NPNK
+cp backend/build/NPWayland* src/NPNK

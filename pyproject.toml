@@ -1,0 +1,29 @@
+# Copyright (C) 2026 Niritech Labs
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+[build-system]
+requires = ["setuptools>=61","NLOrg-Utils"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "NPNK"
+version = "0.0.6.1"
+description = "Nuklear + Wayland bindings"
+authors = [{ name="Lakur Fessi", email="lakurfessi@outlook.com" }]
+readme = "README.md"
+requires-python = ">=3.13"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+    "Operating System :: OS Independent",
+]
+
+dependencies = ["NLOrg-Utils"]
+
+[tool.setuptools]
+packages = ["NPNK"]
+package-dir = {"" = "src"}
+
+[tool.setuptools.package-data]
+NPNK = ["*.so"]

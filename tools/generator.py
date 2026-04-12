@@ -58,7 +58,7 @@ auto as_capsule(Ret (*func)(Args...)) {
 }
 
 
-NB_MODULE(NPNK, m) {
+NB_MODULE(Nuklear, m) {
     m.doc() = "Niritech Labs port Nuklear to python with nanobind"; 
 '''
 outer = """
@@ -106,9 +106,12 @@ using namespace nanobind::literals;
         
     nk_mouse_var.def("__len__", [](nk_mouse &) { return NK_BUTTON_MAX; });
 
+    nb::class_<nk_style_item_data>(m, "nk_style_item_data")
+        .def(nb::init<>())
+        .def_rw("color", &nk_style_item_data::color)
+        .def_rw("image", &nk_style_item_data::image)
+        .def_rw("slice", &nk_style_item_data::slice);
 
-
- 
 }
 """
 

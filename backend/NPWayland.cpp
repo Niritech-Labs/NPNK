@@ -299,16 +299,6 @@ public:
         return nk_image_id((int)tex);
     }
 
-
-    static bool mnk_button_right(struct nk_context* ctx) {
-
-        struct nk_rect bounds = nk_widget_bounds(ctx);
-
-        return nk_input_mouse_clicked(&ctx->input, NK_BUTTON_RIGHT, bounds);
-          
-    }
-
-
 };
 
 NB_MODULE(NPWayland, m) {
@@ -332,8 +322,7 @@ NB_MODULE(NPWayland, m) {
         .def("Shutdown", &Backend::Shutdown)
         .def("InitFont", &Backend::InitFont)
         .def_static("LoadSVGImage", &Backend::LoadSVGImage)
-        .def_static("LoadPNGImage", &Backend::LoadPNGImage)
-        .def_static("mnk_button_right",&Backend::mnk_button_right);
+        .def_static("LoadPNGImage", &Backend::LoadPNGImage);
 }
 
 
