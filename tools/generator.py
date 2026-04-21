@@ -49,6 +49,7 @@ inner = '''
 #include <nanobind/stl/tuple.h>
 
 namespace nb = nanobind;
+using namespace nanobind::literals;
 
 template <typename Ret, typename... Args>
 auto as_capsule(Ret (*func)(Args...)) {
@@ -64,7 +65,7 @@ NB_MODULE(Nuklear, m) {
 outer = """
 // NOT AUTOMATIC REALIZATION
 
-using namespace nanobind::literals;
+
     m.def("mnk_combobox", [](nk_context* ctx, std::vector<std::string> items, int selected, int item_height, struct nk_vec2 size) {
         std::vector<const char*> ptrs;
         for (const auto& s : items) ptrs.push_back(s.c_str());

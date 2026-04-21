@@ -5,6 +5,7 @@
 
 %Make Backend
 $cmake -S backend -B backend/build-o-critical
+TRG:backend/build-o-libnuklear/build/libnuklear.so-o-install-o-755
 $cmake --build backend/build -j-o-critical
 
 %Make Nuklear
@@ -23,14 +24,12 @@ $cmake --build npcore_nuklear/build -j-o-critical
 
 
 %Install on project
+DIR:src-o-install-o-755
 DIR:src/NPNK-o-install-o-755
-
 
 TRG:src/NPNK-o-libnuklear/build/libnuklear.so-o-install-o-755
 
 $sh tools/install.sh-o-critical
-
-
 
 %Clean Backend
 DIR:backend/build-o-remove-o-755
@@ -46,3 +45,4 @@ DIR:backend/build-o-remove-o-755
 DIR:npcore_nuklear/build-o-remove-o-755
 DIR:libnuklear/build-o-remove-o-755
 DIR:src/NPNK-o-remove-o-755
+DIR:src-o-remove-o-755

@@ -87,11 +87,11 @@ def Methods(inputData,Logger):
     name = match.group('name')
 
     if 'void*' in ret:
-        ppSkeleton = f'    m.def("m{name}", as_capsule(&{name}));\n'
+        ppSkeleton = f'    m.def("m{name}", as_capsule(&{name}),"{inputData}");\n'
     elif "*" in ret:
-        ppSkeleton = f'    m.def("m{name}", &{name}, nb::rv_policy::reference);\n'
+        ppSkeleton = f'    m.def("m{name}", &{name}, nb::rv_policy::reference,"{inputData}");\n'
     else:
-        ppSkeleton = f'    m.def("m{name}", &{name});\n'
+        ppSkeleton = f'    m.def("m{name}", &{name},"{inputData}");\n'
 
     return (filter,ppSkeleton)
 

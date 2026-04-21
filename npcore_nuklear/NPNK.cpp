@@ -26,6 +26,7 @@
 #include <nanobind/stl/tuple.h>
 
 namespace nb = nanobind;
+using namespace nanobind::literals;
 
 template <typename Ret, typename... Args>
 auto as_capsule(Ret (*func)(Args...)) {
@@ -1521,993 +1522,993 @@ NB_MODULE(Nuklear, m) {
     nk_context_var.def_rw("count", &nk_context::count);
     nk_context_var.def_rw("seq", &nk_context::seq);
 
-    m.def("mnk_init_default", &nk_init_default);
+    m.def("mnk_init_default", &nk_init_default,"extern nk_bool nk_init_default(struct nk_context*, const struct nk_user_font*);");
 
-    m.def("mnk_init_fixed", &nk_init_fixed);
+    m.def("mnk_init_fixed", &nk_init_fixed,"extern nk_bool nk_init_fixed(struct nk_context*, void *memory, nk_size size, const struct nk_user_font*);");
 
-    m.def("mnk_init_custom", &nk_init_custom);
+    m.def("mnk_init_custom", &nk_init_custom,"extern nk_bool nk_init_custom(struct nk_context*, struct nk_buffer *cmds, struct nk_buffer *pool, const struct nk_user_font*);");
 
-    m.def("mnk_clear", &nk_clear);
+    m.def("mnk_clear", &nk_clear,"extern void nk_clear(struct nk_context*);");
 
-    m.def("mnk_free", &nk_free);
+    m.def("mnk_free", &nk_free,"extern void nk_free(struct nk_context*);");
 
-    m.def("mnk_input_begin", &nk_input_begin);
+    m.def("mnk_input_begin", &nk_input_begin,"extern void nk_input_begin(struct nk_context*);");
 
-    m.def("mnk_input_motion", &nk_input_motion);
+    m.def("mnk_input_motion", &nk_input_motion,"extern void nk_input_motion(struct nk_context*, int x, int y);");
 
-    m.def("mnk_input_key", &nk_input_key);
+    m.def("mnk_input_key", &nk_input_key,"extern void nk_input_key(struct nk_context*, enum nk_keys, nk_bool down);");
 
-    m.def("mnk_input_button", &nk_input_button);
+    m.def("mnk_input_button", &nk_input_button,"extern void nk_input_button(struct nk_context*, enum nk_buttons, int x, int y, nk_bool down);");
 
-    m.def("mnk_input_scroll", &nk_input_scroll);
+    m.def("mnk_input_scroll", &nk_input_scroll,"extern void nk_input_scroll(struct nk_context*, struct nk_vec2 val);");
 
-    m.def("mnk_input_char", &nk_input_char);
+    m.def("mnk_input_char", &nk_input_char,"extern void nk_input_char(struct nk_context*, char);");
 
-    m.def("mnk_input_glyph", &nk_input_glyph);
+    m.def("mnk_input_glyph", &nk_input_glyph,"extern void nk_input_glyph(struct nk_context*, const nk_glyph);");
 
-    m.def("mnk_input_unicode", &nk_input_unicode);
+    m.def("mnk_input_unicode", &nk_input_unicode,"extern void nk_input_unicode(struct nk_context*, nk_rune);");
 
-    m.def("mnk_input_end", &nk_input_end);
+    m.def("mnk_input_end", &nk_input_end,"extern void nk_input_end(struct nk_context*);");
 
-    m.def("mnk_convert", &nk_convert);
+    m.def("mnk_convert", &nk_convert,"extern nk_flags nk_convert(struct nk_context*, struct nk_buffer *cmds, struct nk_buffer *vertices, struct nk_buffer *elements, const struct nk_convert_config*);");
 
-    m.def("mnk_begin", &nk_begin);
+    m.def("mnk_begin", &nk_begin,"extern nk_bool nk_begin(struct nk_context *ctx, const char *title, struct nk_rect bounds, nk_flags flags);");
 
-    m.def("mnk_begin_titled", &nk_begin_titled);
+    m.def("mnk_begin_titled", &nk_begin_titled,"extern nk_bool nk_begin_titled(struct nk_context *ctx, const char *name, const char *title, struct nk_rect bounds, nk_flags flags);");
 
-    m.def("mnk_end", &nk_end);
+    m.def("mnk_end", &nk_end,"extern void nk_end(struct nk_context *ctx);");
 
-    m.def("mnk_window_get_bounds", &nk_window_get_bounds);
+    m.def("mnk_window_get_bounds", &nk_window_get_bounds,"extern struct nk_rect nk_window_get_bounds(const struct nk_context *ctx);");
 
-    m.def("mnk_window_get_position", &nk_window_get_position);
+    m.def("mnk_window_get_position", &nk_window_get_position,"extern struct nk_vec2 nk_window_get_position(const struct nk_context *ctx);");
 
-    m.def("mnk_window_get_size", &nk_window_get_size);
+    m.def("mnk_window_get_size", &nk_window_get_size,"extern struct nk_vec2 nk_window_get_size(const struct nk_context *ctx);");
 
-    m.def("mnk_window_get_width", &nk_window_get_width);
+    m.def("mnk_window_get_width", &nk_window_get_width,"extern float nk_window_get_width(const struct nk_context *ctx);");
 
-    m.def("mnk_window_get_height", &nk_window_get_height);
+    m.def("mnk_window_get_height", &nk_window_get_height,"extern float nk_window_get_height(const struct nk_context* ctx);");
 
-    m.def("mnk_window_get_panel", &nk_window_get_panel, nb::rv_policy::reference);
+    m.def("mnk_window_get_panel", &nk_window_get_panel, nb::rv_policy::reference,"extern struct nk_panel* nk_window_get_panel(const struct nk_context* ctx);");
 
-    m.def("mnk_window_get_content_region", &nk_window_get_content_region);
+    m.def("mnk_window_get_content_region", &nk_window_get_content_region,"extern struct nk_rect nk_window_get_content_region(const struct nk_context* ctx);");
 
-    m.def("mnk_window_get_content_region_min", &nk_window_get_content_region_min);
+    m.def("mnk_window_get_content_region_min", &nk_window_get_content_region_min,"extern struct nk_vec2 nk_window_get_content_region_min(const struct nk_context *ctx);");
 
-    m.def("mnk_window_get_content_region_max", &nk_window_get_content_region_max);
+    m.def("mnk_window_get_content_region_max", &nk_window_get_content_region_max,"extern struct nk_vec2 nk_window_get_content_region_max(const struct nk_context *ctx);");
 
-    m.def("mnk_window_get_content_region_size", &nk_window_get_content_region_size);
+    m.def("mnk_window_get_content_region_size", &nk_window_get_content_region_size,"extern struct nk_vec2 nk_window_get_content_region_size(const struct nk_context *ctx);");
 
-    m.def("mnk_window_get_canvas", &nk_window_get_canvas, nb::rv_policy::reference);
+    m.def("mnk_window_get_canvas", &nk_window_get_canvas, nb::rv_policy::reference,"extern struct nk_command_buffer* nk_window_get_canvas(const struct nk_context* ctx);");
 
-    m.def("mnk_window_get_scroll", &nk_window_get_scroll);
+    m.def("mnk_window_get_scroll", &nk_window_get_scroll,"extern void nk_window_get_scroll(const struct nk_context *ctx, nk_uint *offset_x, nk_uint *offset_y);");
 
-    m.def("mnk_window_has_focus", &nk_window_has_focus);
+    m.def("mnk_window_has_focus", &nk_window_has_focus,"extern nk_bool nk_window_has_focus(const struct nk_context *ctx);");
 
-    m.def("mnk_window_is_hovered", &nk_window_is_hovered);
+    m.def("mnk_window_is_hovered", &nk_window_is_hovered,"extern nk_bool nk_window_is_hovered(const struct nk_context *ctx);");
 
-    m.def("mnk_window_is_collapsed", &nk_window_is_collapsed);
+    m.def("mnk_window_is_collapsed", &nk_window_is_collapsed,"extern nk_bool nk_window_is_collapsed(const struct nk_context *ctx, const char *name);");
 
-    m.def("mnk_window_is_closed", &nk_window_is_closed);
+    m.def("mnk_window_is_closed", &nk_window_is_closed,"extern nk_bool nk_window_is_closed(const struct nk_context *ctx, const char* name);");
 
-    m.def("mnk_window_is_hidden", &nk_window_is_hidden);
+    m.def("mnk_window_is_hidden", &nk_window_is_hidden,"extern nk_bool nk_window_is_hidden(const struct nk_context *ctx, const char* name);");
 
-    m.def("mnk_window_is_active", &nk_window_is_active);
+    m.def("mnk_window_is_active", &nk_window_is_active,"extern nk_bool nk_window_is_active(const struct nk_context *ctx, const char* name);");
 
-    m.def("mnk_window_is_any_hovered", &nk_window_is_any_hovered);
+    m.def("mnk_window_is_any_hovered", &nk_window_is_any_hovered,"extern nk_bool nk_window_is_any_hovered(const struct nk_context *ctx);");
 
-    m.def("mnk_item_is_any_active", &nk_item_is_any_active);
+    m.def("mnk_item_is_any_active", &nk_item_is_any_active,"extern nk_bool nk_item_is_any_active(const struct nk_context *ctx);");
 
-    m.def("mnk_window_set_bounds", &nk_window_set_bounds);
+    m.def("mnk_window_set_bounds", &nk_window_set_bounds,"extern void nk_window_set_bounds(struct nk_context *ctx, const char *name, struct nk_rect bounds);");
 
-    m.def("mnk_window_set_position", &nk_window_set_position);
+    m.def("mnk_window_set_position", &nk_window_set_position,"extern void nk_window_set_position(struct nk_context *ctx, const char *name, struct nk_vec2 pos);");
 
-    m.def("mnk_window_set_size", &nk_window_set_size);
+    m.def("mnk_window_set_size", &nk_window_set_size,"extern void nk_window_set_size(struct nk_context *ctx, const char *name, struct nk_vec2 size);");
 
-    m.def("mnk_window_set_focus", &nk_window_set_focus);
+    m.def("mnk_window_set_focus", &nk_window_set_focus,"extern void nk_window_set_focus(struct nk_context *ctx, const char *name);");
 
-    m.def("mnk_window_set_scroll", &nk_window_set_scroll);
+    m.def("mnk_window_set_scroll", &nk_window_set_scroll,"extern void nk_window_set_scroll(struct nk_context *ctx, nk_uint offset_x, nk_uint offset_y);");
 
-    m.def("mnk_window_close", &nk_window_close);
+    m.def("mnk_window_close", &nk_window_close,"extern void nk_window_close(struct nk_context *ctx, const char *name);");
 
-    m.def("mnk_window_collapse", &nk_window_collapse);
+    m.def("mnk_window_collapse", &nk_window_collapse,"extern void nk_window_collapse(struct nk_context *ctx, const char *name, enum nk_collapse_states state);");
 
-    m.def("mnk_window_collapse_if", &nk_window_collapse_if);
+    m.def("mnk_window_collapse_if", &nk_window_collapse_if,"extern void nk_window_collapse_if(struct nk_context *ctx, const char *name, enum nk_collapse_states state, int cond);");
 
-    m.def("mnk_window_show", &nk_window_show);
+    m.def("mnk_window_show", &nk_window_show,"extern void nk_window_show(struct nk_context *ctx, const char *name, enum nk_show_states state);");
 
-    m.def("mnk_window_show_if", &nk_window_show_if);
+    m.def("mnk_window_show_if", &nk_window_show_if,"extern void nk_window_show_if(struct nk_context *ctx, const char *name, enum nk_show_states state, int cond);");
 
-    m.def("mnk_rule_horizontal", &nk_rule_horizontal);
+    m.def("mnk_rule_horizontal", &nk_rule_horizontal,"extern void nk_rule_horizontal(struct nk_context *ctx, struct nk_color color, nk_bool rounding);");
 
-    m.def("mnk_layout_set_min_row_height", &nk_layout_set_min_row_height);
+    m.def("mnk_layout_set_min_row_height", &nk_layout_set_min_row_height,"extern void nk_layout_set_min_row_height(struct nk_context*, float height);");
 
-    m.def("mnk_layout_reset_min_row_height", &nk_layout_reset_min_row_height);
+    m.def("mnk_layout_reset_min_row_height", &nk_layout_reset_min_row_height,"extern void nk_layout_reset_min_row_height(struct nk_context*);");
 
-    m.def("mnk_layout_widget_bounds", &nk_layout_widget_bounds);
+    m.def("mnk_layout_widget_bounds", &nk_layout_widget_bounds,"extern struct nk_rect nk_layout_widget_bounds(const struct nk_context *ctx);");
 
-    m.def("mnk_layout_ratio_from_pixel", &nk_layout_ratio_from_pixel);
+    m.def("mnk_layout_ratio_from_pixel", &nk_layout_ratio_from_pixel,"extern float nk_layout_ratio_from_pixel(const struct nk_context *ctx, float pixel_width);");
 
-    m.def("mnk_layout_row_dynamic", &nk_layout_row_dynamic);
+    m.def("mnk_layout_row_dynamic", &nk_layout_row_dynamic,"extern void nk_layout_row_dynamic(struct nk_context *ctx, float height, int cols);");
 
-    m.def("mnk_layout_row_static", &nk_layout_row_static);
+    m.def("mnk_layout_row_static", &nk_layout_row_static,"extern void nk_layout_row_static(struct nk_context *ctx, float height, int item_width, int cols);");
 
-    m.def("mnk_layout_row_begin", &nk_layout_row_begin);
+    m.def("mnk_layout_row_begin", &nk_layout_row_begin,"extern void nk_layout_row_begin(struct nk_context *ctx, enum nk_layout_format fmt, float row_height, int cols);");
 
-    m.def("mnk_layout_row_push", &nk_layout_row_push);
+    m.def("mnk_layout_row_push", &nk_layout_row_push,"extern void nk_layout_row_push(struct nk_context*, float value);");
 
-    m.def("mnk_layout_row_end", &nk_layout_row_end);
+    m.def("mnk_layout_row_end", &nk_layout_row_end,"extern void nk_layout_row_end(struct nk_context*);");
 
-    m.def("mnk_layout_row", &nk_layout_row);
+    m.def("mnk_layout_row", &nk_layout_row,"extern void nk_layout_row(struct nk_context*, enum nk_layout_format, float height, int cols, const float *ratio);");
 
-    m.def("mnk_layout_row_template_begin", &nk_layout_row_template_begin);
+    m.def("mnk_layout_row_template_begin", &nk_layout_row_template_begin,"extern void nk_layout_row_template_begin(struct nk_context*, float row_height);");
 
-    m.def("mnk_layout_row_template_push_dynamic", &nk_layout_row_template_push_dynamic);
+    m.def("mnk_layout_row_template_push_dynamic", &nk_layout_row_template_push_dynamic,"extern void nk_layout_row_template_push_dynamic(struct nk_context*);");
 
-    m.def("mnk_layout_row_template_push_variable", &nk_layout_row_template_push_variable);
+    m.def("mnk_layout_row_template_push_variable", &nk_layout_row_template_push_variable,"extern void nk_layout_row_template_push_variable(struct nk_context*, float min_width);");
 
-    m.def("mnk_layout_row_template_push_static", &nk_layout_row_template_push_static);
+    m.def("mnk_layout_row_template_push_static", &nk_layout_row_template_push_static,"extern void nk_layout_row_template_push_static(struct nk_context*, float width);");
 
-    m.def("mnk_layout_row_template_end", &nk_layout_row_template_end);
+    m.def("mnk_layout_row_template_end", &nk_layout_row_template_end,"extern void nk_layout_row_template_end(struct nk_context*);");
 
-    m.def("mnk_layout_space_begin", &nk_layout_space_begin);
+    m.def("mnk_layout_space_begin", &nk_layout_space_begin,"extern void nk_layout_space_begin(struct nk_context*, enum nk_layout_format, float height, int widget_count);");
 
-    m.def("mnk_layout_space_push", &nk_layout_space_push);
+    m.def("mnk_layout_space_push", &nk_layout_space_push,"extern void nk_layout_space_push(struct nk_context*, struct nk_rect bounds);");
 
-    m.def("mnk_layout_space_end", &nk_layout_space_end);
+    m.def("mnk_layout_space_end", &nk_layout_space_end,"extern void nk_layout_space_end(struct nk_context*);");
 
-    m.def("mnk_layout_space_bounds", &nk_layout_space_bounds);
+    m.def("mnk_layout_space_bounds", &nk_layout_space_bounds,"extern struct nk_rect nk_layout_space_bounds(const struct nk_context *ctx);");
 
-    m.def("mnk_layout_space_to_screen", &nk_layout_space_to_screen);
+    m.def("mnk_layout_space_to_screen", &nk_layout_space_to_screen,"extern struct nk_vec2 nk_layout_space_to_screen(const struct nk_context* ctx, struct nk_vec2 vec);");
 
-    m.def("mnk_layout_space_to_local", &nk_layout_space_to_local);
+    m.def("mnk_layout_space_to_local", &nk_layout_space_to_local,"extern struct nk_vec2 nk_layout_space_to_local(const struct nk_context *ctx, struct nk_vec2 vec);");
 
-    m.def("mnk_layout_space_rect_to_screen", &nk_layout_space_rect_to_screen);
+    m.def("mnk_layout_space_rect_to_screen", &nk_layout_space_rect_to_screen,"extern struct nk_rect nk_layout_space_rect_to_screen(const struct nk_context *ctx, struct nk_rect bounds);");
 
-    m.def("mnk_layout_space_rect_to_local", &nk_layout_space_rect_to_local);
+    m.def("mnk_layout_space_rect_to_local", &nk_layout_space_rect_to_local,"extern struct nk_rect nk_layout_space_rect_to_local(const struct nk_context *ctx, struct nk_rect bounds);");
 
-    m.def("mnk_spacer", &nk_spacer);
+    m.def("mnk_spacer", &nk_spacer,"extern void nk_spacer(struct nk_context *ctx);");
 
-    m.def("mnk_group_begin", &nk_group_begin);
+    m.def("mnk_group_begin", &nk_group_begin,"extern nk_bool nk_group_begin(struct nk_context*, const char *title, nk_flags);");
 
-    m.def("mnk_group_begin_titled", &nk_group_begin_titled);
+    m.def("mnk_group_begin_titled", &nk_group_begin_titled,"extern nk_bool nk_group_begin_titled(struct nk_context*, const char *name, const char *title, nk_flags);");
 
-    m.def("mnk_group_end", &nk_group_end);
+    m.def("mnk_group_end", &nk_group_end,"extern void nk_group_end(struct nk_context*);");
 
-    m.def("mnk_group_scrolled_offset_begin", &nk_group_scrolled_offset_begin);
+    m.def("mnk_group_scrolled_offset_begin", &nk_group_scrolled_offset_begin,"extern nk_bool nk_group_scrolled_offset_begin(struct nk_context*, nk_uint *x_offset, nk_uint *y_offset, const char *title, nk_flags flags);");
 
-    m.def("mnk_group_scrolled_begin", &nk_group_scrolled_begin);
+    m.def("mnk_group_scrolled_begin", &nk_group_scrolled_begin,"extern nk_bool nk_group_scrolled_begin(struct nk_context*, struct nk_scroll *off, const char *title, nk_flags);");
 
-    m.def("mnk_group_scrolled_end", &nk_group_scrolled_end);
+    m.def("mnk_group_scrolled_end", &nk_group_scrolled_end,"extern void nk_group_scrolled_end(struct nk_context*);");
 
-    m.def("mnk_group_get_scroll", &nk_group_get_scroll);
+    m.def("mnk_group_get_scroll", &nk_group_get_scroll,"extern void nk_group_get_scroll(struct nk_context*, const char *id, nk_uint *x_offset, nk_uint *y_offset);");
 
-    m.def("mnk_group_set_scroll", &nk_group_set_scroll);
+    m.def("mnk_group_set_scroll", &nk_group_set_scroll,"extern void nk_group_set_scroll(struct nk_context*, const char *id, nk_uint x_offset, nk_uint y_offset);");
 
-    m.def("mnk_tree_push_hashed", &nk_tree_push_hashed);
+    m.def("mnk_tree_push_hashed", &nk_tree_push_hashed,"extern nk_bool nk_tree_push_hashed(struct nk_context*, enum nk_tree_type, const char *title, enum nk_collapse_states initial_state, const char *hash, int len,int seed);");
 
-    m.def("mnk_tree_image_push_hashed", &nk_tree_image_push_hashed);
+    m.def("mnk_tree_image_push_hashed", &nk_tree_image_push_hashed,"extern nk_bool nk_tree_image_push_hashed(struct nk_context*, enum nk_tree_type, struct nk_image, const char *title, enum nk_collapse_states initial_state, const char *hash, int len,int seed);");
 
-    m.def("mnk_tree_pop", &nk_tree_pop);
+    m.def("mnk_tree_pop", &nk_tree_pop,"extern void nk_tree_pop(struct nk_context*);");
 
-    m.def("mnk_tree_state_push", &nk_tree_state_push);
+    m.def("mnk_tree_state_push", &nk_tree_state_push,"extern nk_bool nk_tree_state_push(struct nk_context*, enum nk_tree_type, const char *title, enum nk_collapse_states *state);");
 
-    m.def("mnk_tree_state_image_push", &nk_tree_state_image_push);
+    m.def("mnk_tree_state_image_push", &nk_tree_state_image_push,"extern nk_bool nk_tree_state_image_push(struct nk_context*, enum nk_tree_type, struct nk_image, const char *title, enum nk_collapse_states *state);");
 
-    m.def("mnk_tree_state_pop", &nk_tree_state_pop);
+    m.def("mnk_tree_state_pop", &nk_tree_state_pop,"extern void nk_tree_state_pop(struct nk_context*);");
 
-    m.def("mnk_tree_element_push_hashed", &nk_tree_element_push_hashed);
+    m.def("mnk_tree_element_push_hashed", &nk_tree_element_push_hashed,"extern nk_bool nk_tree_element_push_hashed(struct nk_context*, enum nk_tree_type, const char *title, enum nk_collapse_states initial_state, nk_bool *selected, const char *hash, int len, int seed);");
 
-    m.def("mnk_tree_element_image_push_hashed", &nk_tree_element_image_push_hashed);
+    m.def("mnk_tree_element_image_push_hashed", &nk_tree_element_image_push_hashed,"extern nk_bool nk_tree_element_image_push_hashed(struct nk_context*, enum nk_tree_type, struct nk_image, const char *title, enum nk_collapse_states initial_state, nk_bool *selected, const char *hash, int len,int seed);");
 
-    m.def("mnk_tree_element_pop", &nk_tree_element_pop);
+    m.def("mnk_tree_element_pop", &nk_tree_element_pop,"extern void nk_tree_element_pop(struct nk_context*);");
 
-    m.def("mnk_list_view_begin", &nk_list_view_begin);
+    m.def("mnk_list_view_begin", &nk_list_view_begin,"extern nk_bool nk_list_view_begin(struct nk_context*, struct nk_list_view *out, const char *id, nk_flags, int row_height, int row_count);");
 
-    m.def("mnk_list_view_end", &nk_list_view_end);
+    m.def("mnk_list_view_end", &nk_list_view_end,"extern void nk_list_view_end(struct nk_list_view*);");
 
-    m.def("mnk_widget", &nk_widget);
+    m.def("mnk_widget", &nk_widget,"extern enum nk_widget_layout_states nk_widget(struct nk_rect*, const struct nk_context*);");
 
-    m.def("mnk_widget_fitting", &nk_widget_fitting);
+    m.def("mnk_widget_fitting", &nk_widget_fitting,"extern enum nk_widget_layout_states nk_widget_fitting(struct nk_rect*, const struct nk_context*, struct nk_vec2);");
 
-    m.def("mnk_widget_bounds", &nk_widget_bounds);
+    m.def("mnk_widget_bounds", &nk_widget_bounds,"extern struct nk_rect nk_widget_bounds(const struct nk_context*);");
 
-    m.def("mnk_widget_position", &nk_widget_position);
+    m.def("mnk_widget_position", &nk_widget_position,"extern struct nk_vec2 nk_widget_position(const struct nk_context*);");
 
-    m.def("mnk_widget_size", &nk_widget_size);
+    m.def("mnk_widget_size", &nk_widget_size,"extern struct nk_vec2 nk_widget_size(const struct nk_context*);");
 
-    m.def("mnk_widget_width", &nk_widget_width);
+    m.def("mnk_widget_width", &nk_widget_width,"extern float nk_widget_width(const struct nk_context*);");
 
-    m.def("mnk_widget_height", &nk_widget_height);
+    m.def("mnk_widget_height", &nk_widget_height,"extern float nk_widget_height(const struct nk_context*);");
 
-    m.def("mnk_widget_is_hovered", &nk_widget_is_hovered);
+    m.def("mnk_widget_is_hovered", &nk_widget_is_hovered,"extern nk_bool nk_widget_is_hovered(const struct nk_context*);");
 
-    m.def("mnk_widget_is_mouse_clicked", &nk_widget_is_mouse_clicked);
+    m.def("mnk_widget_is_mouse_clicked", &nk_widget_is_mouse_clicked,"extern nk_bool nk_widget_is_mouse_clicked(const struct nk_context*, enum nk_buttons);");
 
-    m.def("mnk_widget_has_mouse_click_down", &nk_widget_has_mouse_click_down);
+    m.def("mnk_widget_has_mouse_click_down", &nk_widget_has_mouse_click_down,"extern nk_bool nk_widget_has_mouse_click_down(const struct nk_context*, enum nk_buttons, nk_bool down);");
 
-    m.def("mnk_spacing", &nk_spacing);
+    m.def("mnk_spacing", &nk_spacing,"extern void nk_spacing(struct nk_context*, int cols);");
 
-    m.def("mnk_widget_disable_begin", &nk_widget_disable_begin);
+    m.def("mnk_widget_disable_begin", &nk_widget_disable_begin,"extern void nk_widget_disable_begin(struct nk_context* ctx);");
 
-    m.def("mnk_widget_disable_end", &nk_widget_disable_end);
+    m.def("mnk_widget_disable_end", &nk_widget_disable_end,"extern void nk_widget_disable_end(struct nk_context* ctx);");
 
-    m.def("mnk_text", &nk_text);
+    m.def("mnk_text", &nk_text,"extern void nk_text(struct nk_context*, const char*, int, nk_flags);");
 
-    m.def("mnk_text_colored", &nk_text_colored);
+    m.def("mnk_text_colored", &nk_text_colored,"extern void nk_text_colored(struct nk_context*, const char*, int, nk_flags, struct nk_color);");
 
-    m.def("mnk_text_wrap", &nk_text_wrap);
+    m.def("mnk_text_wrap", &nk_text_wrap,"extern void nk_text_wrap(struct nk_context*, const char*, int);");
 
-    m.def("mnk_text_wrap_colored", &nk_text_wrap_colored);
+    m.def("mnk_text_wrap_colored", &nk_text_wrap_colored,"extern void nk_text_wrap_colored(struct nk_context*, const char*, int, struct nk_color);");
 
-    m.def("mnk_label", &nk_label);
+    m.def("mnk_label", &nk_label,"extern void nk_label(struct nk_context*, const char*, nk_flags align);");
 
-    m.def("mnk_label_colored", &nk_label_colored);
+    m.def("mnk_label_colored", &nk_label_colored,"extern void nk_label_colored(struct nk_context*, const char*, nk_flags align, struct nk_color);");
 
-    m.def("mnk_label_wrap", &nk_label_wrap);
+    m.def("mnk_label_wrap", &nk_label_wrap,"extern void nk_label_wrap(struct nk_context*, const char*);");
 
-    m.def("mnk_label_colored_wrap", &nk_label_colored_wrap);
+    m.def("mnk_label_colored_wrap", &nk_label_colored_wrap,"extern void nk_label_colored_wrap(struct nk_context*, const char*, struct nk_color);");
 
-    m.def("mnk_image", &nk_image);
+    m.def("mnk_image", &nk_image,"extern void nk_image(struct nk_context*, struct nk_image);");
 
-    m.def("mnk_image_color", &nk_image_color);
+    m.def("mnk_image_color", &nk_image_color,"extern void nk_image_color(struct nk_context*, struct nk_image, struct nk_color);");
 
-    m.def("mnk_value_bool", &nk_value_bool);
+    m.def("mnk_value_bool", &nk_value_bool,"extern void nk_value_bool(struct nk_context*, const char *prefix, int);");
 
-    m.def("mnk_value_int", &nk_value_int);
+    m.def("mnk_value_int", &nk_value_int,"extern void nk_value_int(struct nk_context*, const char *prefix, int);");
 
-    m.def("mnk_value_uint", &nk_value_uint);
+    m.def("mnk_value_uint", &nk_value_uint,"extern void nk_value_uint(struct nk_context*, const char *prefix, unsigned int);");
 
-    m.def("mnk_value_float", &nk_value_float);
+    m.def("mnk_value_float", &nk_value_float,"extern void nk_value_float(struct nk_context*, const char *prefix, float);");
 
-    m.def("mnk_value_color_byte", &nk_value_color_byte);
+    m.def("mnk_value_color_byte", &nk_value_color_byte,"extern void nk_value_color_byte(struct nk_context*, const char *prefix, struct nk_color);");
 
-    m.def("mnk_value_color_float", &nk_value_color_float);
+    m.def("mnk_value_color_float", &nk_value_color_float,"extern void nk_value_color_float(struct nk_context*, const char *prefix, struct nk_color);");
 
-    m.def("mnk_value_color_hex", &nk_value_color_hex);
+    m.def("mnk_value_color_hex", &nk_value_color_hex,"extern void nk_value_color_hex(struct nk_context*, const char *prefix, struct nk_color);");
 
-    m.def("mnk_button_text", &nk_button_text);
+    m.def("mnk_button_text", &nk_button_text,"extern nk_bool nk_button_text(struct nk_context*, const char *title, int len);");
 
-    m.def("mnk_button_label", &nk_button_label);
+    m.def("mnk_button_label", &nk_button_label,"extern nk_bool nk_button_label(struct nk_context*, const char *title);");
 
-    m.def("mnk_button_color", &nk_button_color);
+    m.def("mnk_button_color", &nk_button_color,"extern nk_bool nk_button_color(struct nk_context*, struct nk_color);");
 
-    m.def("mnk_button_symbol", &nk_button_symbol);
+    m.def("mnk_button_symbol", &nk_button_symbol,"extern nk_bool nk_button_symbol(struct nk_context*, enum nk_symbol_type);");
 
-    m.def("mnk_button_image", &nk_button_image);
+    m.def("mnk_button_image", &nk_button_image,"extern nk_bool nk_button_image(struct nk_context*, struct nk_image img);");
 
-    m.def("mnk_button_symbol_label", &nk_button_symbol_label);
+    m.def("mnk_button_symbol_label", &nk_button_symbol_label,"extern nk_bool nk_button_symbol_label(struct nk_context*, enum nk_symbol_type, const char*, nk_flags text_alignment);");
 
-    m.def("mnk_button_symbol_text", &nk_button_symbol_text);
+    m.def("mnk_button_symbol_text", &nk_button_symbol_text,"extern nk_bool nk_button_symbol_text(struct nk_context*, enum nk_symbol_type, const char*, int, nk_flags alignment);");
 
-    m.def("mnk_button_image_label", &nk_button_image_label);
+    m.def("mnk_button_image_label", &nk_button_image_label,"extern nk_bool nk_button_image_label(struct nk_context*, struct nk_image img, const char*, nk_flags text_alignment);");
 
-    m.def("mnk_button_image_text", &nk_button_image_text);
+    m.def("mnk_button_image_text", &nk_button_image_text,"extern nk_bool nk_button_image_text(struct nk_context*, struct nk_image img, const char*, int, nk_flags alignment);");
 
-    m.def("mnk_button_text_styled", &nk_button_text_styled);
+    m.def("mnk_button_text_styled", &nk_button_text_styled,"extern nk_bool nk_button_text_styled(struct nk_context*, const struct nk_style_button*, const char *title, int len);");
 
-    m.def("mnk_button_label_styled", &nk_button_label_styled);
+    m.def("mnk_button_label_styled", &nk_button_label_styled,"extern nk_bool nk_button_label_styled(struct nk_context*, const struct nk_style_button*, const char *title);");
 
-    m.def("mnk_button_symbol_styled", &nk_button_symbol_styled);
+    m.def("mnk_button_symbol_styled", &nk_button_symbol_styled,"extern nk_bool nk_button_symbol_styled(struct nk_context*, const struct nk_style_button*, enum nk_symbol_type);");
 
-    m.def("mnk_button_image_styled", &nk_button_image_styled);
+    m.def("mnk_button_image_styled", &nk_button_image_styled,"extern nk_bool nk_button_image_styled(struct nk_context*, const struct nk_style_button*, struct nk_image img);");
 
-    m.def("mnk_button_symbol_text_styled", &nk_button_symbol_text_styled);
+    m.def("mnk_button_symbol_text_styled", &nk_button_symbol_text_styled,"extern nk_bool nk_button_symbol_text_styled(struct nk_context*,const struct nk_style_button*, enum nk_symbol_type, const char*, int, nk_flags alignment);");
 
-    m.def("mnk_button_symbol_label_styled", &nk_button_symbol_label_styled);
+    m.def("mnk_button_symbol_label_styled", &nk_button_symbol_label_styled,"extern nk_bool nk_button_symbol_label_styled(struct nk_context *ctx, const struct nk_style_button *style, enum nk_symbol_type symbol, const char *title, nk_flags align);");
 
-    m.def("mnk_button_image_label_styled", &nk_button_image_label_styled);
+    m.def("mnk_button_image_label_styled", &nk_button_image_label_styled,"extern nk_bool nk_button_image_label_styled(struct nk_context*,const struct nk_style_button*, struct nk_image img, const char*, nk_flags text_alignment);");
 
-    m.def("mnk_button_image_text_styled", &nk_button_image_text_styled);
+    m.def("mnk_button_image_text_styled", &nk_button_image_text_styled,"extern nk_bool nk_button_image_text_styled(struct nk_context*,const struct nk_style_button*, struct nk_image img, const char*, int, nk_flags alignment);");
 
-    m.def("mnk_button_set_behavior", &nk_button_set_behavior);
+    m.def("mnk_button_set_behavior", &nk_button_set_behavior,"extern void nk_button_set_behavior(struct nk_context*, enum nk_button_behavior);");
 
-    m.def("mnk_button_push_behavior", &nk_button_push_behavior);
+    m.def("mnk_button_push_behavior", &nk_button_push_behavior,"extern nk_bool nk_button_push_behavior(struct nk_context*, enum nk_button_behavior);");
 
-    m.def("mnk_button_pop_behavior", &nk_button_pop_behavior);
+    m.def("mnk_button_pop_behavior", &nk_button_pop_behavior,"extern nk_bool nk_button_pop_behavior(struct nk_context*);");
 
-    m.def("mnk_check_label", &nk_check_label);
+    m.def("mnk_check_label", &nk_check_label,"extern nk_bool nk_check_label(struct nk_context*, const char*, nk_bool active);");
 
-    m.def("mnk_check_text", &nk_check_text);
+    m.def("mnk_check_text", &nk_check_text,"extern nk_bool nk_check_text(struct nk_context*, const char*, int, nk_bool active);");
 
-    m.def("mnk_check_text_align", &nk_check_text_align);
+    m.def("mnk_check_text_align", &nk_check_text_align,"extern nk_bool nk_check_text_align(struct nk_context*, const char*, int, nk_bool active, nk_flags widget_alignment, nk_flags text_alignment);");
 
-    m.def("mnk_check_flags_label", &nk_check_flags_label);
+    m.def("mnk_check_flags_label", &nk_check_flags_label,"extern unsigned nk_check_flags_label(struct nk_context*, const char*, unsigned int flags, unsigned int value);");
 
-    m.def("mnk_check_flags_text", &nk_check_flags_text);
+    m.def("mnk_check_flags_text", &nk_check_flags_text,"extern unsigned nk_check_flags_text(struct nk_context*, const char*, int, unsigned int flags, unsigned int value);");
 
-    m.def("mnk_checkbox_label", &nk_checkbox_label);
+    m.def("mnk_checkbox_label", &nk_checkbox_label,"extern nk_bool nk_checkbox_label(struct nk_context*, const char*, nk_bool *active);");
 
-    m.def("mnk_checkbox_label_align", &nk_checkbox_label_align);
+    m.def("mnk_checkbox_label_align", &nk_checkbox_label_align,"extern nk_bool nk_checkbox_label_align(struct nk_context *ctx, const char *label, nk_bool *active, nk_flags widget_alignment, nk_flags text_alignment);");
 
-    m.def("mnk_checkbox_text", &nk_checkbox_text);
+    m.def("mnk_checkbox_text", &nk_checkbox_text,"extern nk_bool nk_checkbox_text(struct nk_context*, const char*, int, nk_bool *active);");
 
-    m.def("mnk_checkbox_text_align", &nk_checkbox_text_align);
+    m.def("mnk_checkbox_text_align", &nk_checkbox_text_align,"extern nk_bool nk_checkbox_text_align(struct nk_context *ctx, const char *text, int len, nk_bool *active, nk_flags widget_alignment, nk_flags text_alignment);");
 
-    m.def("mnk_checkbox_flags_label", &nk_checkbox_flags_label);
+    m.def("mnk_checkbox_flags_label", &nk_checkbox_flags_label,"extern nk_bool nk_checkbox_flags_label(struct nk_context*, const char*, unsigned int *flags, unsigned int value);");
 
-    m.def("mnk_checkbox_flags_text", &nk_checkbox_flags_text);
+    m.def("mnk_checkbox_flags_text", &nk_checkbox_flags_text,"extern nk_bool nk_checkbox_flags_text(struct nk_context*, const char*, int, unsigned int *flags, unsigned int value);");
 
-    m.def("mnk_radio_label", &nk_radio_label);
+    m.def("mnk_radio_label", &nk_radio_label,"extern nk_bool nk_radio_label(struct nk_context*, const char*, nk_bool *active);");
 
-    m.def("mnk_radio_label_align", &nk_radio_label_align);
+    m.def("mnk_radio_label_align", &nk_radio_label_align,"extern nk_bool nk_radio_label_align(struct nk_context *ctx, const char *label, nk_bool *active, nk_flags widget_alignment, nk_flags text_alignment);");
 
-    m.def("mnk_radio_text", &nk_radio_text);
+    m.def("mnk_radio_text", &nk_radio_text,"extern nk_bool nk_radio_text(struct nk_context*, const char*, int, nk_bool *active);");
 
-    m.def("mnk_radio_text_align", &nk_radio_text_align);
+    m.def("mnk_radio_text_align", &nk_radio_text_align,"extern nk_bool nk_radio_text_align(struct nk_context *ctx, const char *text, int len, nk_bool *active, nk_flags widget_alignment, nk_flags text_alignment);");
 
-    m.def("mnk_option_label", &nk_option_label);
+    m.def("mnk_option_label", &nk_option_label,"extern nk_bool nk_option_label(struct nk_context*, const char*, nk_bool active);");
 
-    m.def("mnk_option_label_align", &nk_option_label_align);
+    m.def("mnk_option_label_align", &nk_option_label_align,"extern nk_bool nk_option_label_align(struct nk_context *ctx, const char *label, nk_bool active, nk_flags widget_alignment, nk_flags text_alignment);");
 
-    m.def("mnk_option_text", &nk_option_text);
+    m.def("mnk_option_text", &nk_option_text,"extern nk_bool nk_option_text(struct nk_context*, const char*, int, nk_bool active);");
 
-    m.def("mnk_option_text_align", &nk_option_text_align);
+    m.def("mnk_option_text_align", &nk_option_text_align,"extern nk_bool nk_option_text_align(struct nk_context *ctx, const char *text, int len, nk_bool is_active, nk_flags widget_alignment, nk_flags text_alignment);");
 
-    m.def("mnk_selectable_label", &nk_selectable_label);
+    m.def("mnk_selectable_label", &nk_selectable_label,"extern nk_bool nk_selectable_label(struct nk_context*, const char*, nk_flags align, nk_bool *value);");
 
-    m.def("mnk_selectable_text", &nk_selectable_text);
+    m.def("mnk_selectable_text", &nk_selectable_text,"extern nk_bool nk_selectable_text(struct nk_context*, const char*, int, nk_flags align, nk_bool *value);");
 
-    m.def("mnk_selectable_image_label", &nk_selectable_image_label);
+    m.def("mnk_selectable_image_label", &nk_selectable_image_label,"extern nk_bool nk_selectable_image_label(struct nk_context*,struct nk_image, const char*, nk_flags align, nk_bool *value);");
 
-    m.def("mnk_selectable_image_text", &nk_selectable_image_text);
+    m.def("mnk_selectable_image_text", &nk_selectable_image_text,"extern nk_bool nk_selectable_image_text(struct nk_context*,struct nk_image, const char*, int, nk_flags align, nk_bool *value);");
 
-    m.def("mnk_selectable_symbol_label", &nk_selectable_symbol_label);
+    m.def("mnk_selectable_symbol_label", &nk_selectable_symbol_label,"extern nk_bool nk_selectable_symbol_label(struct nk_context*,enum nk_symbol_type, const char*, nk_flags align, nk_bool *value);");
 
-    m.def("mnk_selectable_symbol_text", &nk_selectable_symbol_text);
+    m.def("mnk_selectable_symbol_text", &nk_selectable_symbol_text,"extern nk_bool nk_selectable_symbol_text(struct nk_context*,enum nk_symbol_type, const char*, int, nk_flags align, nk_bool *value);");
 
-    m.def("mnk_select_label", &nk_select_label);
+    m.def("mnk_select_label", &nk_select_label,"extern nk_bool nk_select_label(struct nk_context*, const char*, nk_flags align, nk_bool value);");
 
-    m.def("mnk_select_text", &nk_select_text);
+    m.def("mnk_select_text", &nk_select_text,"extern nk_bool nk_select_text(struct nk_context*, const char*, int, nk_flags align, nk_bool value);");
 
-    m.def("mnk_select_image_label", &nk_select_image_label);
+    m.def("mnk_select_image_label", &nk_select_image_label,"extern nk_bool nk_select_image_label(struct nk_context*, struct nk_image,const char*, nk_flags align, nk_bool value);");
 
-    m.def("mnk_select_image_text", &nk_select_image_text);
+    m.def("mnk_select_image_text", &nk_select_image_text,"extern nk_bool nk_select_image_text(struct nk_context*, struct nk_image,const char*, int, nk_flags align, nk_bool value);");
 
-    m.def("mnk_select_symbol_label", &nk_select_symbol_label);
+    m.def("mnk_select_symbol_label", &nk_select_symbol_label,"extern nk_bool nk_select_symbol_label(struct nk_context*,enum nk_symbol_type, const char*, nk_flags align, nk_bool value);");
 
-    m.def("mnk_select_symbol_text", &nk_select_symbol_text);
+    m.def("mnk_select_symbol_text", &nk_select_symbol_text,"extern nk_bool nk_select_symbol_text(struct nk_context*,enum nk_symbol_type, const char*, int, nk_flags align, nk_bool value);");
 
-    m.def("mnk_slide_float", &nk_slide_float);
+    m.def("mnk_slide_float", &nk_slide_float,"extern float nk_slide_float(struct nk_context*, float min, float val, float max, float step);");
 
-    m.def("mnk_slide_int", &nk_slide_int);
+    m.def("mnk_slide_int", &nk_slide_int,"extern int nk_slide_int(struct nk_context*, int min, int val, int max, int step);");
 
-    m.def("mnk_slider_float", &nk_slider_float);
+    m.def("mnk_slider_float", &nk_slider_float,"extern nk_bool nk_slider_float(struct nk_context*, float min, float *val, float max, float step);");
 
-    m.def("mnk_slider_int", &nk_slider_int);
+    m.def("mnk_slider_int", &nk_slider_int,"extern nk_bool nk_slider_int(struct nk_context*, int min, int *val, int max, int step);");
 
-    m.def("mnk_knob_float", &nk_knob_float);
+    m.def("mnk_knob_float", &nk_knob_float,"extern nk_bool nk_knob_float(struct nk_context*, float min, float *val, float max, float step, enum nk_heading zero_direction, float dead_zone_degrees);");
 
-    m.def("mnk_knob_int", &nk_knob_int);
+    m.def("mnk_knob_int", &nk_knob_int,"extern nk_bool nk_knob_int(struct nk_context*, int min, int *val, int max, int step, enum nk_heading zero_direction, float dead_zone_degrees);");
 
-    m.def("mnk_progress", &nk_progress);
+    m.def("mnk_progress", &nk_progress,"extern nk_bool nk_progress(struct nk_context*, nk_size *cur, nk_size max, nk_bool modifyable);");
 
-    m.def("mnk_prog", &nk_prog);
+    m.def("mnk_prog", &nk_prog,"extern nk_size nk_prog(struct nk_context*, nk_size cur, nk_size max, nk_bool modifyable);");
 
-    m.def("mnk_color_picker", &nk_color_picker);
+    m.def("mnk_color_picker", &nk_color_picker,"extern struct nk_colorf nk_color_picker(struct nk_context*, struct nk_colorf, enum nk_color_format);");
 
-    m.def("mnk_color_pick", &nk_color_pick);
+    m.def("mnk_color_pick", &nk_color_pick,"extern nk_bool nk_color_pick(struct nk_context*, struct nk_colorf*, enum nk_color_format);");
 
-    m.def("mnk_property_int", &nk_property_int);
+    m.def("mnk_property_int", &nk_property_int,"extern nk_bool nk_property_int(struct nk_context*, const char *name, int min, int *val, int max, int step, float inc_per_pixel);");
 
-    m.def("mnk_property_float", &nk_property_float);
+    m.def("mnk_property_float", &nk_property_float,"extern nk_bool nk_property_float(struct nk_context*, const char *name, float min, float *val, float max, float step, float inc_per_pixel);");
 
-    m.def("mnk_property_double", &nk_property_double);
+    m.def("mnk_property_double", &nk_property_double,"extern nk_bool nk_property_double(struct nk_context*, const char *name, double min, double *val, double max, double step, float inc_per_pixel);");
 
-    m.def("mnk_propertyi", &nk_propertyi);
+    m.def("mnk_propertyi", &nk_propertyi,"extern int nk_propertyi(struct nk_context*, const char *name, int min, int val, int max, int step, float inc_per_pixel);");
 
-    m.def("mnk_propertyf", &nk_propertyf);
+    m.def("mnk_propertyf", &nk_propertyf,"extern float nk_propertyf(struct nk_context*, const char *name, float min, float val, float max, float step, float inc_per_pixel);");
 
-    m.def("mnk_propertyd", &nk_propertyd);
+    m.def("mnk_propertyd", &nk_propertyd,"extern double nk_propertyd(struct nk_context*, const char *name, double min, double val, double max, double step, float inc_per_pixel);");
 
-    m.def("mnk_edit_buffer", &nk_edit_buffer);
+    m.def("mnk_edit_buffer", &nk_edit_buffer,"extern nk_flags nk_edit_buffer(struct nk_context*, nk_flags, struct nk_text_edit*, nk_plugin_filter);");
 
-    m.def("mnk_edit_focus", &nk_edit_focus);
+    m.def("mnk_edit_focus", &nk_edit_focus,"extern void nk_edit_focus(struct nk_context*, nk_flags flags);");
 
-    m.def("mnk_edit_unfocus", &nk_edit_unfocus);
+    m.def("mnk_edit_unfocus", &nk_edit_unfocus,"extern void nk_edit_unfocus(struct nk_context*);");
 
-    m.def("mnk_chart_begin", &nk_chart_begin);
+    m.def("mnk_chart_begin", &nk_chart_begin,"extern nk_bool nk_chart_begin(struct nk_context*, enum nk_chart_type, int num, float min, float max);");
 
-    m.def("mnk_chart_begin_colored", &nk_chart_begin_colored);
+    m.def("mnk_chart_begin_colored", &nk_chart_begin_colored,"extern nk_bool nk_chart_begin_colored(struct nk_context*, enum nk_chart_type, struct nk_color, struct nk_color active, int num, float min, float max);");
 
-    m.def("mnk_chart_add_slot", &nk_chart_add_slot);
+    m.def("mnk_chart_add_slot", &nk_chart_add_slot,"extern void nk_chart_add_slot(struct nk_context *ctx, const enum nk_chart_type, int count, float min_value, float max_value);");
 
-    m.def("mnk_chart_add_slot_colored", &nk_chart_add_slot_colored);
+    m.def("mnk_chart_add_slot_colored", &nk_chart_add_slot_colored,"extern void nk_chart_add_slot_colored(struct nk_context *ctx, const enum nk_chart_type, struct nk_color, struct nk_color active, int count, float min_value, float max_value);");
 
-    m.def("mnk_chart_push", &nk_chart_push);
+    m.def("mnk_chart_push", &nk_chart_push,"extern nk_flags nk_chart_push(struct nk_context*, float);");
 
-    m.def("mnk_chart_push_slot", &nk_chart_push_slot);
+    m.def("mnk_chart_push_slot", &nk_chart_push_slot,"extern nk_flags nk_chart_push_slot(struct nk_context*, float, int);");
 
-    m.def("mnk_chart_end", &nk_chart_end);
+    m.def("mnk_chart_end", &nk_chart_end,"extern void nk_chart_end(struct nk_context*);");
 
-    m.def("mnk_plot", &nk_plot);
+    m.def("mnk_plot", &nk_plot,"extern void nk_plot(struct nk_context*, enum nk_chart_type, const float *values, int count, int offset);");
 
-    m.def("mnk_plot_function", &nk_plot_function);
+    m.def("mnk_plot_function", &nk_plot_function,"extern void nk_plot_function(struct nk_context*, enum nk_chart_type, void *userdata, float(*value_getter)(void* user, int index), int count, int offset);");
 
-    m.def("mnk_popup_begin", &nk_popup_begin);
+    m.def("mnk_popup_begin", &nk_popup_begin,"extern nk_bool nk_popup_begin(struct nk_context*, enum nk_popup_type, const char*, nk_flags, struct nk_rect bounds);");
 
-    m.def("mnk_popup_close", &nk_popup_close);
+    m.def("mnk_popup_close", &nk_popup_close,"extern void nk_popup_close(struct nk_context*);");
 
-    m.def("mnk_popup_end", &nk_popup_end);
+    m.def("mnk_popup_end", &nk_popup_end,"extern void nk_popup_end(struct nk_context*);");
 
-    m.def("mnk_popup_get_scroll", &nk_popup_get_scroll);
+    m.def("mnk_popup_get_scroll", &nk_popup_get_scroll,"extern void nk_popup_get_scroll(const struct nk_context*, nk_uint *offset_x, nk_uint *offset_y);");
 
-    m.def("mnk_popup_set_scroll", &nk_popup_set_scroll);
+    m.def("mnk_popup_set_scroll", &nk_popup_set_scroll,"extern void nk_popup_set_scroll(struct nk_context*, nk_uint offset_x, nk_uint offset_y);");
 
-    m.def("mnk_combo_separator", &nk_combo_separator);
+    m.def("mnk_combo_separator", &nk_combo_separator,"extern int nk_combo_separator(struct nk_context*, const char *items_separated_by_separator, int separator, int selected, int count, int item_height, struct nk_vec2 size);");
 
-    m.def("mnk_combo_string", &nk_combo_string);
+    m.def("mnk_combo_string", &nk_combo_string,"extern int nk_combo_string(struct nk_context*, const char *items_separated_by_zeros, int selected, int count, int item_height, struct nk_vec2 size);");
 
-    m.def("mnk_combo_callback", &nk_combo_callback);
+    m.def("mnk_combo_callback", &nk_combo_callback,"extern int nk_combo_callback(struct nk_context*, void(*item_getter)(void*, int, const char**), void *userdata, int selected, int count, int item_height, struct nk_vec2 size);");
 
-    m.def("mnk_combobox_string", &nk_combobox_string);
+    m.def("mnk_combobox_string", &nk_combobox_string,"extern nk_bool nk_combobox_string(struct nk_context*, const char *items_separated_by_zeros, int *selected, int count, int item_height, struct nk_vec2 size);");
 
-    m.def("mnk_combobox_separator", &nk_combobox_separator);
+    m.def("mnk_combobox_separator", &nk_combobox_separator,"extern nk_bool nk_combobox_separator(struct nk_context*, const char *items_separated_by_separator, int separator, int *selected, int count, int item_height, struct nk_vec2 size);");
 
-    m.def("mnk_combobox_callback", &nk_combobox_callback);
+    m.def("mnk_combobox_callback", &nk_combobox_callback,"extern nk_bool nk_combobox_callback(struct nk_context*, void(*item_getter)(void*, int, const char**), void*, int *selected, int count, int item_height, struct nk_vec2 size);");
 
-    m.def("mnk_combo_begin_text", &nk_combo_begin_text);
+    m.def("mnk_combo_begin_text", &nk_combo_begin_text,"extern nk_bool nk_combo_begin_text(struct nk_context*, const char *selected, int, struct nk_vec2 size);");
 
-    m.def("mnk_combo_begin_label", &nk_combo_begin_label);
+    m.def("mnk_combo_begin_label", &nk_combo_begin_label,"extern nk_bool nk_combo_begin_label(struct nk_context*, const char *selected, struct nk_vec2 size);");
 
-    m.def("mnk_combo_begin_color", &nk_combo_begin_color);
+    m.def("mnk_combo_begin_color", &nk_combo_begin_color,"extern nk_bool nk_combo_begin_color(struct nk_context*, struct nk_color color, struct nk_vec2 size);");
 
-    m.def("mnk_combo_begin_symbol", &nk_combo_begin_symbol);
+    m.def("mnk_combo_begin_symbol", &nk_combo_begin_symbol,"extern nk_bool nk_combo_begin_symbol(struct nk_context*, enum nk_symbol_type, struct nk_vec2 size);");
 
-    m.def("mnk_combo_begin_symbol_label", &nk_combo_begin_symbol_label);
+    m.def("mnk_combo_begin_symbol_label", &nk_combo_begin_symbol_label,"extern nk_bool nk_combo_begin_symbol_label(struct nk_context*, const char *selected, enum nk_symbol_type, struct nk_vec2 size);");
 
-    m.def("mnk_combo_begin_symbol_text", &nk_combo_begin_symbol_text);
+    m.def("mnk_combo_begin_symbol_text", &nk_combo_begin_symbol_text,"extern nk_bool nk_combo_begin_symbol_text(struct nk_context*, const char *selected, int, enum nk_symbol_type, struct nk_vec2 size);");
 
-    m.def("mnk_combo_begin_image", &nk_combo_begin_image);
+    m.def("mnk_combo_begin_image", &nk_combo_begin_image,"extern nk_bool nk_combo_begin_image(struct nk_context*, struct nk_image img, struct nk_vec2 size);");
 
-    m.def("mnk_combo_begin_image_label", &nk_combo_begin_image_label);
+    m.def("mnk_combo_begin_image_label", &nk_combo_begin_image_label,"extern nk_bool nk_combo_begin_image_label(struct nk_context*, const char *selected, struct nk_image, struct nk_vec2 size);");
 
-    m.def("mnk_combo_begin_image_text", &nk_combo_begin_image_text);
+    m.def("mnk_combo_begin_image_text", &nk_combo_begin_image_text,"extern nk_bool nk_combo_begin_image_text(struct nk_context*, const char *selected, int, struct nk_image, struct nk_vec2 size);");
 
-    m.def("mnk_combo_item_label", &nk_combo_item_label);
+    m.def("mnk_combo_item_label", &nk_combo_item_label,"extern nk_bool nk_combo_item_label(struct nk_context*, const char*, nk_flags alignment);");
 
-    m.def("mnk_combo_item_text", &nk_combo_item_text);
+    m.def("mnk_combo_item_text", &nk_combo_item_text,"extern nk_bool nk_combo_item_text(struct nk_context*, const char*,int, nk_flags alignment);");
 
-    m.def("mnk_combo_item_image_label", &nk_combo_item_image_label);
+    m.def("mnk_combo_item_image_label", &nk_combo_item_image_label,"extern nk_bool nk_combo_item_image_label(struct nk_context*, struct nk_image, const char*, nk_flags alignment);");
 
-    m.def("mnk_combo_item_image_text", &nk_combo_item_image_text);
+    m.def("mnk_combo_item_image_text", &nk_combo_item_image_text,"extern nk_bool nk_combo_item_image_text(struct nk_context*, struct nk_image, const char*, int,nk_flags alignment);");
 
-    m.def("mnk_combo_item_symbol_label", &nk_combo_item_symbol_label);
+    m.def("mnk_combo_item_symbol_label", &nk_combo_item_symbol_label,"extern nk_bool nk_combo_item_symbol_label(struct nk_context*, enum nk_symbol_type, const char*, nk_flags alignment);");
 
-    m.def("mnk_combo_item_symbol_text", &nk_combo_item_symbol_text);
+    m.def("mnk_combo_item_symbol_text", &nk_combo_item_symbol_text,"extern nk_bool nk_combo_item_symbol_text(struct nk_context*, enum nk_symbol_type, const char*, int, nk_flags alignment);");
 
-    m.def("mnk_combo_close", &nk_combo_close);
+    m.def("mnk_combo_close", &nk_combo_close,"extern void nk_combo_close(struct nk_context*);");
 
-    m.def("mnk_combo_end", &nk_combo_end);
+    m.def("mnk_combo_end", &nk_combo_end,"extern void nk_combo_end(struct nk_context*);");
 
-    m.def("mnk_contextual_begin", &nk_contextual_begin);
+    m.def("mnk_contextual_begin", &nk_contextual_begin,"extern nk_bool nk_contextual_begin(struct nk_context*, nk_flags, struct nk_vec2, struct nk_rect trigger_bounds);");
 
-    m.def("mnk_contextual_item_text", &nk_contextual_item_text);
+    m.def("mnk_contextual_item_text", &nk_contextual_item_text,"extern nk_bool nk_contextual_item_text(struct nk_context*, const char*, int,nk_flags align);");
 
-    m.def("mnk_contextual_item_label", &nk_contextual_item_label);
+    m.def("mnk_contextual_item_label", &nk_contextual_item_label,"extern nk_bool nk_contextual_item_label(struct nk_context*, const char*, nk_flags align);");
 
-    m.def("mnk_contextual_item_image_label", &nk_contextual_item_image_label);
+    m.def("mnk_contextual_item_image_label", &nk_contextual_item_image_label,"extern nk_bool nk_contextual_item_image_label(struct nk_context*, struct nk_image, const char*, nk_flags alignment);");
 
-    m.def("mnk_contextual_item_image_text", &nk_contextual_item_image_text);
+    m.def("mnk_contextual_item_image_text", &nk_contextual_item_image_text,"extern nk_bool nk_contextual_item_image_text(struct nk_context*, struct nk_image, const char*, int len, nk_flags alignment);");
 
-    m.def("mnk_contextual_item_symbol_label", &nk_contextual_item_symbol_label);
+    m.def("mnk_contextual_item_symbol_label", &nk_contextual_item_symbol_label,"extern nk_bool nk_contextual_item_symbol_label(struct nk_context*, enum nk_symbol_type, const char*, nk_flags alignment);");
 
-    m.def("mnk_contextual_item_symbol_text", &nk_contextual_item_symbol_text);
+    m.def("mnk_contextual_item_symbol_text", &nk_contextual_item_symbol_text,"extern nk_bool nk_contextual_item_symbol_text(struct nk_context*, enum nk_symbol_type, const char*, int, nk_flags alignment);");
 
-    m.def("mnk_contextual_close", &nk_contextual_close);
+    m.def("mnk_contextual_close", &nk_contextual_close,"extern void nk_contextual_close(struct nk_context*);");
 
-    m.def("mnk_contextual_end", &nk_contextual_end);
+    m.def("mnk_contextual_end", &nk_contextual_end,"extern void nk_contextual_end(struct nk_context*);");
 
-    m.def("mnk_tooltip", &nk_tooltip);
+    m.def("mnk_tooltip", &nk_tooltip,"extern void nk_tooltip(struct nk_context*, const char*);");
 
-    m.def("mnk_tooltip_offset", &nk_tooltip_offset);
+    m.def("mnk_tooltip_offset", &nk_tooltip_offset,"extern void nk_tooltip_offset(struct nk_context *ctx, const char *text, enum nk_tooltip_pos position, struct nk_vec2 offset);");
 
-    m.def("mnk_tooltip_begin", &nk_tooltip_begin);
+    m.def("mnk_tooltip_begin", &nk_tooltip_begin,"extern nk_bool nk_tooltip_begin(struct nk_context*, float width);");
 
-    m.def("mnk_tooltip_begin_offset", &nk_tooltip_begin_offset);
+    m.def("mnk_tooltip_begin_offset", &nk_tooltip_begin_offset,"extern nk_bool nk_tooltip_begin_offset(struct nk_context*, float, enum nk_tooltip_pos, struct nk_vec2);");
 
-    m.def("mnk_tooltip_end", &nk_tooltip_end);
+    m.def("mnk_tooltip_end", &nk_tooltip_end,"extern void nk_tooltip_end(struct nk_context*);");
 
-    m.def("mnk_menubar_begin", &nk_menubar_begin);
+    m.def("mnk_menubar_begin", &nk_menubar_begin,"extern void nk_menubar_begin(struct nk_context*);");
 
-    m.def("mnk_menubar_end", &nk_menubar_end);
+    m.def("mnk_menubar_end", &nk_menubar_end,"extern void nk_menubar_end(struct nk_context*);");
 
-    m.def("mnk_menu_begin_text", &nk_menu_begin_text);
+    m.def("mnk_menu_begin_text", &nk_menu_begin_text,"extern nk_bool nk_menu_begin_text(struct nk_context*, const char* title, int title_len, nk_flags align, struct nk_vec2 size);");
 
-    m.def("mnk_menu_begin_label", &nk_menu_begin_label);
+    m.def("mnk_menu_begin_label", &nk_menu_begin_label,"extern nk_bool nk_menu_begin_label(struct nk_context*, const char*, nk_flags align, struct nk_vec2 size);");
 
-    m.def("mnk_menu_begin_image", &nk_menu_begin_image);
+    m.def("mnk_menu_begin_image", &nk_menu_begin_image,"extern nk_bool nk_menu_begin_image(struct nk_context*, const char*, struct nk_image, struct nk_vec2 size);");
 
-    m.def("mnk_menu_begin_image_text", &nk_menu_begin_image_text);
+    m.def("mnk_menu_begin_image_text", &nk_menu_begin_image_text,"extern nk_bool nk_menu_begin_image_text(struct nk_context*, const char*, int,nk_flags align,struct nk_image, struct nk_vec2 size);");
 
-    m.def("mnk_menu_begin_image_label", &nk_menu_begin_image_label);
+    m.def("mnk_menu_begin_image_label", &nk_menu_begin_image_label,"extern nk_bool nk_menu_begin_image_label(struct nk_context*, const char*, nk_flags align,struct nk_image, struct nk_vec2 size);");
 
-    m.def("mnk_menu_begin_symbol", &nk_menu_begin_symbol);
+    m.def("mnk_menu_begin_symbol", &nk_menu_begin_symbol,"extern nk_bool nk_menu_begin_symbol(struct nk_context*, const char*, enum nk_symbol_type, struct nk_vec2 size);");
 
-    m.def("mnk_menu_begin_symbol_text", &nk_menu_begin_symbol_text);
+    m.def("mnk_menu_begin_symbol_text", &nk_menu_begin_symbol_text,"extern nk_bool nk_menu_begin_symbol_text(struct nk_context*, const char*, int,nk_flags align,enum nk_symbol_type, struct nk_vec2 size);");
 
-    m.def("mnk_menu_begin_symbol_label", &nk_menu_begin_symbol_label);
+    m.def("mnk_menu_begin_symbol_label", &nk_menu_begin_symbol_label,"extern nk_bool nk_menu_begin_symbol_label(struct nk_context*, const char*, nk_flags align,enum nk_symbol_type, struct nk_vec2 size);");
 
-    m.def("mnk_menu_item_text", &nk_menu_item_text);
+    m.def("mnk_menu_item_text", &nk_menu_item_text,"extern nk_bool nk_menu_item_text(struct nk_context*, const char*, int,nk_flags align);");
 
-    m.def("mnk_menu_item_label", &nk_menu_item_label);
+    m.def("mnk_menu_item_label", &nk_menu_item_label,"extern nk_bool nk_menu_item_label(struct nk_context*, const char*, nk_flags alignment);");
 
-    m.def("mnk_menu_item_image_label", &nk_menu_item_image_label);
+    m.def("mnk_menu_item_image_label", &nk_menu_item_image_label,"extern nk_bool nk_menu_item_image_label(struct nk_context*, struct nk_image, const char*, nk_flags alignment);");
 
-    m.def("mnk_menu_item_image_text", &nk_menu_item_image_text);
+    m.def("mnk_menu_item_image_text", &nk_menu_item_image_text,"extern nk_bool nk_menu_item_image_text(struct nk_context*, struct nk_image, const char*, int len, nk_flags alignment);");
 
-    m.def("mnk_menu_item_symbol_text", &nk_menu_item_symbol_text);
+    m.def("mnk_menu_item_symbol_text", &nk_menu_item_symbol_text,"extern nk_bool nk_menu_item_symbol_text(struct nk_context*, enum nk_symbol_type, const char*, int, nk_flags alignment);");
 
-    m.def("mnk_menu_item_symbol_label", &nk_menu_item_symbol_label);
+    m.def("mnk_menu_item_symbol_label", &nk_menu_item_symbol_label,"extern nk_bool nk_menu_item_symbol_label(struct nk_context*, enum nk_symbol_type, const char*, nk_flags alignment);");
 
-    m.def("mnk_menu_close", &nk_menu_close);
+    m.def("mnk_menu_close", &nk_menu_close,"extern void nk_menu_close(struct nk_context*);");
 
-    m.def("mnk_menu_end", &nk_menu_end);
+    m.def("mnk_menu_end", &nk_menu_end,"extern void nk_menu_end(struct nk_context*);");
 
-    m.def("mnk_style_default", &nk_style_default);
+    m.def("mnk_style_default", &nk_style_default,"extern void nk_style_default(struct nk_context*);");
 
-    m.def("mnk_style_from_table", &nk_style_from_table);
+    m.def("mnk_style_from_table", &nk_style_from_table,"extern void nk_style_from_table(struct nk_context*, const struct nk_color*);");
 
-    m.def("mnk_style_load_cursor", &nk_style_load_cursor);
+    m.def("mnk_style_load_cursor", &nk_style_load_cursor,"extern void nk_style_load_cursor(struct nk_context*, enum nk_style_cursor, const struct nk_cursor*);");
 
-    m.def("mnk_style_load_all_cursors", &nk_style_load_all_cursors);
+    m.def("mnk_style_load_all_cursors", &nk_style_load_all_cursors,"extern void nk_style_load_all_cursors(struct nk_context*, const struct nk_cursor*);");
 
-    m.def("mnk_style_get_color_by_name", &nk_style_get_color_by_name, nb::rv_policy::reference);
+    m.def("mnk_style_get_color_by_name", &nk_style_get_color_by_name, nb::rv_policy::reference,"extern const char* nk_style_get_color_by_name(enum nk_style_colors);");
 
-    m.def("mnk_style_set_font", &nk_style_set_font);
+    m.def("mnk_style_set_font", &nk_style_set_font,"extern void nk_style_set_font(struct nk_context*, const struct nk_user_font*);");
 
-    m.def("mnk_style_set_cursor", &nk_style_set_cursor);
+    m.def("mnk_style_set_cursor", &nk_style_set_cursor,"extern nk_bool nk_style_set_cursor(struct nk_context*, enum nk_style_cursor);");
 
-    m.def("mnk_style_show_cursor", &nk_style_show_cursor);
+    m.def("mnk_style_show_cursor", &nk_style_show_cursor,"extern void nk_style_show_cursor(struct nk_context*);");
 
-    m.def("mnk_style_hide_cursor", &nk_style_hide_cursor);
+    m.def("mnk_style_hide_cursor", &nk_style_hide_cursor,"extern void nk_style_hide_cursor(struct nk_context*);");
 
-    m.def("mnk_style_push_font", &nk_style_push_font);
+    m.def("mnk_style_push_font", &nk_style_push_font,"extern nk_bool nk_style_push_font(struct nk_context*, const struct nk_user_font*);");
 
-    m.def("mnk_style_push_float", &nk_style_push_float);
+    m.def("mnk_style_push_float", &nk_style_push_float,"extern nk_bool nk_style_push_float(struct nk_context*, float*, float);");
 
-    m.def("mnk_style_push_vec2", &nk_style_push_vec2);
+    m.def("mnk_style_push_vec2", &nk_style_push_vec2,"extern nk_bool nk_style_push_vec2(struct nk_context*, struct nk_vec2*, struct nk_vec2);");
 
-    m.def("mnk_style_push_style_item", &nk_style_push_style_item);
+    m.def("mnk_style_push_style_item", &nk_style_push_style_item,"extern nk_bool nk_style_push_style_item(struct nk_context*, struct nk_style_item*, struct nk_style_item);");
 
-    m.def("mnk_style_push_flags", &nk_style_push_flags);
+    m.def("mnk_style_push_flags", &nk_style_push_flags,"extern nk_bool nk_style_push_flags(struct nk_context*, nk_flags*, nk_flags);");
 
-    m.def("mnk_style_push_color", &nk_style_push_color);
+    m.def("mnk_style_push_color", &nk_style_push_color,"extern nk_bool nk_style_push_color(struct nk_context*, struct nk_color*, struct nk_color);");
 
-    m.def("mnk_style_pop_font", &nk_style_pop_font);
+    m.def("mnk_style_pop_font", &nk_style_pop_font,"extern nk_bool nk_style_pop_font(struct nk_context*);");
 
-    m.def("mnk_style_pop_float", &nk_style_pop_float);
+    m.def("mnk_style_pop_float", &nk_style_pop_float,"extern nk_bool nk_style_pop_float(struct nk_context*);");
 
-    m.def("mnk_style_pop_vec2", &nk_style_pop_vec2);
+    m.def("mnk_style_pop_vec2", &nk_style_pop_vec2,"extern nk_bool nk_style_pop_vec2(struct nk_context*);");
 
-    m.def("mnk_style_pop_style_item", &nk_style_pop_style_item);
+    m.def("mnk_style_pop_style_item", &nk_style_pop_style_item,"extern nk_bool nk_style_pop_style_item(struct nk_context*);");
 
-    m.def("mnk_style_pop_flags", &nk_style_pop_flags);
+    m.def("mnk_style_pop_flags", &nk_style_pop_flags,"extern nk_bool nk_style_pop_flags(struct nk_context*);");
 
-    m.def("mnk_style_pop_color", &nk_style_pop_color);
+    m.def("mnk_style_pop_color", &nk_style_pop_color,"extern nk_bool nk_style_pop_color(struct nk_context*);");
 
-    m.def("mnk_rgb", &nk_rgb);
+    m.def("mnk_rgb", &nk_rgb,"extern struct nk_color nk_rgb(int r, int g, int b);");
 
-    m.def("mnk_rgb_iv", &nk_rgb_iv);
+    m.def("mnk_rgb_iv", &nk_rgb_iv,"extern struct nk_color nk_rgb_iv(const int *rgb);");
 
-    m.def("mnk_rgb_bv", &nk_rgb_bv);
+    m.def("mnk_rgb_bv", &nk_rgb_bv,"extern struct nk_color nk_rgb_bv(const nk_byte* rgb);");
 
-    m.def("mnk_rgb_f", &nk_rgb_f);
+    m.def("mnk_rgb_f", &nk_rgb_f,"extern struct nk_color nk_rgb_f(float r, float g, float b);");
 
-    m.def("mnk_rgb_fv", &nk_rgb_fv);
+    m.def("mnk_rgb_fv", &nk_rgb_fv,"extern struct nk_color nk_rgb_fv(const float *rgb);");
 
-    m.def("mnk_rgb_cf", &nk_rgb_cf);
+    m.def("mnk_rgb_cf", &nk_rgb_cf,"extern struct nk_color nk_rgb_cf(struct nk_colorf c);");
 
-    m.def("mnk_rgb_hex", &nk_rgb_hex);
+    m.def("mnk_rgb_hex", &nk_rgb_hex,"extern struct nk_color nk_rgb_hex(const char *rgb);");
 
-    m.def("mnk_rgb_factor", &nk_rgb_factor);
+    m.def("mnk_rgb_factor", &nk_rgb_factor,"extern struct nk_color nk_rgb_factor(struct nk_color col, float factor);");
 
-    m.def("mnk_rgba", &nk_rgba);
+    m.def("mnk_rgba", &nk_rgba,"extern struct nk_color nk_rgba(int r, int g, int b, int a);");
 
-    m.def("mnk_rgba_u32", &nk_rgba_u32);
+    m.def("mnk_rgba_u32", &nk_rgba_u32,"extern struct nk_color nk_rgba_u32(nk_uint);");
 
-    m.def("mnk_rgba_iv", &nk_rgba_iv);
+    m.def("mnk_rgba_iv", &nk_rgba_iv,"extern struct nk_color nk_rgba_iv(const int *rgba);");
 
-    m.def("mnk_rgba_bv", &nk_rgba_bv);
+    m.def("mnk_rgba_bv", &nk_rgba_bv,"extern struct nk_color nk_rgba_bv(const nk_byte *rgba);");
 
-    m.def("mnk_rgba_f", &nk_rgba_f);
+    m.def("mnk_rgba_f", &nk_rgba_f,"extern struct nk_color nk_rgba_f(float r, float g, float b, float a);");
 
-    m.def("mnk_rgba_fv", &nk_rgba_fv);
+    m.def("mnk_rgba_fv", &nk_rgba_fv,"extern struct nk_color nk_rgba_fv(const float *rgba);");
 
-    m.def("mnk_rgba_cf", &nk_rgba_cf);
+    m.def("mnk_rgba_cf", &nk_rgba_cf,"extern struct nk_color nk_rgba_cf(struct nk_colorf c);");
 
-    m.def("mnk_rgba_hex", &nk_rgba_hex);
+    m.def("mnk_rgba_hex", &nk_rgba_hex,"extern struct nk_color nk_rgba_hex(const char *rgb);");
 
-    m.def("mnk_hsva_colorf", &nk_hsva_colorf);
+    m.def("mnk_hsva_colorf", &nk_hsva_colorf,"extern struct nk_colorf nk_hsva_colorf(float h, float s, float v, float a);");
 
-    m.def("mnk_hsva_colorfv", &nk_hsva_colorfv);
+    m.def("mnk_hsva_colorfv", &nk_hsva_colorfv,"extern struct nk_colorf nk_hsva_colorfv(const float *c);");
 
-    m.def("mnk_colorf_hsva_f", &nk_colorf_hsva_f);
+    m.def("mnk_colorf_hsva_f", &nk_colorf_hsva_f,"extern void nk_colorf_hsva_f(float *out_h, float *out_s, float *out_v, float *out_a, struct nk_colorf in);");
 
-    m.def("mnk_colorf_hsva_fv", &nk_colorf_hsva_fv);
+    m.def("mnk_colorf_hsva_fv", &nk_colorf_hsva_fv,"extern void nk_colorf_hsva_fv(float *hsva, struct nk_colorf in);");
 
-    m.def("mnk_hsv", &nk_hsv);
+    m.def("mnk_hsv", &nk_hsv,"extern struct nk_color nk_hsv(int h, int s, int v);");
 
-    m.def("mnk_hsv_iv", &nk_hsv_iv);
+    m.def("mnk_hsv_iv", &nk_hsv_iv,"extern struct nk_color nk_hsv_iv(const int *hsv);");
 
-    m.def("mnk_hsv_bv", &nk_hsv_bv);
+    m.def("mnk_hsv_bv", &nk_hsv_bv,"extern struct nk_color nk_hsv_bv(const nk_byte *hsv);");
 
-    m.def("mnk_hsv_f", &nk_hsv_f);
+    m.def("mnk_hsv_f", &nk_hsv_f,"extern struct nk_color nk_hsv_f(float h, float s, float v);");
 
-    m.def("mnk_hsv_fv", &nk_hsv_fv);
+    m.def("mnk_hsv_fv", &nk_hsv_fv,"extern struct nk_color nk_hsv_fv(const float *hsv);");
 
-    m.def("mnk_hsva", &nk_hsva);
+    m.def("mnk_hsva", &nk_hsva,"extern struct nk_color nk_hsva(int h, int s, int v, int a);");
 
-    m.def("mnk_hsva_iv", &nk_hsva_iv);
+    m.def("mnk_hsva_iv", &nk_hsva_iv,"extern struct nk_color nk_hsva_iv(const int *hsva);");
 
-    m.def("mnk_hsva_bv", &nk_hsva_bv);
+    m.def("mnk_hsva_bv", &nk_hsva_bv,"extern struct nk_color nk_hsva_bv(const nk_byte *hsva);");
 
-    m.def("mnk_hsva_f", &nk_hsva_f);
+    m.def("mnk_hsva_f", &nk_hsva_f,"extern struct nk_color nk_hsva_f(float h, float s, float v, float a);");
 
-    m.def("mnk_hsva_fv", &nk_hsva_fv);
+    m.def("mnk_hsva_fv", &nk_hsva_fv,"extern struct nk_color nk_hsva_fv(const float *hsva);");
 
-    m.def("mnk_color_f", &nk_color_f);
+    m.def("mnk_color_f", &nk_color_f,"extern void nk_color_f(float *r, float *g, float *b, float *a, struct nk_color);");
 
-    m.def("mnk_color_fv", &nk_color_fv);
+    m.def("mnk_color_fv", &nk_color_fv,"extern void nk_color_fv(float *rgba_out, struct nk_color);");
 
-    m.def("mnk_color_cf", &nk_color_cf);
+    m.def("mnk_color_cf", &nk_color_cf,"extern struct nk_colorf nk_color_cf(struct nk_color);");
 
-    m.def("mnk_color_d", &nk_color_d);
+    m.def("mnk_color_d", &nk_color_d,"extern void nk_color_d(double *r, double *g, double *b, double *a, struct nk_color);");
 
-    m.def("mnk_color_dv", &nk_color_dv);
+    m.def("mnk_color_dv", &nk_color_dv,"extern void nk_color_dv(double *rgba_out, struct nk_color);");
 
-    m.def("mnk_color_u32", &nk_color_u32);
+    m.def("mnk_color_u32", &nk_color_u32,"extern nk_uint nk_color_u32(struct nk_color);");
 
-    m.def("mnk_color_hsv_i", &nk_color_hsv_i);
+    m.def("mnk_color_hsv_i", &nk_color_hsv_i,"extern void nk_color_hsv_i(int *out_h, int *out_s, int *out_v, struct nk_color);");
 
-    m.def("mnk_color_hsv_b", &nk_color_hsv_b);
+    m.def("mnk_color_hsv_b", &nk_color_hsv_b,"extern void nk_color_hsv_b(nk_byte *out_h, nk_byte *out_s, nk_byte *out_v, struct nk_color);");
 
-    m.def("mnk_color_hsv_iv", &nk_color_hsv_iv);
+    m.def("mnk_color_hsv_iv", &nk_color_hsv_iv,"extern void nk_color_hsv_iv(int *hsv_out, struct nk_color);");
 
-    m.def("mnk_color_hsv_bv", &nk_color_hsv_bv);
+    m.def("mnk_color_hsv_bv", &nk_color_hsv_bv,"extern void nk_color_hsv_bv(nk_byte *hsv_out, struct nk_color);");
 
-    m.def("mnk_color_hsv_f", &nk_color_hsv_f);
+    m.def("mnk_color_hsv_f", &nk_color_hsv_f,"extern void nk_color_hsv_f(float *out_h, float *out_s, float *out_v, struct nk_color);");
 
-    m.def("mnk_color_hsv_fv", &nk_color_hsv_fv);
+    m.def("mnk_color_hsv_fv", &nk_color_hsv_fv,"extern void nk_color_hsv_fv(float *hsv_out, struct nk_color);");
 
-    m.def("mnk_color_hsva_i", &nk_color_hsva_i);
+    m.def("mnk_color_hsva_i", &nk_color_hsva_i,"extern void nk_color_hsva_i(int *h, int *s, int *v, int *a, struct nk_color);");
 
-    m.def("mnk_color_hsva_b", &nk_color_hsva_b);
+    m.def("mnk_color_hsva_b", &nk_color_hsva_b,"extern void nk_color_hsva_b(nk_byte *h, nk_byte *s, nk_byte *v, nk_byte *a, struct nk_color);");
 
-    m.def("mnk_color_hsva_iv", &nk_color_hsva_iv);
+    m.def("mnk_color_hsva_iv", &nk_color_hsva_iv,"extern void nk_color_hsva_iv(int *hsva_out, struct nk_color);");
 
-    m.def("mnk_color_hsva_bv", &nk_color_hsva_bv);
+    m.def("mnk_color_hsva_bv", &nk_color_hsva_bv,"extern void nk_color_hsva_bv(nk_byte *hsva_out, struct nk_color);");
 
-    m.def("mnk_color_hsva_f", &nk_color_hsva_f);
+    m.def("mnk_color_hsva_f", &nk_color_hsva_f,"extern void nk_color_hsva_f(float *out_h, float *out_s, float *out_v, float *out_a, struct nk_color);");
 
-    m.def("mnk_color_hsva_fv", &nk_color_hsva_fv);
+    m.def("mnk_color_hsva_fv", &nk_color_hsva_fv,"extern void nk_color_hsva_fv(float *hsva_out, struct nk_color);");
 
-    m.def("mnk_handle_ptr", &nk_handle_ptr);
+    m.def("mnk_handle_ptr", &nk_handle_ptr,"extern nk_handle nk_handle_ptr(void*);");
 
-    m.def("mnk_handle_id", &nk_handle_id);
+    m.def("mnk_handle_id", &nk_handle_id,"extern nk_handle nk_handle_id(int);");
 
-    m.def("mnk_image_handle", &nk_image_handle);
+    m.def("mnk_image_handle", &nk_image_handle,"extern struct nk_image nk_image_handle(nk_handle);");
 
-    m.def("mnk_image_ptr", &nk_image_ptr);
+    m.def("mnk_image_ptr", &nk_image_ptr,"extern struct nk_image nk_image_ptr(void*);");
 
-    m.def("mnk_image_id", &nk_image_id);
+    m.def("mnk_image_id", &nk_image_id,"extern struct nk_image nk_image_id(int);");
 
-    m.def("mnk_image_is_subimage", &nk_image_is_subimage);
+    m.def("mnk_image_is_subimage", &nk_image_is_subimage,"extern nk_bool nk_image_is_subimage(const struct nk_image* img);");
 
-    m.def("mnk_subimage_ptr", &nk_subimage_ptr);
+    m.def("mnk_subimage_ptr", &nk_subimage_ptr,"extern struct nk_image nk_subimage_ptr(void*, nk_ushort w, nk_ushort h, struct nk_rect sub_region);");
 
-    m.def("mnk_subimage_id", &nk_subimage_id);
+    m.def("mnk_subimage_id", &nk_subimage_id,"extern struct nk_image nk_subimage_id(int, nk_ushort w, nk_ushort h, struct nk_rect sub_region);");
 
-    m.def("mnk_subimage_handle", &nk_subimage_handle);
+    m.def("mnk_subimage_handle", &nk_subimage_handle,"extern struct nk_image nk_subimage_handle(nk_handle, nk_ushort w, nk_ushort h, struct nk_rect sub_region);");
 
-    m.def("mnk_nine_slice_handle", &nk_nine_slice_handle);
+    m.def("mnk_nine_slice_handle", &nk_nine_slice_handle,"extern struct nk_nine_slice nk_nine_slice_handle(nk_handle, nk_ushort l, nk_ushort t, nk_ushort r, nk_ushort b);");
 
-    m.def("mnk_nine_slice_ptr", &nk_nine_slice_ptr);
+    m.def("mnk_nine_slice_ptr", &nk_nine_slice_ptr,"extern struct nk_nine_slice nk_nine_slice_ptr(void*, nk_ushort l, nk_ushort t, nk_ushort r, nk_ushort b);");
 
-    m.def("mnk_nine_slice_id", &nk_nine_slice_id);
+    m.def("mnk_nine_slice_id", &nk_nine_slice_id,"extern struct nk_nine_slice nk_nine_slice_id(int, nk_ushort l, nk_ushort t, nk_ushort r, nk_ushort b);");
 
-    m.def("mnk_nine_slice_is_sub9slice", &nk_nine_slice_is_sub9slice);
+    m.def("mnk_nine_slice_is_sub9slice", &nk_nine_slice_is_sub9slice,"extern int nk_nine_slice_is_sub9slice(const struct nk_nine_slice* img);");
 
-    m.def("mnk_sub9slice_ptr", &nk_sub9slice_ptr);
+    m.def("mnk_sub9slice_ptr", &nk_sub9slice_ptr,"extern struct nk_nine_slice nk_sub9slice_ptr(void*, nk_ushort w, nk_ushort h, struct nk_rect sub_region, nk_ushort l, nk_ushort t, nk_ushort r, nk_ushort b);");
 
-    m.def("mnk_sub9slice_id", &nk_sub9slice_id);
+    m.def("mnk_sub9slice_id", &nk_sub9slice_id,"extern struct nk_nine_slice nk_sub9slice_id(int, nk_ushort w, nk_ushort h, struct nk_rect sub_region, nk_ushort l, nk_ushort t, nk_ushort r, nk_ushort b);");
 
-    m.def("mnk_sub9slice_handle", &nk_sub9slice_handle);
+    m.def("mnk_sub9slice_handle", &nk_sub9slice_handle,"extern struct nk_nine_slice nk_sub9slice_handle(nk_handle, nk_ushort w, nk_ushort h, struct nk_rect sub_region, nk_ushort l, nk_ushort t, nk_ushort r, nk_ushort b);");
 
-    m.def("mnk_murmur_hash", &nk_murmur_hash);
+    m.def("mnk_murmur_hash", &nk_murmur_hash,"extern nk_hash nk_murmur_hash(const void *key, int len, nk_hash seed);");
 
-    m.def("mnk_triangle_from_direction", &nk_triangle_from_direction);
+    m.def("mnk_triangle_from_direction", &nk_triangle_from_direction,"extern void nk_triangle_from_direction(struct nk_vec2 *result, struct nk_rect r, float pad_x, float pad_y, enum nk_heading);");
 
-    m.def("mnk_vec2", &nk_vec2);
+    m.def("mnk_vec2", &nk_vec2,"extern struct nk_vec2 nk_vec2(float x, float y);");
 
-    m.def("mnk_vec2i", &nk_vec2i);
+    m.def("mnk_vec2i", &nk_vec2i,"extern struct nk_vec2 nk_vec2i(int x, int y);");
 
-    m.def("mnk_vec2v", &nk_vec2v);
+    m.def("mnk_vec2v", &nk_vec2v,"extern struct nk_vec2 nk_vec2v(const float *xy);");
 
-    m.def("mnk_vec2iv", &nk_vec2iv);
+    m.def("mnk_vec2iv", &nk_vec2iv,"extern struct nk_vec2 nk_vec2iv(const int *xy);");
 
-    m.def("mnk_get_null_rect", &nk_get_null_rect);
+    m.def("mnk_get_null_rect", &nk_get_null_rect,"extern struct nk_rect nk_get_null_rect(void);");
 
-    m.def("mnk_rect", &nk_rect);
+    m.def("mnk_rect", &nk_rect,"extern struct nk_rect nk_rect(float x, float y, float w, float h);");
 
-    m.def("mnk_recti", &nk_recti);
+    m.def("mnk_recti", &nk_recti,"extern struct nk_rect nk_recti(int x, int y, int w, int h);");
 
-    m.def("mnk_recta", &nk_recta);
+    m.def("mnk_recta", &nk_recta,"extern struct nk_rect nk_recta(struct nk_vec2 pos, struct nk_vec2 size);");
 
-    m.def("mnk_rectv", &nk_rectv);
+    m.def("mnk_rectv", &nk_rectv,"extern struct nk_rect nk_rectv(const float *xywh);");
 
-    m.def("mnk_rectiv", &nk_rectiv);
+    m.def("mnk_rectiv", &nk_rectiv,"extern struct nk_rect nk_rectiv(const int *xywh);");
 
-    m.def("mnk_rect_pos", &nk_rect_pos);
+    m.def("mnk_rect_pos", &nk_rect_pos,"extern struct nk_vec2 nk_rect_pos(struct nk_rect);");
 
-    m.def("mnk_rect_size", &nk_rect_size);
+    m.def("mnk_rect_size", &nk_rect_size,"extern struct nk_vec2 nk_rect_size(struct nk_rect);");
 
-    m.def("mnk_strlen", &nk_strlen);
+    m.def("mnk_strlen", &nk_strlen,"extern int nk_strlen(const char *str);");
 
-    m.def("mnk_stricmp", &nk_stricmp);
+    m.def("mnk_stricmp", &nk_stricmp,"extern int nk_stricmp(const char *s1, const char *s2);");
 
-    m.def("mnk_stricmpn", &nk_stricmpn);
+    m.def("mnk_stricmpn", &nk_stricmpn,"extern int nk_stricmpn(const char *s1, const char *s2, int n);");
 
-    m.def("mnk_strfilter", &nk_strfilter);
+    m.def("mnk_strfilter", &nk_strfilter,"extern int nk_strfilter(const char *text, const char *regexp);");
 
-    m.def("mnk_strmatch_fuzzy_string", &nk_strmatch_fuzzy_string);
+    m.def("mnk_strmatch_fuzzy_string", &nk_strmatch_fuzzy_string,"extern int nk_strmatch_fuzzy_string(char const *str, char const *pattern, int *out_score);");
 
-    m.def("mnk_strmatch_fuzzy_text", &nk_strmatch_fuzzy_text);
+    m.def("mnk_strmatch_fuzzy_text", &nk_strmatch_fuzzy_text,"extern int nk_strmatch_fuzzy_text(const char *txt, int txt_len, const char *pattern, int *out_score);");
 
-    m.def("mnk_font_atlas_init_default", &nk_font_atlas_init_default);
+    m.def("mnk_font_atlas_init_default", &nk_font_atlas_init_default,"extern void nk_font_atlas_init_default(struct nk_font_atlas*);");
 
-    m.def("mnk_font_atlas_begin", &nk_font_atlas_begin);
+    m.def("mnk_font_atlas_begin", &nk_font_atlas_begin,"extern void nk_font_atlas_begin(struct nk_font_atlas*);");
 
-    m.def("mnk_font_config", &nk_font_config);
+    m.def("mnk_font_config", &nk_font_config,"extern struct nk_font_config nk_font_config(float pixel_height);");
 
-    m.def("mnk_font_atlas_add_default", &nk_font_atlas_add_default, nb::rv_policy::reference);
+    m.def("mnk_font_atlas_add_default", &nk_font_atlas_add_default, nb::rv_policy::reference,"extern struct nk_font* nk_font_atlas_add_default(struct nk_font_atlas*, float height, const struct nk_font_config*);");
 
-    m.def("mnk_font_atlas_add_from_memory", &nk_font_atlas_add_from_memory, nb::rv_policy::reference);
+    m.def("mnk_font_atlas_add_from_memory", &nk_font_atlas_add_from_memory, nb::rv_policy::reference,"extern struct nk_font* nk_font_atlas_add_from_memory(struct nk_font_atlas *atlas, void *memory, nk_size size, float height, const struct nk_font_config *config);");
 
-    m.def("mnk_font_atlas_add_from_file", &nk_font_atlas_add_from_file, nb::rv_policy::reference);
+    m.def("mnk_font_atlas_add_from_file", &nk_font_atlas_add_from_file, nb::rv_policy::reference,"extern struct nk_font* nk_font_atlas_add_from_file(struct nk_font_atlas *atlas, const char *file_path, float height, const struct nk_font_config*);");
 
-    m.def("mnk_font_atlas_add_compressed_base85", &nk_font_atlas_add_compressed_base85, nb::rv_policy::reference);
+    m.def("mnk_font_atlas_add_compressed_base85", &nk_font_atlas_add_compressed_base85, nb::rv_policy::reference,"extern struct nk_font* nk_font_atlas_add_compressed_base85(struct nk_font_atlas*, const char *data, float height, const struct nk_font_config *config);");
 
-    m.def("mnk_font_atlas_bake", as_capsule(&nk_font_atlas_bake));
+    m.def("mnk_font_atlas_bake", as_capsule(&nk_font_atlas_bake),"extern const void* nk_font_atlas_bake(struct nk_font_atlas*, int *width, int *height, enum nk_font_atlas_format);");
 
-    m.def("mnk_font_atlas_end", &nk_font_atlas_end);
+    m.def("mnk_font_atlas_end", &nk_font_atlas_end,"extern void nk_font_atlas_end(struct nk_font_atlas*, nk_handle tex, struct nk_draw_null_texture*);");
 
-    m.def("mnk_font_find_glyph", &nk_font_find_glyph, nb::rv_policy::reference);
+    m.def("mnk_font_find_glyph", &nk_font_find_glyph, nb::rv_policy::reference,"extern const struct nk_font_glyph* nk_font_find_glyph(const struct nk_font*, nk_rune unicode);");
 
-    m.def("mnk_font_atlas_cleanup", &nk_font_atlas_cleanup);
+    m.def("mnk_font_atlas_cleanup", &nk_font_atlas_cleanup,"extern void nk_font_atlas_cleanup(struct nk_font_atlas *atlas);");
 
-    m.def("mnk_font_atlas_clear", &nk_font_atlas_clear);
+    m.def("mnk_font_atlas_clear", &nk_font_atlas_clear,"extern void nk_font_atlas_clear(struct nk_font_atlas*);");
 
-    m.def("mnk_buffer_init_default", &nk_buffer_init_default);
+    m.def("mnk_buffer_init_default", &nk_buffer_init_default,"extern void nk_buffer_init_default(struct nk_buffer*);");
 
-    m.def("mnk_buffer_init_fixed", &nk_buffer_init_fixed);
+    m.def("mnk_buffer_init_fixed", &nk_buffer_init_fixed,"extern void nk_buffer_init_fixed(struct nk_buffer*, void *memory, nk_size size);");
 
-    m.def("mnk_buffer_info", &nk_buffer_info);
+    m.def("mnk_buffer_info", &nk_buffer_info,"extern void nk_buffer_info(struct nk_memory_status*, const struct nk_buffer*);");
 
-    m.def("mnk_buffer_push", &nk_buffer_push);
+    m.def("mnk_buffer_push", &nk_buffer_push,"extern void nk_buffer_push(struct nk_buffer*, enum nk_buffer_allocation_type type, const void *memory, nk_size size, nk_size align);");
 
-    m.def("mnk_buffer_mark", &nk_buffer_mark);
+    m.def("mnk_buffer_mark", &nk_buffer_mark,"extern void nk_buffer_mark(struct nk_buffer*, enum nk_buffer_allocation_type type);");
 
-    m.def("mnk_buffer_reset", &nk_buffer_reset);
+    m.def("mnk_buffer_reset", &nk_buffer_reset,"extern void nk_buffer_reset(struct nk_buffer*, enum nk_buffer_allocation_type type);");
 
-    m.def("mnk_buffer_clear", &nk_buffer_clear);
+    m.def("mnk_buffer_clear", &nk_buffer_clear,"extern void nk_buffer_clear(struct nk_buffer*);");
 
-    m.def("mnk_buffer_free", &nk_buffer_free);
+    m.def("mnk_buffer_free", &nk_buffer_free,"extern void nk_buffer_free(struct nk_buffer*);");
 
-    m.def("mnk_buffer_total", &nk_buffer_total);
+    m.def("mnk_buffer_total", &nk_buffer_total,"extern nk_size nk_buffer_total(const struct nk_buffer*);");
 
-    m.def("mnk_str_init_default", &nk_str_init_default);
+    m.def("mnk_str_init_default", &nk_str_init_default,"extern void nk_str_init_default(struct nk_str*);");
 
-    m.def("mnk_str_init_fixed", &nk_str_init_fixed);
+    m.def("mnk_str_init_fixed", &nk_str_init_fixed,"extern void nk_str_init_fixed(struct nk_str*, void *memory, nk_size size);");
 
-    m.def("mnk_str_clear", &nk_str_clear);
+    m.def("mnk_str_clear", &nk_str_clear,"extern void nk_str_clear(struct nk_str*);");
 
-    m.def("mnk_str_free", &nk_str_free);
+    m.def("mnk_str_free", &nk_str_free,"extern void nk_str_free(struct nk_str*);");
 
-    m.def("mnk_str_append_text_char", &nk_str_append_text_char);
+    m.def("mnk_str_append_text_char", &nk_str_append_text_char,"extern int nk_str_append_text_char(struct nk_str*, const char*, int);");
 
-    m.def("mnk_str_append_str_char", &nk_str_append_str_char);
+    m.def("mnk_str_append_str_char", &nk_str_append_str_char,"extern int nk_str_append_str_char(struct nk_str*, const char*);");
 
-    m.def("mnk_str_append_text_utf8", &nk_str_append_text_utf8);
+    m.def("mnk_str_append_text_utf8", &nk_str_append_text_utf8,"extern int nk_str_append_text_utf8(struct nk_str*, const char*, int);");
 
-    m.def("mnk_str_append_str_utf8", &nk_str_append_str_utf8);
+    m.def("mnk_str_append_str_utf8", &nk_str_append_str_utf8,"extern int nk_str_append_str_utf8(struct nk_str*, const char*);");
 
-    m.def("mnk_str_append_text_runes", &nk_str_append_text_runes);
+    m.def("mnk_str_append_text_runes", &nk_str_append_text_runes,"extern int nk_str_append_text_runes(struct nk_str*, const nk_rune*, int);");
 
-    m.def("mnk_str_append_str_runes", &nk_str_append_str_runes);
+    m.def("mnk_str_append_str_runes", &nk_str_append_str_runes,"extern int nk_str_append_str_runes(struct nk_str*, const nk_rune*);");
 
-    m.def("mnk_str_insert_at_char", &nk_str_insert_at_char);
+    m.def("mnk_str_insert_at_char", &nk_str_insert_at_char,"extern int nk_str_insert_at_char(struct nk_str*, int pos, const char*, int);");
 
-    m.def("mnk_str_insert_at_rune", &nk_str_insert_at_rune);
+    m.def("mnk_str_insert_at_rune", &nk_str_insert_at_rune,"extern int nk_str_insert_at_rune(struct nk_str*, int pos, const char*, int);");
 
-    m.def("mnk_str_insert_text_char", &nk_str_insert_text_char);
+    m.def("mnk_str_insert_text_char", &nk_str_insert_text_char,"extern int nk_str_insert_text_char(struct nk_str*, int pos, const char*, int);");
 
-    m.def("mnk_str_insert_str_char", &nk_str_insert_str_char);
+    m.def("mnk_str_insert_str_char", &nk_str_insert_str_char,"extern int nk_str_insert_str_char(struct nk_str*, int pos, const char*);");
 
-    m.def("mnk_str_insert_text_utf8", &nk_str_insert_text_utf8);
+    m.def("mnk_str_insert_text_utf8", &nk_str_insert_text_utf8,"extern int nk_str_insert_text_utf8(struct nk_str*, int pos, const char*, int);");
 
-    m.def("mnk_str_insert_str_utf8", &nk_str_insert_str_utf8);
+    m.def("mnk_str_insert_str_utf8", &nk_str_insert_str_utf8,"extern int nk_str_insert_str_utf8(struct nk_str*, int pos, const char*);");
 
-    m.def("mnk_str_insert_text_runes", &nk_str_insert_text_runes);
+    m.def("mnk_str_insert_text_runes", &nk_str_insert_text_runes,"extern int nk_str_insert_text_runes(struct nk_str*, int pos, const nk_rune*, int);");
 
-    m.def("mnk_str_insert_str_runes", &nk_str_insert_str_runes);
+    m.def("mnk_str_insert_str_runes", &nk_str_insert_str_runes,"extern int nk_str_insert_str_runes(struct nk_str*, int pos, const nk_rune*);");
 
-    m.def("mnk_str_remove_chars", &nk_str_remove_chars);
+    m.def("mnk_str_remove_chars", &nk_str_remove_chars,"extern void nk_str_remove_chars(struct nk_str*, int len);");
 
-    m.def("mnk_str_remove_runes", &nk_str_remove_runes);
+    m.def("mnk_str_remove_runes", &nk_str_remove_runes,"extern void nk_str_remove_runes(struct nk_str *str, int len);");
 
-    m.def("mnk_str_delete_chars", &nk_str_delete_chars);
+    m.def("mnk_str_delete_chars", &nk_str_delete_chars,"extern void nk_str_delete_chars(struct nk_str*, int pos, int len);");
 
-    m.def("mnk_str_delete_runes", &nk_str_delete_runes);
+    m.def("mnk_str_delete_runes", &nk_str_delete_runes,"extern void nk_str_delete_runes(struct nk_str*, int pos, int len);");
 
-    m.def("mnk_str_rune_at", &nk_str_rune_at);
+    m.def("mnk_str_rune_at", &nk_str_rune_at,"extern nk_rune nk_str_rune_at(const struct nk_str*, int pos);");
 
-    m.def("mnk_str_len", &nk_str_len);
+    m.def("mnk_str_len", &nk_str_len,"extern int nk_str_len(const struct nk_str*);");
 
-    m.def("mnk_str_len_char", &nk_str_len_char);
+    m.def("mnk_str_len_char", &nk_str_len_char,"extern int nk_str_len_char(const struct nk_str*);");
 
-    m.def("mnk_filter_default", &nk_filter_default);
+    m.def("mnk_filter_default", &nk_filter_default,"extern nk_bool nk_filter_default(const struct nk_text_edit*, nk_rune unicode);");
 
-    m.def("mnk_filter_ascii", &nk_filter_ascii);
+    m.def("mnk_filter_ascii", &nk_filter_ascii,"extern nk_bool nk_filter_ascii(const struct nk_text_edit*, nk_rune unicode);");
 
-    m.def("mnk_filter_float", &nk_filter_float);
+    m.def("mnk_filter_float", &nk_filter_float,"extern nk_bool nk_filter_float(const struct nk_text_edit*, nk_rune unicode);");
 
-    m.def("mnk_filter_decimal", &nk_filter_decimal);
+    m.def("mnk_filter_decimal", &nk_filter_decimal,"extern nk_bool nk_filter_decimal(const struct nk_text_edit*, nk_rune unicode);");
 
-    m.def("mnk_filter_hex", &nk_filter_hex);
+    m.def("mnk_filter_hex", &nk_filter_hex,"extern nk_bool nk_filter_hex(const struct nk_text_edit*, nk_rune unicode);");
 
-    m.def("mnk_filter_oct", &nk_filter_oct);
+    m.def("mnk_filter_oct", &nk_filter_oct,"extern nk_bool nk_filter_oct(const struct nk_text_edit*, nk_rune unicode);");
 
-    m.def("mnk_filter_binary", &nk_filter_binary);
+    m.def("mnk_filter_binary", &nk_filter_binary,"extern nk_bool nk_filter_binary(const struct nk_text_edit*, nk_rune unicode);");
 
-    m.def("mnk_textedit_init_default", &nk_textedit_init_default);
+    m.def("mnk_textedit_init_default", &nk_textedit_init_default,"extern void nk_textedit_init_default(struct nk_text_edit*);");
 
-    m.def("mnk_textedit_init_fixed", &nk_textedit_init_fixed);
+    m.def("mnk_textedit_init_fixed", &nk_textedit_init_fixed,"extern void nk_textedit_init_fixed(struct nk_text_edit*, void *memory, nk_size size);");
 
-    m.def("mnk_textedit_free", &nk_textedit_free);
+    m.def("mnk_textedit_free", &nk_textedit_free,"extern void nk_textedit_free(struct nk_text_edit*);");
 
-    m.def("mnk_textedit_text", &nk_textedit_text);
+    m.def("mnk_textedit_text", &nk_textedit_text,"extern void nk_textedit_text(struct nk_text_edit*, const char*, int total_len);");
 
-    m.def("mnk_textedit_delete", &nk_textedit_delete);
+    m.def("mnk_textedit_delete", &nk_textedit_delete,"extern void nk_textedit_delete(struct nk_text_edit*, int where, int len);");
 
-    m.def("mnk_textedit_delete_selection", &nk_textedit_delete_selection);
+    m.def("mnk_textedit_delete_selection", &nk_textedit_delete_selection,"extern void nk_textedit_delete_selection(struct nk_text_edit*);");
 
-    m.def("mnk_textedit_select_all", &nk_textedit_select_all);
+    m.def("mnk_textedit_select_all", &nk_textedit_select_all,"extern void nk_textedit_select_all(struct nk_text_edit*);");
 
-    m.def("mnk_textedit_cut", &nk_textedit_cut);
+    m.def("mnk_textedit_cut", &nk_textedit_cut,"extern nk_bool nk_textedit_cut(struct nk_text_edit*);");
 
-    m.def("mnk_textedit_paste", &nk_textedit_paste);
+    m.def("mnk_textedit_paste", &nk_textedit_paste,"extern nk_bool nk_textedit_paste(struct nk_text_edit*, char const*, int len);");
 
-    m.def("mnk_textedit_undo", &nk_textedit_undo);
+    m.def("mnk_textedit_undo", &nk_textedit_undo,"extern void nk_textedit_undo(struct nk_text_edit*);");
 
-    m.def("mnk_textedit_redo", &nk_textedit_redo);
+    m.def("mnk_textedit_redo", &nk_textedit_redo,"extern void nk_textedit_redo(struct nk_text_edit*);");
 
-    m.def("mnk_stroke_line", &nk_stroke_line);
+    m.def("mnk_stroke_line", &nk_stroke_line,"extern void nk_stroke_line(struct nk_command_buffer *b, float x0, float y0, float x1, float y1, float line_thickness, struct nk_color);");
 
-    m.def("mnk_stroke_curve", &nk_stroke_curve);
+    m.def("mnk_stroke_curve", &nk_stroke_curve,"extern void nk_stroke_curve(struct nk_command_buffer*, float, float, float, float, float, float, float, float, float line_thickness, struct nk_color);");
 
-    m.def("mnk_stroke_rect", &nk_stroke_rect);
+    m.def("mnk_stroke_rect", &nk_stroke_rect,"extern void nk_stroke_rect(struct nk_command_buffer*, struct nk_rect, float rounding, float line_thickness, struct nk_color);");
 
-    m.def("mnk_stroke_circle", &nk_stroke_circle);
+    m.def("mnk_stroke_circle", &nk_stroke_circle,"extern void nk_stroke_circle(struct nk_command_buffer*, struct nk_rect, float line_thickness, struct nk_color);");
 
-    m.def("mnk_stroke_arc", &nk_stroke_arc);
+    m.def("mnk_stroke_arc", &nk_stroke_arc,"extern void nk_stroke_arc(struct nk_command_buffer*, float cx, float cy, float radius, float a_min, float a_max, float line_thickness, struct nk_color);");
 
-    m.def("mnk_stroke_triangle", &nk_stroke_triangle);
+    m.def("mnk_stroke_triangle", &nk_stroke_triangle,"extern void nk_stroke_triangle(struct nk_command_buffer*, float, float, float, float, float, float, float line_thichness, struct nk_color);");
 
-    m.def("mnk_stroke_polyline", &nk_stroke_polyline);
+    m.def("mnk_stroke_polyline", &nk_stroke_polyline,"extern void nk_stroke_polyline(struct nk_command_buffer*, const float *points, int point_count, float line_thickness, struct nk_color col);");
 
-    m.def("mnk_stroke_polygon", &nk_stroke_polygon);
+    m.def("mnk_stroke_polygon", &nk_stroke_polygon,"extern void nk_stroke_polygon(struct nk_command_buffer*, const float *points, int point_count, float line_thickness, struct nk_color);");
 
-    m.def("mnk_fill_rect", &nk_fill_rect);
+    m.def("mnk_fill_rect", &nk_fill_rect,"extern void nk_fill_rect(struct nk_command_buffer*, struct nk_rect, float rounding, struct nk_color);");
 
-    m.def("mnk_fill_rect_multi_color", &nk_fill_rect_multi_color);
+    m.def("mnk_fill_rect_multi_color", &nk_fill_rect_multi_color,"extern void nk_fill_rect_multi_color(struct nk_command_buffer*, struct nk_rect, struct nk_color left, struct nk_color top, struct nk_color right, struct nk_color bottom);");
 
-    m.def("mnk_fill_circle", &nk_fill_circle);
+    m.def("mnk_fill_circle", &nk_fill_circle,"extern void nk_fill_circle(struct nk_command_buffer*, struct nk_rect, struct nk_color);");
 
-    m.def("mnk_fill_arc", &nk_fill_arc);
+    m.def("mnk_fill_arc", &nk_fill_arc,"extern void nk_fill_arc(struct nk_command_buffer*, float cx, float cy, float radius, float a_min, float a_max, struct nk_color);");
 
-    m.def("mnk_fill_triangle", &nk_fill_triangle);
+    m.def("mnk_fill_triangle", &nk_fill_triangle,"extern void nk_fill_triangle(struct nk_command_buffer*, float x0, float y0, float x1, float y1, float x2, float y2, struct nk_color);");
 
-    m.def("mnk_fill_polygon", &nk_fill_polygon);
+    m.def("mnk_fill_polygon", &nk_fill_polygon,"extern void nk_fill_polygon(struct nk_command_buffer*, const float *points, int point_count, struct nk_color);");
 
-    m.def("mnk_draw_image", &nk_draw_image);
+    m.def("mnk_draw_image", &nk_draw_image,"extern void nk_draw_image(struct nk_command_buffer*, struct nk_rect, const struct nk_image*, struct nk_color);");
 
-    m.def("mnk_draw_nine_slice", &nk_draw_nine_slice);
+    m.def("mnk_draw_nine_slice", &nk_draw_nine_slice,"extern void nk_draw_nine_slice(struct nk_command_buffer*, struct nk_rect, const struct nk_nine_slice*, struct nk_color);");
 
-    m.def("mnk_draw_text", &nk_draw_text);
+    m.def("mnk_draw_text", &nk_draw_text,"extern void nk_draw_text(struct nk_command_buffer*, struct nk_rect, const char *text, int len, const struct nk_user_font*, struct nk_color, struct nk_color);");
 
-    m.def("mnk_push_scissor", &nk_push_scissor);
+    m.def("mnk_push_scissor", &nk_push_scissor,"extern void nk_push_scissor(struct nk_command_buffer*, struct nk_rect);");
 
-    m.def("mnk_input_has_mouse_click", &nk_input_has_mouse_click);
+    m.def("mnk_input_has_mouse_click", &nk_input_has_mouse_click,"extern nk_bool nk_input_has_mouse_click(const struct nk_input*, enum nk_buttons);");
 
-    m.def("mnk_input_has_mouse_click_in_rect", &nk_input_has_mouse_click_in_rect);
+    m.def("mnk_input_has_mouse_click_in_rect", &nk_input_has_mouse_click_in_rect,"extern nk_bool nk_input_has_mouse_click_in_rect(const struct nk_input*, enum nk_buttons, struct nk_rect);");
 
-    m.def("mnk_input_has_mouse_click_in_button_rect", &nk_input_has_mouse_click_in_button_rect);
+    m.def("mnk_input_has_mouse_click_in_button_rect", &nk_input_has_mouse_click_in_button_rect,"extern nk_bool nk_input_has_mouse_click_in_button_rect(const struct nk_input*, enum nk_buttons, struct nk_rect);");
 
-    m.def("mnk_input_has_mouse_click_down_in_rect", &nk_input_has_mouse_click_down_in_rect);
+    m.def("mnk_input_has_mouse_click_down_in_rect", &nk_input_has_mouse_click_down_in_rect,"extern nk_bool nk_input_has_mouse_click_down_in_rect(const struct nk_input*, enum nk_buttons, struct nk_rect, nk_bool down);");
 
-    m.def("mnk_input_is_mouse_click_in_rect", &nk_input_is_mouse_click_in_rect);
+    m.def("mnk_input_is_mouse_click_in_rect", &nk_input_is_mouse_click_in_rect,"extern nk_bool nk_input_is_mouse_click_in_rect(const struct nk_input*, enum nk_buttons, struct nk_rect);");
 
-    m.def("mnk_input_is_mouse_click_down_in_rect", &nk_input_is_mouse_click_down_in_rect);
+    m.def("mnk_input_is_mouse_click_down_in_rect", &nk_input_is_mouse_click_down_in_rect,"extern nk_bool nk_input_is_mouse_click_down_in_rect(const struct nk_input *i, enum nk_buttons id, struct nk_rect b, nk_bool down);");
 
-    m.def("mnk_input_any_mouse_click_in_rect", &nk_input_any_mouse_click_in_rect);
+    m.def("mnk_input_any_mouse_click_in_rect", &nk_input_any_mouse_click_in_rect,"extern nk_bool nk_input_any_mouse_click_in_rect(const struct nk_input*, struct nk_rect);");
 
-    m.def("mnk_input_is_mouse_prev_hovering_rect", &nk_input_is_mouse_prev_hovering_rect);
+    m.def("mnk_input_is_mouse_prev_hovering_rect", &nk_input_is_mouse_prev_hovering_rect,"extern nk_bool nk_input_is_mouse_prev_hovering_rect(const struct nk_input*, struct nk_rect);");
 
-    m.def("mnk_input_is_mouse_hovering_rect", &nk_input_is_mouse_hovering_rect);
+    m.def("mnk_input_is_mouse_hovering_rect", &nk_input_is_mouse_hovering_rect,"extern nk_bool nk_input_is_mouse_hovering_rect(const struct nk_input*, struct nk_rect);");
 
-    m.def("mnk_input_is_mouse_moved", &nk_input_is_mouse_moved);
+    m.def("mnk_input_is_mouse_moved", &nk_input_is_mouse_moved,"extern nk_bool nk_input_is_mouse_moved(const struct nk_input*);");
 
-    m.def("mnk_input_mouse_clicked", &nk_input_mouse_clicked);
+    m.def("mnk_input_mouse_clicked", &nk_input_mouse_clicked,"extern nk_bool nk_input_mouse_clicked(const struct nk_input*, enum nk_buttons, struct nk_rect);");
 
-    m.def("mnk_input_is_mouse_down", &nk_input_is_mouse_down);
+    m.def("mnk_input_is_mouse_down", &nk_input_is_mouse_down,"extern nk_bool nk_input_is_mouse_down(const struct nk_input*, enum nk_buttons);");
 
-    m.def("mnk_input_is_mouse_pressed", &nk_input_is_mouse_pressed);
+    m.def("mnk_input_is_mouse_pressed", &nk_input_is_mouse_pressed,"extern nk_bool nk_input_is_mouse_pressed(const struct nk_input*, enum nk_buttons);");
 
-    m.def("mnk_input_is_mouse_released", &nk_input_is_mouse_released);
+    m.def("mnk_input_is_mouse_released", &nk_input_is_mouse_released,"extern nk_bool nk_input_is_mouse_released(const struct nk_input*, enum nk_buttons);");
 
-    m.def("mnk_input_is_key_pressed", &nk_input_is_key_pressed);
+    m.def("mnk_input_is_key_pressed", &nk_input_is_key_pressed,"extern nk_bool nk_input_is_key_pressed(const struct nk_input*, enum nk_keys);");
 
-    m.def("mnk_input_is_key_released", &nk_input_is_key_released);
+    m.def("mnk_input_is_key_released", &nk_input_is_key_released,"extern nk_bool nk_input_is_key_released(const struct nk_input*, enum nk_keys);");
 
-    m.def("mnk_input_is_key_down", &nk_input_is_key_down);
+    m.def("mnk_input_is_key_down", &nk_input_is_key_down,"extern nk_bool nk_input_is_key_down(const struct nk_input*, enum nk_keys);");
 
-    m.def("mnk_draw_list_init", &nk_draw_list_init);
+    m.def("mnk_draw_list_init", &nk_draw_list_init,"extern void nk_draw_list_init(struct nk_draw_list*);");
 
-    m.def("mnk_draw_list_setup", &nk_draw_list_setup);
+    m.def("mnk_draw_list_setup", &nk_draw_list_setup,"extern void nk_draw_list_setup(struct nk_draw_list*, const struct nk_convert_config*, struct nk_buffer *cmds, struct nk_buffer *vertices, struct nk_buffer *elements, enum nk_anti_aliasing line_aa,enum nk_anti_aliasing shape_aa);");
 
-    m.def("mnk_draw_list_path_clear", &nk_draw_list_path_clear);
+    m.def("mnk_draw_list_path_clear", &nk_draw_list_path_clear,"extern void nk_draw_list_path_clear(struct nk_draw_list*);");
 
-    m.def("mnk_draw_list_path_line_to", &nk_draw_list_path_line_to);
+    m.def("mnk_draw_list_path_line_to", &nk_draw_list_path_line_to,"extern void nk_draw_list_path_line_to(struct nk_draw_list*, struct nk_vec2 pos);");
 
-    m.def("mnk_draw_list_path_arc_to_fast", &nk_draw_list_path_arc_to_fast);
+    m.def("mnk_draw_list_path_arc_to_fast", &nk_draw_list_path_arc_to_fast,"extern void nk_draw_list_path_arc_to_fast(struct nk_draw_list*, struct nk_vec2 center, float radius, int a_min, int a_max);");
 
-    m.def("mnk_draw_list_path_arc_to", &nk_draw_list_path_arc_to);
+    m.def("mnk_draw_list_path_arc_to", &nk_draw_list_path_arc_to,"extern void nk_draw_list_path_arc_to(struct nk_draw_list*, struct nk_vec2 center, float radius, float a_min, float a_max, unsigned int segments);");
 
-    m.def("mnk_draw_list_path_rect_to", &nk_draw_list_path_rect_to);
+    m.def("mnk_draw_list_path_rect_to", &nk_draw_list_path_rect_to,"extern void nk_draw_list_path_rect_to(struct nk_draw_list*, struct nk_vec2 a, struct nk_vec2 b, float rounding);");
 
-    m.def("mnk_draw_list_path_curve_to", &nk_draw_list_path_curve_to);
+    m.def("mnk_draw_list_path_curve_to", &nk_draw_list_path_curve_to,"extern void nk_draw_list_path_curve_to(struct nk_draw_list*, struct nk_vec2 p2, struct nk_vec2 p3, struct nk_vec2 p4, unsigned int num_segments);");
 
-    m.def("mnk_draw_list_path_fill", &nk_draw_list_path_fill);
+    m.def("mnk_draw_list_path_fill", &nk_draw_list_path_fill,"extern void nk_draw_list_path_fill(struct nk_draw_list*, struct nk_color);");
 
-    m.def("mnk_draw_list_path_stroke", &nk_draw_list_path_stroke);
+    m.def("mnk_draw_list_path_stroke", &nk_draw_list_path_stroke,"extern void nk_draw_list_path_stroke(struct nk_draw_list*, struct nk_color, enum nk_draw_list_stroke closed, float thickness);");
 
-    m.def("mnk_draw_list_stroke_line", &nk_draw_list_stroke_line);
+    m.def("mnk_draw_list_stroke_line", &nk_draw_list_stroke_line,"extern void nk_draw_list_stroke_line(struct nk_draw_list*, struct nk_vec2 a, struct nk_vec2 b, struct nk_color, float thickness);");
 
-    m.def("mnk_draw_list_stroke_rect", &nk_draw_list_stroke_rect);
+    m.def("mnk_draw_list_stroke_rect", &nk_draw_list_stroke_rect,"extern void nk_draw_list_stroke_rect(struct nk_draw_list*, struct nk_rect rect, struct nk_color, float rounding, float thickness);");
 
-    m.def("mnk_draw_list_stroke_triangle", &nk_draw_list_stroke_triangle);
+    m.def("mnk_draw_list_stroke_triangle", &nk_draw_list_stroke_triangle,"extern void nk_draw_list_stroke_triangle(struct nk_draw_list*, struct nk_vec2 a, struct nk_vec2 b, struct nk_vec2 c, struct nk_color, float thickness);");
 
-    m.def("mnk_draw_list_stroke_circle", &nk_draw_list_stroke_circle);
+    m.def("mnk_draw_list_stroke_circle", &nk_draw_list_stroke_circle,"extern void nk_draw_list_stroke_circle(struct nk_draw_list*, struct nk_vec2 center, float radius, struct nk_color, unsigned int segs, float thickness);");
 
-    m.def("mnk_draw_list_stroke_curve", &nk_draw_list_stroke_curve);
+    m.def("mnk_draw_list_stroke_curve", &nk_draw_list_stroke_curve,"extern void nk_draw_list_stroke_curve(struct nk_draw_list*, struct nk_vec2 p0, struct nk_vec2 cp0, struct nk_vec2 cp1, struct nk_vec2 p1, struct nk_color, unsigned int segments, float thickness);");
 
-    m.def("mnk_draw_list_stroke_poly_line", &nk_draw_list_stroke_poly_line);
+    m.def("mnk_draw_list_stroke_poly_line", &nk_draw_list_stroke_poly_line,"extern void nk_draw_list_stroke_poly_line(struct nk_draw_list*, const struct nk_vec2 *pnts, const unsigned int cnt, struct nk_color, enum nk_draw_list_stroke, float thickness, enum nk_anti_aliasing);");
 
-    m.def("mnk_draw_list_fill_rect", &nk_draw_list_fill_rect);
+    m.def("mnk_draw_list_fill_rect", &nk_draw_list_fill_rect,"extern void nk_draw_list_fill_rect(struct nk_draw_list*, struct nk_rect rect, struct nk_color, float rounding);");
 
-    m.def("mnk_draw_list_fill_rect_multi_color", &nk_draw_list_fill_rect_multi_color);
+    m.def("mnk_draw_list_fill_rect_multi_color", &nk_draw_list_fill_rect_multi_color,"extern void nk_draw_list_fill_rect_multi_color(struct nk_draw_list*, struct nk_rect rect, struct nk_color left, struct nk_color top, struct nk_color right, struct nk_color bottom);");
 
-    m.def("mnk_draw_list_fill_triangle", &nk_draw_list_fill_triangle);
+    m.def("mnk_draw_list_fill_triangle", &nk_draw_list_fill_triangle,"extern void nk_draw_list_fill_triangle(struct nk_draw_list*, struct nk_vec2 a, struct nk_vec2 b, struct nk_vec2 c, struct nk_color);");
 
-    m.def("mnk_draw_list_fill_circle", &nk_draw_list_fill_circle);
+    m.def("mnk_draw_list_fill_circle", &nk_draw_list_fill_circle,"extern void nk_draw_list_fill_circle(struct nk_draw_list*, struct nk_vec2 center, float radius, struct nk_color col, unsigned int segs);");
 
-    m.def("mnk_draw_list_fill_poly_convex", &nk_draw_list_fill_poly_convex);
+    m.def("mnk_draw_list_fill_poly_convex", &nk_draw_list_fill_poly_convex,"extern void nk_draw_list_fill_poly_convex(struct nk_draw_list*, const struct nk_vec2 *points, const unsigned int count, struct nk_color, enum nk_anti_aliasing);");
 
-    m.def("mnk_draw_list_add_image", &nk_draw_list_add_image);
+    m.def("mnk_draw_list_add_image", &nk_draw_list_add_image,"extern void nk_draw_list_add_image(struct nk_draw_list*, struct nk_image texture, struct nk_rect rect, struct nk_color);");
 
-    m.def("mnk_draw_list_add_text", &nk_draw_list_add_text);
+    m.def("mnk_draw_list_add_text", &nk_draw_list_add_text,"extern void nk_draw_list_add_text(struct nk_draw_list*, const struct nk_user_font*, struct nk_rect, const char *text, int len, float font_height, struct nk_color);");
 
-    m.def("mnk_style_item_color", &nk_style_item_color);
+    m.def("mnk_style_item_color", &nk_style_item_color,"extern struct nk_style_item nk_style_item_color(struct nk_color);");
 
-    m.def("mnk_style_item_image", &nk_style_item_image);
+    m.def("mnk_style_item_image", &nk_style_item_image,"extern struct nk_style_item nk_style_item_image(struct nk_image img);");
 
-    m.def("mnk_style_item_nine_slice", &nk_style_item_nine_slice);
+    m.def("mnk_style_item_nine_slice", &nk_style_item_nine_slice,"extern struct nk_style_item nk_style_item_nine_slice(struct nk_nine_slice slice);");
 
-    m.def("mnk_style_item_hide", &nk_style_item_hide);
+    m.def("mnk_style_item_hide", &nk_style_item_hide,"extern struct nk_style_item nk_style_item_hide(void);");
 
 // NOT AUTOMATIC REALIZATION
 
-using namespace nanobind::literals;
+
     m.def("mnk_combobox", [](nk_context* ctx, std::vector<std::string> items, int selected, int item_height, struct nk_vec2 size) {
         std::vector<const char*> ptrs;
         for (const auto& s : items) ptrs.push_back(s.c_str());

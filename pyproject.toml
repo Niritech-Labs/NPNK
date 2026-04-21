@@ -8,7 +8,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "NPNK"
-version = "0.0.6.1"
+version = "0.0.6.2"
 description = "Nuklear + Wayland bindings"
 authors = [{ name="Lakur Fessi", email="lakurfessi@outlook.com" }]
 readme = "README.md"
@@ -26,4 +26,4 @@ packages = ["NPNK"]
 package-dir = {"" = "src"}
 
 [tool.setuptools.package-data]
-NPNK = ["*.so"]
+NPNK = ["*.so","*.dll"]

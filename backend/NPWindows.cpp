@@ -92,15 +92,12 @@ public:
         glfw_initialized = true;
     }
 
-    void CreateWindow(int widthps, int heightps, const char* title, bool decorated, bool layerShell) {
+    void CreateWindow(int widthps, int heightps, const char* title, bool decorated) {
         if (window)
             throw std::runtime_error("Window already exists");
 
         glfwWindowHint(GLFW_DECORATED, decorated);
-        if (layerShell) {
-            glfwWindowHint(GLFW_WAYLAND_ZWLR_KEYBOARD_ON_FOCUS, GLFW_TRUE);
-            glfwWindowHint(GLFW_WAYLAND_USE_ZWLR, GLFW_WAYLAND_ZWLR_LAYER_TOP);
-        }
+        
 
         window = glfwCreateWindow(widthps, heightps, title, nullptr, nullptr);
         if (!window)
@@ -179,41 +176,6 @@ public:
         return {w, h};
     }
 
-    void LS_SetExclusiveZone(int zone) {
-        if (!window) throw std::runtime_error("No window");
-        glfwWaylandZwlrSetExclusiveZone(window, zone);
-    }
-
-    void LS_SetMargin(int top, int right, int bottom, int left) {
-        if (!window) throw std::runtime_error("No window");
-        glfwWaylandZwlrSetMargin(window, top, right, bottom, left);
-    }
-
-    void LS_SetLayer(int layer) {
-        if (!window) throw std::runtime_error("No window");
-        static const int layers[] = {
-            GLFW_WAYLAND_ZWLR_LAYER_TOP,
-            GLFW_WAYLAND_ZWLR_LAYER_OVERLAY,
-            GLFW_WAYLAND_ZWLR_LAYER_BOTTOM,
-            GLFW_WAYLAND_ZWLR_LAYER_BACKGROUND
-        };
-        if (layer < 0 || layer >= 4)
-            throw std::runtime_error("Invalid layer index (0..3)");
-        glfwWaylandZwlrSetLayer(window, layers[layer]);
-    }
-
-    void LS_SetAnchor(int anchor) {
-        if (!window) throw std::runtime_error("No window");
-        static const int anchors[] = {
-            GLFW_WAYLAND_ZWLR_ANCHOR_TOP,
-            GLFW_WAYLAND_ZWLR_ANCHOR_BOTTOM,
-            GLFW_WAYLAND_ZWLR_ANCHOR_LEFT,
-            GLFW_WAYLAND_ZWLR_ANCHOR_RIGHT
-        };
-        if (anchor < 0 || anchor >= 4)
-            throw std::runtime_error("Invalid anchor index (0..3)");
-        glfwWaylandZwlrSetAnchor(window, anchors[anchor]);
-    }
 
     void SetKeyboardFocus(bool focus) {
         if (!window) throw std::runtime_error("No window");
@@ -411,10 +373,6 @@ NB_MODULE(NPWayland, m) {
         bk.def("ShouldClose", &Backend::ShouldClose);
         bk.def("SetShouldClose", &Backend::SetShouldClose);
         bk.def("GetWindowSize", &Backend::GetWindowSize);
-        bk.def("LS_SetExclusiveZone", &Backend::LS_SetExclusiveZone,"zone"_a);
-        bk.def("LS_SetMargin", &Backend::LS_SetMargin,"top"_a,"right"_a,"bottom"_a,"left"_a);
-        bk.def("LS_SetLayer", &Backend::LS_SetLayer,"layer"_a,"0--TOP, 1--OVERLAY, 2--BOTTOM, 3--BACKGROUND");
-        bk.def("LS_SetAnchor", &Backend::LS_SetAnchor,"achor"_a,"0--TOP, 1--BOTTOM, 2--LEFT, 3--RIGHT");
         bk.def("SetKeyboardFocus", &Backend::SetKeyboardFocus,"focus"_a);
         bk.def("Shutdown", &Backend::Shutdown);
         bk.def("InitFont", &Backend::InitFont,"customFont"_a,"path"_a,"bold"_a);

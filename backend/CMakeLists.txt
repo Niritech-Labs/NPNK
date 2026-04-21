@@ -13,11 +13,15 @@ set(GLFW_BUILD_EXAMPLES OFF CACHE INTERNAL "")
 set(GLFW_BUILD_TESTS OFF CACHE INTERNAL "")
 set(GLFW_BUILD_DOCS OFF CACHE INTERNAL "")
 set(GLFW_INSTALL OFF CACHE INTERNAL "")
+
+if (UNIX)
 set(GLFW_BUILD_WAYLAND ON CACHE INTERNAL "")
+endif()
 
+if (WIN32)
+set(GLFW_BUILD_WIN32 ON CACHE INTERNAL "")
+endif()
 add_subdirectory(glfw-nor)
-
-
 
 
 
@@ -38,17 +42,20 @@ endif()
 
 set(nanobind_DIR "${NANOBIND_DIR}")
 find_package(nanobind CONFIG REQUIRED)
-#find_package(glad REQUIRED)
+
+get_filename_component(NUKLEAR_LIB_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../libnuklear/build" ABSOLUTE)
 
 
-find_library(NUKLEAR_LIB nuklear)
-find_path(NUKLEAR_INCLUDE_DIR nuklear.h)
+list(APPEND CMAKE_INSTALL_RPATH "$ORIGIN")
+set(CMAKE_SKIP_BUILD_RPATH FALSE)
+set(CMAKE_BUILD_WITH_INSTALL_RPATH TRUE)
 
+if (UNIX)
 find_package(OpenGL REQUIRED)
-find_package(Threads REQUIRED) 
 find_package(lunasvg REQUIRED) 
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(SPNG REQUIRED spng)
+
 
 nanobind_add_module(NPWayland 
     LTO 
@@ -72,3 +79,47 @@ nanobind_add_stub(stub
     OUTPUT NPWayland.pyi
 )
 add_dependencies(stub NPWayland)
+endif()
+
+if (WIN32)
+find_package(OpenGL REQUIRED)
+
+include(FetchContent)
+
+FetchContent_Declare(
+    spng
+    GIT_REPOSITORY https://github.com/randy408/libspng.git
+    GIT_TAG        v0.7.4 
+)
+FetchContent_MakeAvailable(spng)
+
+FetchContent_Declare(
+    lunasvg
+    GIT_REPOSITORY https://github.com/sammycage/lunasvg.git
+    GIT_TAG        v3.1.0
+)
+FetchContent_MakeAvailable(lunasvg)
+
+nanobind_add_module(NPWindows 
+    LTO 
+    NPWindows.cpp
+)
+
+target_include_directories(NPWindows PRIVATE ${NUKLEAR_INCLUDE_DIR})
+target_link_libraries(NPWindows PRIVATE
+    nuklear 
+    glfw 
+    OpenGL::GL   
+    lunasvg
+    spng
+)
+set_property(TARGET glfw PROPERTY POSITION_INDEPENT_CODE ON)
+
+nanobind_add_stub(stub
+    TARGET NPWindows
+    MODULE NPWindows
+    OUTPUT NPWindows.pyi
+)
+add_dependencies(stub NPWindows)
+endif()
+
