@@ -27,14 +27,13 @@
 #define NK_INCLUDE_DEFAULT_FONT
 #define NK_INCLUDE_STANDARD_VARARGS
 
-#include <spng.h>
+//#include <spng.h>
 #include <nanobind/nanobind.h>
 #include <nanobind/stl/tuple.h>
-#include <lunasvg/lunasvg.h> 
+#include <lunasvg.h> 
 #include <vector>
 #include "glfw-nor/deps/glad/gl.h"
 #include <GLFW/glfw3.h>
-#include <GLFW/glfw3native.h>   
 #include "../nuklear/nuklear.h"
 
 #include "../nuklear/demo/glfw_opengl3/nuklear_glfw_gl3.h"
@@ -176,12 +175,6 @@ public:
         return {w, h};
     }
 
-
-    void SetKeyboardFocus(bool focus) {
-        if (!window) throw std::runtime_error("No window");
-        glfwWaylandZwlrSetKeyboardFocus(window, focus);
-    }
-
     void Shutdown() {
         if (nk_ctx) {
             nk_glfw3_shutdown(&glfw);
@@ -221,7 +214,7 @@ struct nk_image LoadSVGImage(const char* filename, int width, int height) {
     img.h = height;
     return img;
 }
-
+/*
 struct nk_image LoadPNGImage(const char* filename) {
     FILE *fp = fopen(filename, "rb");
     if (!fp) throw std::runtime_error("Failed to open file");
@@ -268,7 +261,7 @@ struct nk_image LoadPNGImage(const char* filename) {
     img.w = ihdr.width;
     img.h = ihdr.height;
     return img;
-}
+}*/
 
 /*struct nk_image TransformImage(struct nk_image image, int w, int h, struct nk_rect crop) {
     GLuint sourceTex;
@@ -364,7 +357,7 @@ NB_MODULE(NPWayland, m) {
     auto bk = nb::class_<Backend>(m, "Window");
         bk.def(nb::init<>());
         bk.def("GLFWInit", &Backend::GLFWInit);
-        bk.def("CreateWindow", &Backend::CreateWindow,"w"_a,"h"_a,"title"_a,"decorated"_a,"LayerShell"_a);
+        bk.def("CreateWindow", &Backend::CreateWindow,"w"_a,"h"_a,"title"_a,"decorated"_a);
         bk.def("GetNKContext", &Backend::GetNKContext);
         bk.def("NewFrame", &Backend::NewFrame);
         bk.def("Render", &Backend::Render);
@@ -373,13 +366,12 @@ NB_MODULE(NPWayland, m) {
         bk.def("ShouldClose", &Backend::ShouldClose);
         bk.def("SetShouldClose", &Backend::SetShouldClose);
         bk.def("GetWindowSize", &Backend::GetWindowSize);
-        bk.def("SetKeyboardFocus", &Backend::SetKeyboardFocus,"focus"_a);
         bk.def("Shutdown", &Backend::Shutdown);
         bk.def("InitFont", &Backend::InitFont,"customFont"_a,"path"_a,"bold"_a);
 
     //m.def("TransformImage", &TransformImage,"image"_a,"w"_a,"h"_a,"crop"_a);
     m.def("LoadSVGImage", &LoadSVGImage,"path"_a,"w"_a,"h"_a);
-    m.def("LoadPNGImage", &LoadPNGImage,"path"_a);
+    //m.def("LoadPNGImage", &LoadPNGImage,"path"_a);
 }
 
 

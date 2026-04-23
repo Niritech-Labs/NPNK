@@ -7,10 +7,15 @@ from NLUtils.Installer import NLInstaller
 
 ti = NLInstaller('project.targets')
 
-ti.RunTarget('Clean All')
-ti.RunTarget('Make Nuklear')
-ti.RunTarget('Make Nuklear Bingings')
-ti.RunTarget('Make Backend')
-ti.RunTarget('Install on project')
+ti.RunTarget('Clean Final')
+ti.RunTarget('Clean Subs')
+ti.RunTarget('Make Nuklear WL')
+ti.RunTarget('Make Nuklear Bingings WL')
+ti.RunTarget('Make Backend WL')
+ti.RunTarget('Install WL')
 
-#ti.RunTarget('Install Nuklear')
+ti.RunTarget('Clean Subs')
+ti.RunTarget('Make Nuklear WN')
+ti.RunTarget('Make Nuklear Bingings WN')
+ti.RunTarget('Make Backend WN')
+ti.RunTarget('Install WN')

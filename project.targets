@@ -2,47 +2,57 @@
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
-
-%Make Backend
+####################################################
+%Make Backend WL
 $cmake -S backend -B backend/build-o-critical
 TRG:backend/build-o-libnuklear/build/libnuklear.so-o-install-o-755
 $cmake --build backend/build -j-o-critical
 
-%Make Nuklear
+%Make Nuklear WL
 $cmake -S libnuklear -B libnuklear/build-o-critical
 $cmake --build libnuklear/build-o-critical
 
-%Make Nuklear Bingings
+%Make Nuklear Bingings WL
 $sh tools/preprocess.sh-o-critical
 $python3 tools/generator.py-o-critical
 $cmake -S npcore_nuklear -B npcore_nuklear/build-o-critical
 $cmake --build npcore_nuklear/build -j-o-critical
+######################################################
+%Make Backend WN
+$cmake -S backend -B backend/build -DCMAKE_TOOLCHAIN_FILE=../tools/WIN32TC.cmake-o-critical
+$cmake --build backend/build -j-o-critical
 
-#%Install Nuklear
-#$sudo cmake --install libnuklear/build-o-critical
-#TRG:/usr/lib64-o-libnuklear/build/libnuklear.so-o-install-o-755
+
+%Make Nuklear WN
+$cmake -S libnuklear -B libnuklear/build -DCMAKE_TOOLCHAIN_FILE=../tools/WIN32TC.cmake-o-critical
+$cmake --build libnuklear/build-o-critical
 
 
-%Install on project
+%Make Nuklear Bingings WN
+$sh tools/preprocess.sh-o-critical
+$python3 tools/generator.py-o-critical
+$cmake -S npcore_nuklear -B npcore_nuklear/build -DCMAKE_TOOLCHAIN_FILE=../tools/WIN32TC.cmake-o-critical
+$cmake --build npcore_nuklear/build -j-o-critical
+
+######################################################################
+%Install WL
 DIR:src-o-install-o-755
 DIR:src/NPNK-o-install-o-755
-
 TRG:src/NPNK-o-libnuklear/build/libnuklear.so-o-install-o-755
-
 $sh tools/install.sh-o-critical
 
-%Clean Backend
-DIR:backend/build-o-remove-o-755
+%Install WN
+TRG:src/NPNK-o-libnuklear/build/libnuklear.dll-o-install-o-755
+$sh tools/install.sh-o-critical
 
-%Clean Nuklear
-DIR:libnuklear/build-o-remove-o-755
-
-%Clean Nuklear Bingings
-DIR:npcore_nuklear/build-o-remove-o-755
-
-%Clean All
+###########################################################################
+%Clean Subs
 DIR:backend/build-o-remove-o-755
 DIR:npcore_nuklear/build-o-remove-o-755
 DIR:libnuklear/build-o-remove-o-755
+
+%Сlean Final
 DIR:src/NPNK-o-remove-o-755
 DIR:src-o-remove-o-755
+
+

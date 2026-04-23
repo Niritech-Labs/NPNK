@@ -24,6 +24,7 @@
 #include <nanobind/stl/string.h>
 #include <nanobind/stl/vector.h>
 #include <nanobind/stl/tuple.h>
+#include <unordered_map>
 
 namespace nb = nanobind;
 using namespace nanobind::literals;
@@ -35,6 +36,26 @@ auto as_capsule(Ret (*func)(Args...)) {
     };
 }
 
+namespace {
+    thread_local std::unordered_map<const void*, nb::callable> filter_map;
+
+    nk_bool filter_trampoline(const nk_text_edit* edit, nk_rune unicode) {
+        auto it = filter_map.find(static_cast<const void*>(edit));
+        if (it != filter_map.end())
+            return nb::cast<bool>(it->second(edit, unicode));
+        return nk_true;  
+    }
+
+    float plot_value_getter_trampoline(void* user, int index) {
+        return nb::cast<float>((*static_cast<nb::callable*>(user))(user, index));
+    }
+
+    void combo_item_getter_trampoline(void* user, int index, const char** item) {
+        static thread_local std::string result;
+        result = nb::cast<std::string>((*static_cast<nb::callable*>(user))(user, index));
+        *item = result.c_str();
+    }
+}
 
 NB_MODULE(Nuklear, m) {
     m.doc() = "Niritech Labs port Nuklear to python with nanobind"; 
@@ -1900,8 +1921,6 @@ NB_MODULE(Nuklear, m) {
 
     m.def("mnk_propertyd", &nk_propertyd,"extern double nk_propertyd(struct nk_context*, const char *name, double min, double val, double max, double step, float inc_per_pixel);");
 
-    m.def("mnk_edit_buffer", &nk_edit_buffer,"extern nk_flags nk_edit_buffer(struct nk_context*, nk_flags, struct nk_text_edit*, nk_plugin_filter);");
-
     m.def("mnk_edit_focus", &nk_edit_focus,"extern void nk_edit_focus(struct nk_context*, nk_flags flags);");
 
     m.def("mnk_edit_unfocus", &nk_edit_unfocus,"extern void nk_edit_unfocus(struct nk_context*);");
@@ -1922,8 +1941,6 @@ NB_MODULE(Nuklear, m) {
 
     m.def("mnk_plot", &nk_plot,"extern void nk_plot(struct nk_context*, enum nk_chart_type, const float *values, int count, int offset);");
 
-    m.def("mnk_plot_function", &nk_plot_function,"extern void nk_plot_function(struct nk_context*, enum nk_chart_type, void *userdata, float(*value_getter)(void* user, int index), int count, int offset);");
-
     m.def("mnk_popup_begin", &nk_popup_begin,"extern nk_bool nk_popup_begin(struct nk_context*, enum nk_popup_type, const char*, nk_flags, struct nk_rect bounds);");
 
     m.def("mnk_popup_close", &nk_popup_close,"extern void nk_popup_close(struct nk_context*);");
@@ -1938,13 +1955,9 @@ NB_MODULE(Nuklear, m) {
 
     m.def("mnk_combo_string", &nk_combo_string,"extern int nk_combo_string(struct nk_context*, const char *items_separated_by_zeros, int selected, int count, int item_height, struct nk_vec2 size);");
 
-    m.def("mnk_combo_callback", &nk_combo_callback,"extern int nk_combo_callback(struct nk_context*, void(*item_getter)(void*, int, const char**), void *userdata, int selected, int count, int item_height, struct nk_vec2 size);");
-
     m.def("mnk_combobox_string", &nk_combobox_string,"extern nk_bool nk_combobox_string(struct nk_context*, const char *items_separated_by_zeros, int *selected, int count, int item_height, struct nk_vec2 size);");
 
     m.def("mnk_combobox_separator", &nk_combobox_separator,"extern nk_bool nk_combobox_separator(struct nk_context*, const char *items_separated_by_separator, int separator, int *selected, int count, int item_height, struct nk_vec2 size);");
-
-    m.def("mnk_combobox_callback", &nk_combobox_callback,"extern nk_bool nk_combobox_callback(struct nk_context*, void(*item_getter)(void*, int, const char**), void*, int *selected, int count, int item_height, struct nk_vec2 size);");
 
     m.def("mnk_combo_begin_text", &nk_combo_begin_text,"extern nk_bool nk_combo_begin_text(struct nk_context*, const char *selected, int, struct nk_vec2 size);");
 
@@ -2523,25 +2536,74 @@ NB_MODULE(Nuklear, m) {
         return nk_combo(ctx, ptrs.data(), (int)ptrs.size(), selected, item_height, size);
     });
 
-    m.def("mnk_edit_string_zero_terminated", [](nk_context* ctx, nk_flags flags, std::string buffer, int max, nk_plugin_filter filter) {
-        buffer.resize(max); 
-        nk_flags res = nk_edit_string_zero_terminated(ctx, flags, buffer.data(), max, filter);
-    
-    
-        buffer.resize(strlen(buffer.c_str())); 
-        return std::make_tuple(res, buffer);
-    }, "ctx"_a, "flags"_a, "buffer"_a, "max"_a, "filter"_a = nullptr);
 
-    m.def("mnk_edit_string", [](nk_context* ctx, nk_flags flags, std::string buffer, int max, nk_plugin_filter filter) {
+    m.def("mnk_edit_buffer", [](nk_context* ctx, nk_flags flags, nk_text_edit* edit, nb::callable filter) {
+        nk_plugin_filter c_filter = nullptr;
+        if (!filter.is_none()) {
+            filter_map[static_cast<const void*>(edit)] = filter;   
+            c_filter = filter_trampoline;
+        }
+        nk_flags res = nk_edit_buffer(ctx, flags, edit, c_filter);
+        filter_map.erase(static_cast<const void*>(edit));           
+        return res;
+    }, "ctx"_a, "flags"_a, "edit"_a, "filter"_a = nb::none());
+
+    m.def("mnk_plot_function", [](nk_context* ctx, nk_chart_type chart_type, nb::callable value_getter, int count, int offset) {
+        if (value_getter.is_none()) {
+            nk_plot_function(ctx, chart_type, nullptr, nullptr, count, offset);
+        } else {
+            nb::callable* cb_ptr = &value_getter;              
+            nk_plot_function(ctx, chart_type, cb_ptr, plot_value_getter_trampoline,
+                             count, offset);
+        }
+    }, "ctx"_a, "chart_type"_a, "value_getter"_a = nb::none(), "count"_a, "offset"_a);
+
+    m.def("mnk_combo_callback", [](nk_context* ctx, nb::callable item_getter, void* userdata, int selected, int count, int item_height, struct nk_vec2 size) {
+        if (item_getter.is_none()) return nk_combo_callback(ctx, nullptr, nullptr, selected, count, item_height, size);
+
+        nb::callable* cb_ptr = &item_getter;
+
+        return nk_combo_callback(ctx, combo_item_getter_trampoline, cb_ptr, selected, count, item_height, size);
+
+    }, "ctx"_a, "item_getter"_a = nb::none(), "userdata"_a = nb::none(), "selected"_a, "count"_a, "item_height"_a, "size"_a);
+
+    m.def("mnk_combobox_callback", [](nk_context* ctx, nb::callable item_getter, void* userdata, int* selected, int count, int item_height, struct nk_vec2 size) {
+        if (item_getter.is_none())
+            return nk_combobox_callback(ctx, nullptr, nullptr, selected, count, item_height, size);
+        nb::callable* cb_ptr = &item_getter;
+        return nk_combobox_callback(ctx, combo_item_getter_trampoline, cb_ptr, selected, count, item_height, size);
+    }, "ctx"_a, "item_getter"_a = nb::none(), "userdata"_a = nb::none(), "selected"_a, "count"_a, "item_height"_a, "size"_a);
+
+    m.def("mnk_edit_string_zero_terminated", [](nk_context* ctx, nk_flags flags, std::string buffer, int max, nb::callable filter) {
         buffer.resize(max);
-        int current_len = (int)strlen(buffer.c_str()); // Или передавать len из Python
-    
-        nk_flags res = nk_edit_string(ctx, flags, buffer.data(), &current_len, max, filter);
+        nk_plugin_filter c_filter = nullptr;
+        const void* key = static_cast<const void*>(&filter);  
+        if (!filter.is_none()) {
+            filter_map[key] = filter;
+            c_filter = filter_trampoline;
+        }
+        nk_flags res = nk_edit_string_zero_terminated(ctx, flags, buffer.data(),
+                                                      max, c_filter);
+        filter_map.erase(key);
+        buffer.resize(strlen(buffer.c_str()));
+        return std::make_tuple(res, buffer);
+    }, "ctx"_a, "flags"_a, "buffer"_a, "max"_a, "filter"_a = nb::none());
 
+    
+    m.def("mnk_edit_string", [](nk_context* ctx, nk_flags flags, std::string buffer, int max, nb::callable filter) {
+        buffer.resize(max);
+        int current_len = (int)strlen(buffer.c_str());
+        nk_plugin_filter c_filter = nullptr;
+        const void* key = static_cast<const void*>(&filter);
+        if (!filter.is_none()) {
+            filter_map[key] = filter;
+            c_filter = filter_trampoline;
+        }
+        nk_flags res = nk_edit_string(ctx, flags, buffer.data(), &current_len, max, c_filter);
+        filter_map.erase(key);
         buffer.resize(current_len);
         return std::make_tuple(res, buffer);
-    }, "ctx"_a, "flags"_a, "buffer"_a, "max"_a, "filter"_a = nullptr);
-
+    }, "ctx"_a, "flags"_a, "buffer"_a, "max"_a, "filter"_a = nb::none());
 
     nk_mouse_var.def("__getitem__", [](nk_mouse &m, size_t i) -> nk_mouse_button& {
             if (i >= NK_BUTTON_MAX) throw nb::index_error();
